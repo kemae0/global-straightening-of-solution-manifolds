@@ -1,0 +1,13 @@
+.lake/
+.toolchain/
+*.olean
+*.ilean
+*.c
+*.o
+scratch/
+exports/
+source_v5/
+manuscript/
+verification/publication-target.json
+verification/publication-report.json
+verification/publish-*.json

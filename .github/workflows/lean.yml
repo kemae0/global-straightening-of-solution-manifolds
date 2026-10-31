@@ -1,0 +1,20 @@
+name: Lean
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: "false"
+          build: "true"
+          test: "false"
+          lint: "false"
+          use-mathlib-cache: "true"
+      - run: lake env lean scripts/Audit.lean
+      - run: lake env lean scripts/MainCertificate.lean
+      - run: lake env lean scripts/PaperCertificate.lean

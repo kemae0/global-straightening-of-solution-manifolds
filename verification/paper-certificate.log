@@ -1,0 +1,257 @@
+GlobalRegularization.mainClaim (n : ℕ) : GlobalRegularization.MainClaim n
+'GlobalRegularization.mainClaim' depends on axioms: [propext, Classical.choice, Quot.sound]
+GlobalRegularization.localized_straightening_of_bounded_approximants.{u_1, u_2} (h : NNReal) (B : Type u_1)
+  [NormedAddCommGroup B] [NormedSpace ℝ B] [CompleteSpace B] {Z : ℕ → Type u_2} [(j : ℕ) → NormedAddCommGroup (Z j)]
+  [(j : ℕ) → NormedSpace ℝ (Z j)] (U : Set (GlobalRegularization.C1History h B)) (hU : IsOpen U)
+  (f : GlobalRegularization.C1History h B → B) (hf : ContDiffOn ℝ 1 f U)
+  (fm : ℕ → GlobalRegularization.C1History h B → B) (hsmooth : ∀ (n : ℕ), ContDiff ℝ 1 (fm n))
+  (hbounded : ∀ (n : ℕ), Bornology.IsBounded (Set.range (fm n)))
+  (happ : GlobalRegularization.LocalC1Approximation U f fm) (O : (n : ℕ) → GlobalRegularization.C1History h B →L[ℝ] Z n)
+  (hfactor : ∀ (i : ℕ) (x y : GlobalRegularization.C1History h B), (O i) x = (O i) y → fm i x = fm i y)
+  (hsep : ∀ (x y : GlobalRegularization.C1History h B), (∀ (j : ℕ), (O j) x = (O j) y) → x = y) (σ : ℕ → ℝ)
+  (hσ : ∀ (n : ℕ), 0 < σ n) (hσmono : Antitone σ)
+  (hinvisible :
+    ∀ (n : ℕ) (δ : ℝ) (hδ : 0 < δ), δ / 2 < σ n → (O n).comp (GlobalRegularization.terminalCorrection h B δ hδ) = 0)
+  (τ ε : ℝ) (hτ : 0 < τ) (hε : 0 < ε) : ∃ chart, chart.HasAffineIsotopy ∧ chart.HasTriangularDerivative
+GlobalRegularization.C1Straightening.HasTriangularDerivative.spectrum_eq.{u_1, u_2} {E : Type u_1} {B : Type u_2}
+  [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E] [NormedAddCommGroup B] [NormedSpace ℝ B] [Nontrivial E]
+  {U : Set E} {D : E →L[ℝ] B} {f : E → B} {chart : GlobalRegularization.C1Straightening U D f}
+  (hc : chart.HasTriangularDerivative) {x : E} (hx : x ∈ U) :
+  spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) = {1}
+GlobalRegularization.RealComplexification.norm_embed.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E]
+  (x : E) : ‖GlobalRegularization.RealComplexification.embed x‖ = ‖x‖
+GlobalRegularization.RealComplexification.decomposition.{u_1} {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E]
+  (f : GlobalRegularization.RealComplexification E) :
+  f =
+    GlobalRegularization.RealComplexification.embed ((fun z => ↑f z) 1) +
+      Complex.I • GlobalRegularization.RealComplexification.embed (-(fun z => ↑f z) Complex.I)
+GlobalRegularization.RealComplexification.map_unique.{u_1, u_2} {E : Type u_1} {F : Type u_2} [NormedAddCommGroup E]
+  [NormedSpace ℝ E] [NormedAddCommGroup F] [NormedSpace ℝ F] (L : E →L[ℝ] F)
+  (T : GlobalRegularization.RealComplexification E →L[ℂ] GlobalRegularization.RealComplexification F)
+  (hT :
+    ∀ (x : E),
+      T (GlobalRegularization.RealComplexification.embed x) = GlobalRegularization.RealComplexification.embed (L x)) :
+  T = GlobalRegularization.RealComplexification.map L
+GlobalRegularization.LocalizedHistoryStraightening.localized_isotopy_of_affine.{u_1} (h : NNReal) (B : Type u_1)
+  [NormedAddCommGroup B] [NormedSpace ℝ B] [CompleteSpace B] {U : Set (GlobalRegularization.C1History h B)}
+  {f : GlobalRegularization.C1History h B → B} {τ ε : ℝ}
+  (chart : GlobalRegularization.LocalizedHistoryStraightening h B U f τ ε) (hε : 0 < ε) (hi : chart.HasAffineIsotopy) :
+  GlobalRegularization.LocalizedHistoryStraightening.HasLocalizedAffineIsotopy h B chart
+GlobalRegularization.historyFunctional_matrix_representation (h : NNReal) (n : ℕ)
+  (L : GlobalRegularization.C1History h (Fin n → ℝ) →L[ℝ] Fin n → ℝ) :
+  ∃ A μ ν,
+    (∀ (i j : Fin n), MeasureTheory.IsFiniteMeasure (μ i j)) ∧
+      (∀ (i j : Fin n), MeasureTheory.IsFiniteMeasure (ν i j)) ∧
+        ∀ (x : GlobalRegularization.C1History h (Fin n → ℝ)) (i : Fin n),
+          L x i =
+            A (((GlobalRegularization.historyInclusion h (Fin n → ℝ)) x) (GlobalRegularization.historyLeft h)) i +
+              ∑ j,
+                (∫ (t : ↑(GlobalRegularization.HistoryInterval h)),
+                    ((GlobalRegularization.historyDerivative h (Fin n → ℝ)) x) t j ∂μ i j -
+                  ∫ (t : ↑(GlobalRegularization.HistoryInterval h)),
+                    ((GlobalRegularization.historyDerivative h (Fin n → ℝ)) x) t j ∂ν i j)
+GlobalRegularization.matrixHistoryFunctional_terminal_operator_limit (h : NNReal) (hh : 0 < ↑h) (n : ℕ)
+  (L : GlobalRegularization.C1History h (Fin n → ℝ) →L[ℝ] Fin n → ℝ) (A : (Fin n → ℝ) →L[ℝ] Fin n → ℝ)
+  (μ ν : Fin n → Fin n → MeasureTheory.Measure ↑(GlobalRegularization.HistoryInterval h))
+  [∀ (i j : Fin n), MeasureTheory.IsFiniteMeasure (μ i j)] [∀ (i j : Fin n), MeasureTheory.IsFiniteMeasure (ν i j)]
+  (hrep :
+    ∀ (x : GlobalRegularization.C1History h (Fin n → ℝ)) (i : Fin n),
+      L x i =
+        A (((GlobalRegularization.historyInclusion h (Fin n → ℝ)) x) (GlobalRegularization.historyLeft h)) i +
+          ∑ j,
+            (∫ (t : ↑(GlobalRegularization.HistoryInterval h)),
+                ((GlobalRegularization.historyDerivative h (Fin n → ℝ)) x) t j ∂μ i j -
+              ∫ (t : ↑(GlobalRegularization.HistoryInterval h)),
+                ((GlobalRegularization.historyDerivative h (Fin n → ℝ)) x) t j ∂ν i j))
+  (δ : ℕ → ℝ) (hδ : ∀ (m : ℕ), 0 < δ m) (hlim : Filter.Tendsto δ Filter.atTop (nhds 0)) :
+  Filter.Tendsto (fun m => L.comp (GlobalRegularization.terminalCorrection h (Fin n → ℝ) (δ m) ⋯)) Filter.atTop
+    (nhds (GlobalRegularization.historyAtomOperator h n μ ν))
+GlobalRegularization.matrixHistoryFunctional_terminal_zero_iff (h : NNReal) (hh : 0 < ↑h) (n : ℕ)
+  (L : GlobalRegularization.C1History h (Fin n → ℝ) →L[ℝ] Fin n → ℝ) (A : (Fin n → ℝ) →L[ℝ] Fin n → ℝ)
+  (μ ν : Fin n → Fin n → MeasureTheory.Measure ↑(GlobalRegularization.HistoryInterval h))
+  [∀ (i j : Fin n), MeasureTheory.IsFiniteMeasure (μ i j)] [∀ (i j : Fin n), MeasureTheory.IsFiniteMeasure (ν i j)]
+  (hrep :
+    ∀ (x : GlobalRegularization.C1History h (Fin n → ℝ)) (i : Fin n),
+      L x i =
+        A (((GlobalRegularization.historyInclusion h (Fin n → ℝ)) x) (GlobalRegularization.historyLeft h)) i +
+          ∑ j,
+            (∫ (t : ↑(GlobalRegularization.HistoryInterval h)),
+                ((GlobalRegularization.historyDerivative h (Fin n → ℝ)) x) t j ∂μ i j -
+              ∫ (t : ↑(GlobalRegularization.HistoryInterval h)),
+                ((GlobalRegularization.historyDerivative h (Fin n → ℝ)) x) t j ∂ν i j))
+  (δ : ℕ → ℝ) (hδ : ∀ (m : ℕ), 0 < δ m) (hlim : Filter.Tendsto δ Filter.atTop (nhds 0)) :
+  Filter.Tendsto (fun m => L.comp (GlobalRegularization.terminalCorrection h (Fin n → ℝ) (δ m) ⋯)) Filter.atTop
+      (nhds 0) ↔
+    ∀ (i j : Fin n),
+      (μ i j).real {GlobalRegularization.historyRight h} - (ν i j).real {GlobalRegularization.historyRight h} = 0
+GlobalRegularization.exists_adapted_operators_for_separable_family (h : NNReal) (hh : 0 < ↑h) (n : ℕ)
+  (S : Set (GlobalRegularization.C1History h (Fin n → ℝ) →L[ℝ] Fin n → ℝ)) (hsep : TopologicalSpace.IsSeparable S)
+  (hzero :
+    ∀ L ∈ S,
+      Filter.Tendsto
+        (fun m =>
+          L.comp
+            (GlobalRegularization.terminalCorrection h (Fin n → ℝ) (GlobalRegularization.adaptedTerminalWidth h m) ⋯))
+        Filter.atTop (nhds 0)) :
+  ∃ P C,
+    0 < C ∧
+      (∀ (m : ℕ), ‖P m‖ ≤ C) ∧
+        (∀ (x : GlobalRegularization.C1History h (Fin n → ℝ)),
+            Filter.Tendsto (fun m => (P m) x) Filter.atTop (nhds x)) ∧
+          (∀ (m : ℕ), FiniteDimensional ℝ ↥(LinearMap.range (P m))) ∧
+            (∀ L ∈ S,
+                Filter.Tendsto
+                  (fun m => L.comp (P m - ContinuousLinearMap.id ℝ (GlobalRegularization.C1History h (Fin n → ℝ))))
+                  Filter.atTop (nhds 0)) ∧
+              ∀ (m : ℕ) (δ : ℝ) (hδ : 0 < δ),
+                δ / 2 < GlobalRegularization.adaptedTerminalWidth h m →
+                  (P m).comp (GlobalRegularization.terminalCorrection h (Fin n → ℝ) δ hδ) = 0
+GlobalRegularization.adaptedTerminalWidth_pos (h : NNReal) (hh : 0 < ↑h) (n : ℕ) :
+  0 < GlobalRegularization.adaptedTerminalWidth h n
+GlobalRegularization.adaptedTerminalWidth_antitone (h : NNReal) : Antitone (GlobalRegularization.adaptedTerminalWidth h)
+GlobalRegularization.adaptedTerminalWidth_tendsto (h : NNReal) :
+  Filter.Tendsto (GlobalRegularization.adaptedTerminalWidth h) Filter.atTop (nhds 0)
+GlobalRegularization.terminal_atom_full_straightening (h : NNReal) (hh : 0 < ↑h) (n : ℕ) [NeZero n]
+  (U : Set (GlobalRegularization.C1History h (Fin n → ℝ))) (hU : IsOpen U)
+  (f : GlobalRegularization.C1History h (Fin n → ℝ) → Fin n → ℝ) (hf : ContDiffOn ℝ 1 f U)
+  (hzero : GlobalRegularization.HasVanishingTerminalDerivative h (Fin n → ℝ) U f) (τ ε : ℝ) (hτ : 0 < τ) (hε : 0 < ε) :
+  ∃ chart,
+    chart.HasAffineIsotopy ∧
+      ∀ x ∈ U, spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) = {1}
+GlobalRegularization.terminal_atom_full_straightening_spectrum_inclusion (h : NNReal) (hh : 0 < ↑h) (n : ℕ)
+  (U : Set (GlobalRegularization.C1History h (Fin n → ℝ))) (hU : IsOpen U)
+  (f : GlobalRegularization.C1History h (Fin n → ℝ) → Fin n → ℝ) (hf : ContDiffOn ℝ 1 f U)
+  (hzero : GlobalRegularization.HasVanishingTerminalDerivative h (Fin n → ℝ) U f) (τ ε : ℝ) (hτ : 0 < τ) (hε : 0 < ε) :
+  ∃ chart,
+    chart.HasAffineIsotopy ∧
+      ∀ x ∈ U, spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) ⊆ {1}
+'GlobalRegularization.terminal_atom_full_straightening' depends on axioms: [propext, Classical.choice, Quot.sound]
+GlobalRegularization.terminal_atom_all_levels (h : NNReal) (hh : 0 < ↑h) (n : ℕ)
+  (U : Set (GlobalRegularization.C1History h (Fin n → ℝ))) (hU : IsOpen U)
+  (f : GlobalRegularization.C1History h (Fin n → ℝ) → Fin n → ℝ) (hf : ContDiffOn ℝ 1 f U)
+  (hzero : GlobalRegularization.HasVanishingTerminalDerivative h (Fin n → ℝ) U f) (τ ε : ℝ) (hτ : 0 < τ) (hε : 0 < ε) :
+  ∃ chart,
+    ∀ (b : Fin n → ℝ),
+      chart.forward '' {x | x ∈ U ∧ (GlobalRegularization.endpointDerivative h (Fin n → ℝ)) x - f x = b} =
+        chart.forward '' U ∩ {y | (GlobalRegularization.endpointDerivative h (Fin n → ℝ)) y = b}
+GlobalRegularization.terminal_atom_fiber_geometry (h : NNReal) (hh : 0 < ↑h) (n : ℕ)
+  (U : Set (GlobalRegularization.C1History h (Fin n → ℝ))) (hU : IsOpen U)
+  (f : GlobalRegularization.C1History h (Fin n → ℝ) → Fin n → ℝ) (hf : ContDiffOn ℝ 1 f U)
+  (hzero : GlobalRegularization.HasVanishingTerminalDerivative h (Fin n → ℝ) U f) (τ ε : ℝ) (hτ : 0 < τ) (hε : 0 < ε) :
+  ∃ chart,
+    (∀ (b : Fin n → ℝ),
+        chart.forward '' {x | x ∈ U ∧ (GlobalRegularization.endpointDerivative h (Fin n → ℝ)) x - f x = b} =
+          chart.forward '' U ∩ {y | (GlobalRegularization.endpointDerivative h (Fin n → ℝ)) y = b}) ∧
+      (∀ (b : Fin n → ℝ),
+          Nonempty
+            (GlobalRegularization.SplitC1FiberParametrization U (GlobalRegularization.endpointDerivative h (Fin n → ℝ))
+              f b)) ∧
+        ∃ R,
+          ContinuousOn R U ∧
+            ∀ x ∈ U,
+              IsCompl
+                  (LinearMap.ker
+                    (fderiv ℝ (fun y => (GlobalRegularization.endpointDerivative h (Fin n → ℝ)) y - f y) x))
+                  (LinearMap.range (R x)) ∧
+                Module.finrank ℝ ↥(LinearMap.range (R x)) = n ∧
+                  Module.finrank ℝ
+                      (GlobalRegularization.C1History h (Fin n → ℝ) ⧸
+                        LinearMap.ker
+                          (fderiv ℝ (fun y => (GlobalRegularization.endpointDerivative h (Fin n → ℝ)) y - f y) x)) =
+                    n
+GlobalRegularization.C1Straightening.splitFiberParametrization.{u_1, u_2} {E : Type u_1} {B : Type u_2}
+  [NormedAddCommGroup E] [NormedSpace ℝ E] [NormedAddCommGroup B] [NormedSpace ℝ B] {U : Set E} {D : E →L[ℝ] B}
+  {f : E → B} (s : GlobalRegularization.C1Straightening U D f) (Q : B →L[ℝ] E)
+  (hQ : D.comp Q = ContinuousLinearMap.id ℝ B) (b : B) : GlobalRegularization.SplitC1FiberParametrization U D f b
+GlobalRegularization.C1Straightening.fiber_parameter_derivative.{u_1, u_2} {E : Type u_1} {B : Type u_2}
+  [NormedAddCommGroup E] [NormedSpace ℝ E] [NormedAddCommGroup B] [NormedSpace ℝ B] {U : Set E} {D : E →L[ℝ] B}
+  {f : E → B} (s : GlobalRegularization.C1Straightening U D f) {x : E} (hx : x ∈ U) :
+  HasFDerivAt (fun z => s.backward (s.forward x + ↑z)) (s.fiberTangentInclusion x) 0
+GlobalRegularization.C1Straightening.fiberTangent_range.{u_1, u_2} {E : Type u_1} {B : Type u_2} [NormedAddCommGroup E]
+  [NormedSpace ℝ E] [NormedAddCommGroup B] [NormedSpace ℝ B] {U : Set E} {D : E →L[ℝ] B} {f : E → B}
+  (s : GlobalRegularization.C1Straightening U D f) (hU : IsOpen U) {x : E} (hx : x ∈ U) :
+  LinearMap.range (s.fiberTangentInclusion x) = LinearMap.ker (fderiv ℝ (fun y => D y - f y) x)
+GlobalRegularization.C1Straightening.continuous_complement_family.{u_1, u_2} {E : Type u_1} {B : Type u_2}
+  [NormedAddCommGroup E] [NormedSpace ℝ E] [NormedAddCommGroup B] [NormedSpace ℝ B] {U : Set E} {D : E →L[ℝ] B}
+  {f : E → B} (s : GlobalRegularization.C1Straightening U D f) (hU : IsOpen U) (Q : B →L[ℝ] E)
+  (hQ : D.comp Q = ContinuousLinearMap.id ℝ B) :
+  ContinuousOn (s.defectRightInverse Q) U ∧
+    ∀ x ∈ U, IsCompl (LinearMap.ker (fderiv ℝ (fun y => D y - f y) x)) (LinearMap.range (s.defectRightInverse Q x))
+GlobalRegularization.C1Straightening.normal_dimension.{u_1, u_2} {E : Type u_1} {B : Type u_2} [NormedAddCommGroup E]
+  [NormedSpace ℝ E] [NormedAddCommGroup B] [NormedSpace ℝ B] {U : Set E} {D : E →L[ℝ] B} {f : E → B}
+  (s : GlobalRegularization.C1Straightening U D f) [FiniteDimensional ℝ B] (hU : IsOpen U) (Q : B →L[ℝ] E)
+  (hQ : D.comp Q = ContinuousLinearMap.id ℝ B) {x : E} (hx : x ∈ U) :
+  Module.finrank ℝ ↥(LinearMap.range (s.defectRightInverse Q x)) = Module.finrank ℝ B ∧
+    Module.finrank ℝ (E ⧸ LinearMap.ker (fderiv ℝ (fun y => D y - f y) x)) = Module.finrank ℝ B
+GlobalRegularization.terminal_atom_endpoint_coupling_of_isUnit (h : NNReal) (hh : 0 < ↑h) (n : ℕ)
+  (U : Set (GlobalRegularization.C1History h (Fin n → ℝ))) (hU : IsOpen U)
+  (g : GlobalRegularization.C1History h (Fin n → ℝ) → Fin n → ℝ) (hg : ContDiffOn ℝ 1 g U)
+  (hzero : GlobalRegularization.HasVanishingTerminalDerivative h (Fin n → ℝ) U g) (M : (Fin n → ℝ) →L[ℝ] Fin n → ℝ)
+  (hM : IsUnit (1 - M)) :
+  Nonempty
+    (GlobalRegularization.C1Straightening U (GlobalRegularization.endpointDerivative h (Fin n → ℝ)) fun x =>
+      M ((GlobalRegularization.endpointDerivative h (Fin n → ℝ)) x) + g x)
+GlobalRegularization.no_endpoint_identity_straightening.{u_1, u_2} {E : Type u_1} {B : Type u_2} [NormedAddCommGroup E]
+  [NormedSpace ℝ E] [NormedAddCommGroup B] [NormedSpace ℝ B] [Nontrivial B] (U : Set E) (hU : IsOpen U)
+  (hne : U.Nonempty) (D : E →L[ℝ] B) (Q : B →L[ℝ] E) (hQ : D.comp Q = ContinuousLinearMap.id ℝ B) :
+  ¬Nonempty (GlobalRegularization.C1Straightening U D fun x => D x)
+GlobalRegularization.empty_domain_endpoint_identity_straightening.{u_1, u_2} {E : Type u_1} {B : Type u_2}
+  [NormedAddCommGroup E] [NormedSpace ℝ E] [NormedAddCommGroup B] [NormedSpace ℝ B] (D : E →L[ℝ] B) :
+  Nonempty (GlobalRegularization.C1Straightening ∅ D fun x => D x)
+GlobalRegularization.endpointIdentityStraighteningOfSubsingleton.{u_1, u_2} {E : Type u_1} {B : Type u_2}
+  [NormedAddCommGroup E] [NormedSpace ℝ E] [NormedAddCommGroup B] [NormedSpace ℝ B] [Subsingleton B] (U : Set E)
+  (hU : IsOpen U) (D : E →L[ℝ] B) : GlobalRegularization.C1Straightening U D fun x => D x
+GlobalRegularization.remote_observation_full_straightening.{u_2} (h : NNReal) (Y : Type u_2) [NormedAddCommGroup Y]
+  [NormedSpace ℝ Y] (hh : 0 < ↑h) (n : ℕ) [NeZero n] (L : GlobalRegularization.C1History h (Fin n → ℝ) →L[ℝ] Y) (σ : ℝ)
+  (hσ : 0 < σ) (hremote : GlobalRegularization.AnnihilatesTerminalSupport h (Fin n → ℝ) Y L σ)
+  (W : Set (GlobalRegularization.ContinuousHistory h (Fin n → ℝ) × Y)) (hW : IsOpen W)
+  (G : GlobalRegularization.ContinuousHistory h (Fin n → ℝ) × Y → Fin n → ℝ) (hG : ContDiffOn ℝ 1 G W) (τ ε : ℝ)
+  (hτ : 0 < τ) (hε : 0 < ε) :
+  ∃ chart,
+    chart.HasAffineIsotopy ∧
+      ∀ x ∈ ⇑((GlobalRegularization.historyInclusion h (Fin n → ℝ)).prod L) ⁻¹' W,
+        spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) = {1}
+GlobalRegularization.pastDerivative_full_straightening (h : NNReal) (hh : 0 < ↑h) (n : ℕ) [NeZero n]
+  (t s : ↑(GlobalRegularization.HistoryInterval h)) (ht : ↑t < 0)
+  (U : Set (GlobalRegularization.C1History h (Fin n → ℝ))) (hU : IsOpen U) (τ ε : ℝ) (hτ : 0 < τ) (hε : 0 < ε) :
+  ∃ chart,
+    chart.HasAffineIsotopy ∧
+      ∀ x ∈ U, spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) = {1}
+GlobalRegularization.scalarPastDerivativeFeedback_no_extended_derivative_at_zero (h : NNReal)
+  (t s : ↑(GlobalRegularization.HistoryInterval h)) :
+  ¬∃ L,
+      fderiv ℝ (GlobalRegularization.scalarPastDerivativeFeedback h t s) 0 =
+        L.comp (GlobalRegularization.historyInclusion h ℝ)
+GlobalRegularization.exists_hilbert_C1_cutoff.{u_1} {H : Type u_1} [NormedAddCommGroup H] [InnerProductSpace ℝ H]
+  [TopologicalSpace.SeparableSpace H] {K U : Set H} (hK : IsClosed K) (hU : IsOpen U) (hKU : K ⊆ U) :
+  ∃ χ, ContDiff ℝ 1 χ ∧ tsupport χ ⊆ U ∧ (∀ᶠ (x : H) in nhdsSet K, χ x = 1) ∧ ∀ (x : H), χ x ∈ Set.Icc 0 1
+GlobalRegularization.property_e_Hilbert_bounded_C1_approximants.{u_1} (H : Type u_1) [NormedAddCommGroup H]
+  [InnerProductSpace ℝ H] [CompleteSpace H] [TopologicalSpace.SeparableSpace H]
+  (U : Set (GlobalRegularization.C1History 1 H)) (hU : IsOpen U) (f : GlobalRegularization.C1History 1 H → H)
+  (he : GlobalRegularization.HasExtendedDerivative U (GlobalRegularization.historyInclusion 1 H) f) :
+  ∃ fm,
+    (∀ (n : ℕ), ContDiff ℝ 1 (fm n)) ∧
+      (∀ (n : ℕ), Bornology.IsBounded (Set.range (fm n))) ∧
+        GlobalRegularization.LocalC1Approximation U f fm ∧
+          ∀ (i : ℕ) (x y : GlobalRegularization.C1History 1 H),
+            (GlobalRegularization.hilbertHistoryObservation H i) x =
+                (GlobalRegularization.hilbertHistoryObservation H i) y →
+              fm i x = fm i y
+GlobalRegularization.property_e_Hilbert_full_straightening.{u_1} (h : NNReal) (B : Type u_1) [NormedAddCommGroup B]
+  [InnerProductSpace ℝ B] [CompleteSpace B] [TopologicalSpace.SeparableSpace B] [Nontrivial B] (hh : 0 < ↑h)
+  (U : Set (GlobalRegularization.C1History h B)) (hU : IsOpen U) (f : GlobalRegularization.C1History h B → B)
+  (he : GlobalRegularization.HasExtendedDerivative U (GlobalRegularization.historyInclusion h B) f) (τ ε : ℝ)
+  (hτ : 0 < τ) (hε : 0 < ε) :
+  ∃ chart,
+    chart.HasAffineIsotopy ∧
+      ∀ x ∈ U, spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) = {1}
+GlobalRegularization.property_e_Hilbert_straightening_spectrum_inclusion.{u_1} (h : NNReal) (B : Type u_1)
+  [NormedAddCommGroup B] [InnerProductSpace ℝ B] [CompleteSpace B] [TopologicalSpace.SeparableSpace B] (hh : 0 < ↑h)
+  (U : Set (GlobalRegularization.C1History h B)) (hU : IsOpen U) (f : GlobalRegularization.C1History h B → B)
+  (he : GlobalRegularization.HasExtendedDerivative U (GlobalRegularization.historyInclusion h B) f) (τ ε : ℝ)
+  (hτ : 0 < τ) (hε : 0 < ε) :
+  ∃ chart,
+    chart.HasAffineIsotopy ∧
+      ∀ x ∈ U, spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) ⊆ {1}
+'GlobalRegularization.property_e_Hilbert_full_straightening' depends on axioms: [propext, Classical.choice, Quot.sound]
+GlobalRegularization.zero_space_identity_spectrum_ne_one : spectrum ℂ 1 ≠ {1}

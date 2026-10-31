@@ -1,0 +1,11 @@
+{
+  "Source": "lean_global_regularization_v5_unchecked.zip",
+  "SHA256": "C32A4AE95812EA0AA605D9CD38E128FB6E61F7FAF962C1A9C50A50FA98C68F2C",
+  "ManuscriptTitle": "On global regularization of solution manifolds",
+  "ManuscriptDate": "2026-10-31",
+  "ManuscriptSHA256": "66217CCBE17B88907D6EF03FDAA9FE98C6D5CA76EE09239179704003F96C5298",
+  "Lean": "4.24.0",
+  "LeanCommit": "797c613eb9b6d4ec95db23e3e00af9ac6657f24b",
+  "Mathlib": "f897ebcf72cd16f89ab4577d0c826cd14afaafc7",
+  "OriginalSourcesImported": false
+}

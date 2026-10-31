@@ -1,0 +1,75 @@
+⚠ [3229/3336] Replayed GlobalRegularization.MarkovApproximation
+warning: GlobalRegularization/MarkovApproximation.lean:78:0: automatically included section variable(s) unused in theorem `GlobalRegularization.norm_markovApproximation_le`:
+  [CompleteSpace B]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace B] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [3232/3336] Replayed GlobalRegularization.IntegralDensityFunctional
+warning: GlobalRegularization/IntegralDensityFunctional.lean:38:0: automatically included section variable(s) unused in theorem `GlobalRegularization.norm_integralDensity_apply_le`:
+  [IsFiniteMeasure μ]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [IsFiniteMeasure μ] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [3279/3336] Replayed GlobalRegularization.TriangularDerivativeConjugate
+warning: GlobalRegularization/TriangularDerivativeConjugate.lean:17:0: automatically included section variable(s) unused in theorem `GlobalRegularization.C1Straightening.HasTriangularDerivative.conjugate`:
+  [CompleteSpace E]
+  [CompleteSpace F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace E] [CompleteSpace F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+✔ [3284/3336] Built GlobalRegularization.Statement (11s)
+✔ [3285/3336] Built GlobalRegularization.ExtendedDerivative (11s)
+✔ [3286/3336] Built GlobalRegularization.MainStatement (13s)
+✔ [3287/3336] Built GlobalRegularization.UnitHistoryOperatorNorm (13s)
+✔ [3288/3336] Built GlobalRegularization.BoundaryLayer (13s)
+✔ [3289/3336] Built GlobalRegularization.ExtendedDerivativeTransport (13s)
+✔ [3290/3336] Built GlobalRegularization.BoundaryScaling (14s)
+✔ [3291/3336] Built GlobalRegularization.UnitHistoryObservations (14s)
+✔ [3292/3336] Built GlobalRegularization.LocalizedIsotopy (16s)
+✔ [3293/3336] Built GlobalRegularization.LocalizedTransport (16s)
+✔ [3294/3336] Built GlobalRegularization.ShellGeometry (12s)
+✔ [3295/3336] Built GlobalRegularization.HilbertHistoryObservations (13s)
+✔ [3296/3336] Built GlobalRegularization.NormalizedCylindrical (13s)
+✔ [3297/3336] Built GlobalRegularization.TerminalAtomLimit (12s)
+✔ [3298/3336] Built GlobalRegularization.TerminalShells (13s)
+✔ [3299/3336] Built GlobalRegularization.TerminalHistoryCutoff (13s)
+✔ [3300/3336] Built GlobalRegularization.HilbertCylindricalFamily (14s)
+✔ [3301/3336] Built GlobalRegularization.HistoryTerminalAtom (14s)
+✔ [3302/3336] Built GlobalRegularization.TerminalShellSeries (14s)
+✔ [3303/3336] Built GlobalRegularization.TerminalCutoffAdjoint (19s)
+✔ [3304/3336] Built GlobalRegularization.ReconstructedApproximants (19s)
+✔ [3305/3336] Built GlobalRegularization.ShellCoordinate (13s)
+✔ [3306/3336] Built GlobalRegularization.MatrixTerminalAtom (14s)
+✔ [3307/3336] Built GlobalRegularization.AdaptedHistoryOperators (13s)
+✔ [3308/3336] Built GlobalRegularization.ShellInjectivity (17s)
+✔ [3309/3336] Built GlobalRegularization.ShellDisplacement (17s)
+✔ [3310/3336] Built GlobalRegularization.ShellInvertibility (17s)
+✔ [3311/3336] Built GlobalRegularization.VectorMarkovOperators (16s)
+✔ [3312/3336] Built GlobalRegularization.AtomFreeRepresentation (16s)
+✔ [3313/3336] Built GlobalRegularization.IntervalReferenceMeasure (16s)
+✔ [3314/3336] Built GlobalRegularization.HistorySeparable (16s)
+✔ [3315/3336] Built GlobalRegularization.NormalizedStraightening (14s)
+✔ [3316/3336] Built GlobalRegularization.ShellIsotopy (14s)
+✔ [3317/3336] Built GlobalRegularization.MatrixAdaptedAdjoint (14s)
+✔ [3318/3336] Built GlobalRegularization.GeneralShellObservations (13s)
+✔ [3319/3336] Built GlobalRegularization.NormalizedLocalized (13s)
+✔ [3320/3336] Built GlobalRegularization.SeparableAdaptedOperators (13s)
+✔ [3321/3336] Built GlobalRegularization.MainExistence (14s)
+✔ [3322/3336] Built GlobalRegularization.AdaptedStraightening (14s)
+✔ [3323/3336] Built GlobalRegularization.PrincipalApplications (12s)
+✔ [3324/3336] Built GlobalRegularization.TerminalExistence (13s)
+✔ [3325/3336] Built GlobalRegularization.EndpointCoupling (13s)
+✔ [3326/3336] Built GlobalRegularization.ApproximantStraightening (14s)
+✔ [3327/3336] Built GlobalRegularization.FiniteFullTheorem (14s)
+✔ [3328/3336] Built GlobalRegularization.FiberApplications (14s)
+✔ [3329/3336] Built GlobalRegularization.HilbertNormalizedExistence (13s)
+✔ [3330/3336] Built GlobalRegularization.TerminalApplications (14s)
+✔ [3331/3336] Built GlobalRegularization.HilbertExistence (12s)
+✔ [3332/3336] Built GlobalRegularization.RemoteTerminalCondition (14s)
+✔ [3333/3336] Built GlobalRegularization.PastDerivativeApplication (11s)
+✔ [3334/3336] Built GlobalRegularization.PastDerivativeNonextension (11s)
+✔ [3335/3336] Built GlobalRegularization (10s)
+Build completed successfully (3336 jobs).

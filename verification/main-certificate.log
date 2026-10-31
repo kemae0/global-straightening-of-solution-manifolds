@@ -1,0 +1,75 @@
+GlobalRegularization.property_e_localized_straightening.{u_1} (h : NNReal) (B : Type u_1) [NormedAddCommGroup B]
+  [NormedSpace ℝ B] [CompleteSpace B] [FiniteDimensional ℝ B] (hh : 0 < ↑h)
+  (U : Set (GlobalRegularization.C1History h B)) (hU : IsOpen U) (f : GlobalRegularization.C1History h B → B)
+  (he : GlobalRegularization.HasExtendedDerivative U (GlobalRegularization.historyInclusion h B) f) (τ ε : ℝ)
+  (hτ : 0 < τ) (hε : 0 < ε) : Nonempty (GlobalRegularization.LocalizedHistoryStraightening h B U f τ ε)
+GlobalRegularization.property_e_localized_straightening_with_isotopy.{u_1} (h : NNReal) (B : Type u_1)
+  [NormedAddCommGroup B] [NormedSpace ℝ B] [CompleteSpace B] [FiniteDimensional ℝ B] (hh : 0 < ↑h)
+  (U : Set (GlobalRegularization.C1History h B)) (hU : IsOpen U) (f : GlobalRegularization.C1History h B → B)
+  (he : GlobalRegularization.HasExtendedDerivative U (GlobalRegularization.historyInclusion h B) f) (τ ε : ℝ)
+  (hτ : 0 < τ) (hε : 0 < ε) : ∃ chart, chart.HasAffineIsotopy
+GlobalRegularization.mainClaim (n : ℕ) : GlobalRegularization.MainClaim n
+'GlobalRegularization.mainClaim' depends on axioms: [propext, Classical.choice, Quot.sound]
+'GlobalRegularization.property_e_localized_straightening_with_isotopy' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+GlobalRegularization.property_e_solution_manifold.{u_1} (h : NNReal) (B : Type u_1) [NormedAddCommGroup B]
+  [NormedSpace ℝ B] [CompleteSpace B] [FiniteDimensional ℝ B] (hh : 0 < ↑h)
+  (U : Set (GlobalRegularization.C1History h B)) (hU : IsOpen U) (f : GlobalRegularization.C1History h B → B)
+  (he : GlobalRegularization.HasExtendedDerivative U (GlobalRegularization.historyInclusion h B) f) (τ ε : ℝ)
+  (hτ : 0 < τ) (hε : 0 < ε) :
+  ∃ chart,
+    chart.forward '' GlobalRegularization.solutionManifold U (⇑(GlobalRegularization.endpointDerivative h B)) f =
+      chart.forward '' U ∩ GlobalRegularization.zeroHyperplane ⇑(GlobalRegularization.endpointDerivative h B)
+GlobalRegularization.terminal_atom_full_straightening (h : NNReal) (hh : 0 < ↑h) (n : ℕ) [NeZero n]
+  (U : Set (GlobalRegularization.C1History h (Fin n → ℝ))) (hU : IsOpen U)
+  (f : GlobalRegularization.C1History h (Fin n → ℝ) → Fin n → ℝ) (hf : ContDiffOn ℝ 1 f U)
+  (hzero : GlobalRegularization.HasVanishingTerminalDerivative h (Fin n → ℝ) U f) (τ ε : ℝ) (hτ : 0 < τ) (hε : 0 < ε) :
+  ∃ chart,
+    chart.HasAffineIsotopy ∧
+      ∀ x ∈ U, spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) = {1}
+GlobalRegularization.property_e_full_straightening (h : NNReal) (hh : 0 < ↑h) (n : ℕ) [NeZero n]
+  (U : Set (GlobalRegularization.C1History h (Fin n → ℝ))) (hU : IsOpen U)
+  (f : GlobalRegularization.C1History h (Fin n → ℝ) → Fin n → ℝ)
+  (he : GlobalRegularization.HasExtendedDerivative U (GlobalRegularization.historyInclusion h (Fin n → ℝ)) f) (τ ε : ℝ)
+  (hτ : 0 < τ) (hε : 0 < ε) :
+  ∃ chart,
+    chart.HasAffineIsotopy ∧
+      ∀ x ∈ U, spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) = {1}
+'GlobalRegularization.terminal_atom_full_straightening' depends on axioms: [propext, Classical.choice, Quot.sound]
+'GlobalRegularization.property_e_full_straightening' depends on axioms: [propext, Classical.choice, Quot.sound]
+GlobalRegularization.remote_observation_localized_straightening.{u_2} (h : NNReal) (Y : Type u_2) [NormedAddCommGroup Y]
+  [NormedSpace ℝ Y] (hh : 0 < ↑h) (n : ℕ) (L : GlobalRegularization.C1History h (Fin n → ℝ) →L[ℝ] Y) (σ : ℝ)
+  (hσ : 0 < σ) (hremote : GlobalRegularization.AnnihilatesTerminalSupport h (Fin n → ℝ) Y L σ)
+  (W : Set (GlobalRegularization.ContinuousHistory h (Fin n → ℝ) × Y)) (hW : IsOpen W)
+  (G : GlobalRegularization.ContinuousHistory h (Fin n → ℝ) × Y → Fin n → ℝ) (hG : ContDiffOn ℝ 1 G W) (τ ε : ℝ)
+  (hτ : 0 < τ) (hε : 0 < ε) : ∃ chart, chart.HasAffineIsotopy
+GlobalRegularization.pastDerivative_localized_straightening (h : NNReal) (hh : 0 < ↑h) (n : ℕ)
+  (t s : ↑(GlobalRegularization.HistoryInterval h)) (ht : ↑t < 0)
+  (U : Set (GlobalRegularization.C1History h (Fin n → ℝ))) (hU : IsOpen U) (τ ε : ℝ) (hτ : 0 < τ) (hε : 0 < ε) :
+  ∃ chart, chart.HasAffineIsotopy
+GlobalRegularization.terminal_atom_endpoint_coupling (h : NNReal) (hh : 0 < ↑h) (n : ℕ)
+  (U : Set (GlobalRegularization.C1History h (Fin n → ℝ))) (hU : IsOpen U)
+  (g : GlobalRegularization.C1History h (Fin n → ℝ) → Fin n → ℝ) (hg : ContDiffOn ℝ 1 g U)
+  (hzero : GlobalRegularization.HasVanishingTerminalDerivative h (Fin n → ℝ) U g) (M : (Fin n → ℝ) →L[ℝ] Fin n → ℝ)
+  (N : (Fin n → ℝ) ≃L[ℝ] Fin n → ℝ) (hN : ↑N = ContinuousLinearMap.id ℝ (Fin n → ℝ) - M) :
+  Nonempty
+    (GlobalRegularization.C1Straightening U (GlobalRegularization.endpointDerivative h (Fin n → ℝ)) fun x =>
+      M ((GlobalRegularization.endpointDerivative h (Fin n → ℝ)) x) + g x)
+GlobalRegularization.property_e_Hilbert_full_straightening.{u_1} (h : NNReal) (B : Type u_1) [NormedAddCommGroup B]
+  [InnerProductSpace ℝ B] [CompleteSpace B] [TopologicalSpace.SeparableSpace B] [Nontrivial B] (hh : 0 < ↑h)
+  (U : Set (GlobalRegularization.C1History h B)) (hU : IsOpen U) (f : GlobalRegularization.C1History h B → B)
+  (he : GlobalRegularization.HasExtendedDerivative U (GlobalRegularization.historyInclusion h B) f) (τ ε : ℝ)
+  (hτ : 0 < τ) (hε : 0 < ε) :
+  ∃ chart,
+    chart.HasAffineIsotopy ∧
+      ∀ x ∈ U, spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) = {1}
+GlobalRegularization.property_e_Hilbert_straightening_spectrum_inclusion.{u_1} (h : NNReal) (B : Type u_1)
+  [NormedAddCommGroup B] [InnerProductSpace ℝ B] [CompleteSpace B] [TopologicalSpace.SeparableSpace B] (hh : 0 < ↑h)
+  (U : Set (GlobalRegularization.C1History h B)) (hU : IsOpen U) (f : GlobalRegularization.C1History h B → B)
+  (he : GlobalRegularization.HasExtendedDerivative U (GlobalRegularization.historyInclusion h B) f) (τ ε : ℝ)
+  (hτ : 0 < τ) (hε : 0 < ε) :
+  ∃ chart,
+    chart.HasAffineIsotopy ∧
+      ∀ x ∈ U, spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) ⊆ {1}
+'GlobalRegularization.property_e_Hilbert_full_straightening' depends on axioms: [propext, Classical.choice, Quot.sound]
