@@ -9,7 +9,7 @@
   "Mathlib": "f897ebcf72cd16f89ab4577d0c826cd14afaafc7",
   "OriginalSourcesImported": false,
   "CorrectedManuscript": "manuscript/paper_corrected.tex",
-  "CorrectedManuscriptSHA256": "e7a513b64ab08ab2e0e0d68f19c4b661c4b8d47767363aaa2b678d442407308b",
+  "CorrectedManuscriptSHA256": "4b8ac13ddf35907011f319d19740996bd76bea01099ca2c9b7eef738d759a74e",
   "PriorCorrectedManuscripts": [
     {
       "title": "On global regularization of solution manifolds",
@@ -18,11 +18,14 @@
     }
   ],
   "RevisedManuscript": "manuscript/paper_revised.tex",
-  "RevisedManuscriptSHA256": "56320ea5a2a24bf95d547d92889b5ae00385935df9534e2a6ac3fab7fe9b2187",
-  "CurrentClarification": "Restrict the endpoint reflection comparison to ambient defect straightening; its spectrum cannot be {1}.",
+  "RevisedManuscriptSHA256": "4b8ac13ddf35907011f319d19740996bd76bea01099ca2c9b7eef738d759a74e",
+  "CurrentClarification": "The author updated the reflection paragraph to distinguish the full theorem from existence of an ambient diffeomorphism with the defect identity.",
   "CurrentClarificationReportedToUser": true,
   "PriorSuppliedRevisions": [
-    "892232dbee5216a7df702a1c9871fd789aa0250caed4653a85db954d4eaea80f"
+    "892232dbee5216a7df702a1c9871fd789aa0250caed4653a85db954d4eaea80f",
+    "56320ea5a2a24bf95d547d92889b5ae00385935df9534e2a6ac3fab7fe9b2187"
   ],
-  "HistoricalCorrectionsApprovedByUser": true
+  "HistoricalCorrectionsApprovedByUser": true,
+  "CurrentClarificationResolvedByUser": true,
+  "CurrentSourceModifiedByAgent": false
 }

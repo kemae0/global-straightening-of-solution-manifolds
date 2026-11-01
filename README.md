@@ -21,8 +21,8 @@ results include derivative spectrum `{1}` and the affine C¹ isotopy
 
 - [Supplied manuscript](manuscript/paper_revised.tex): the latest attachment,
   preserved byte for byte, including the expanded introduction and bibliography.
-- [Qualified manuscript](manuscript/paper_corrected.tex): the same text with
-  the single endpoint-reflection phrase clarified as explained below.
+- [Certificate source](manuscript/paper_corrected.tex): an identical copy of
+  the latest supplied text, retained at this path for the verification scripts.
 - [Claim map](verification/manuscript-coverage.json): source locations and
   Lean declarations for the results and construction claims under review.
 - [Formalization audit](FORMALIZATION_AUDIT.md) and
@@ -40,11 +40,12 @@ constant below epsilon for every affine slice with parameter in `[0,1]`.
 The local C¹ approximation is in operator norm; the literal strict local
 supremum estimate is proved separately.
 
-## Qualification needed in the supplied text
+## Reflection example: wording resolved
 
-The paragraph after the endpoint-coupling corollary says that the zero-atom
-condition is not necessary for "the diffeomorphism in Theorem 3.3"
-(`thm:no-atom`). Its example proves a narrower assertion.
+The latest manuscript distinguishes all conclusions of Theorem 3.3
+(`thm:no-atom`) from existence of a C¹ diffeomorphism satisfying the defect
+identity. This resolves the overbroad wording in the preceding draft and
+matches the Lean reflection result.
 
 For endpoint differentiation `D` and a bounded right inverse `Q`, the map
 `A = I - 2QD` is an ambient linear involution satisfying `DA = -D`.
@@ -54,11 +55,11 @@ For nonzero `a`, however, `A(Qa) = -Qa`, so its derivative has eigenvalue
 the spectral obstruction. In fact the obstruction applies to every C¹
 chart with the same defect identity on a nonempty open domain.
 
-The qualified manuscript replaces that phrase with
-"an ambient diffeomorphism satisfying the defect identity".
-The example supports this statement. See
-[MANUSCRIPT_CORRECTIONS.md](MANUSCRIPT_CORRECTIONS.md) for this qualification
-and the historical corrections already incorporated into the new draft.
+The example proves that the zero-atom condition is not necessary for
+ambient defect straightening. It does not assert all the theorem's further
+conclusions. See [MANUSCRIPT_CORRECTIONS.md](MANUSCRIPT_CORRECTIONS.md) for
+the resolved issue and the historical corrections already incorporated
+into the current draft. The supplied manuscript has not been edited.
 
 ## Main Lean certificates
 

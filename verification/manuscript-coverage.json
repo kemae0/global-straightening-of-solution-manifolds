@@ -1,6 +1,6 @@
 {
   "target": "manuscript/paper_corrected.tex",
-  "scope": "The revised manuscript mathematical results and construction claims, with the endpoint-reflection clarification documented in MANUSCRIPT_CORRECTIONS.md. The source and reference checker is a correspondence aid; it does not prove prose/Lean equivalence or completeness of this manually chosen list.",
+  "scope": "Mathematical results and construction claims in the latest supplied revision, including the author-corrected reflection paragraph. The checker validates anchors and references; it does not prove exhaustive prose/Lean equivalence.",
   "excluded_background": [
     "Differentiable semiflow existence and historical discussion of cited articles",
     "The attribution/application to external Theorems 3.4 and 4.2 in Walther2026; their hypotheses/property-(e) inclusion are discussed as external background, not formalized here",
@@ -623,7 +623,7 @@
     },
     {
       "id": "C050",
-      "source_line": 678,
+      "source_line": 684,
       "anchor": "In contrast, $f(\\phi)=\\phi",
       "claim": "Corrected nonempty-domain, nontrivial-state impossibility comparison",
       "status": "checked-counterpart",
@@ -634,8 +634,8 @@
     },
     {
       "id": "C051",
-      "source_line": 673,
-      "anchor": "but not necessary, for the existence",
+      "source_line": 675,
+      "anchor": "but is not necessary for the existence",
       "claim": "Endpoint reflection is an involution giving ambient defect straightening; it cannot have spectrum {1}",
       "status": "checked-counterpart",
       "proofs": [
@@ -649,7 +649,7 @@
     },
     {
       "id": "C052",
-      "source_line": 683,
+      "source_line": 693,
       "anchor": "\\label{thm:remote}",
       "claim": "Remote observations with arbitrary Banach range; full localization, spectrum and isotopy",
       "status": "checked-counterpart",
@@ -660,7 +660,7 @@
     },
     {
       "id": "C053",
-      "source_line": 694,
+      "source_line": 704,
       "anchor": "For sufficiently small $\\delta$, $LQ_\\delta=0$",
       "claim": "Remote chain-rule terminal defect tends to zero",
       "status": "checked-counterpart",
@@ -672,7 +672,7 @@
     },
     {
       "id": "C054",
-      "source_line": 707,
+      "source_line": 717,
       "anchor": "\\label{cor:past}",
       "claim": "Past-derivative feedback admits localized straightening",
       "status": "checked-counterpart",
@@ -683,7 +683,7 @@
     },
     {
       "id": "C055",
-      "source_line": 715,
+      "source_line": 725,
       "anchor": "does not satisfy property",
       "claim": "Actual failure of continuous-history derivative extension at zero",
       "status": "checked-counterpart",
@@ -695,7 +695,7 @@
     },
     {
       "id": "C056",
-      "source_line": 749,
+      "source_line": 759,
       "anchor": "\\label{thm:hilbert}",
       "claim": "Full corrected separable Hilbert theorem with actual complex spectrum and isotopy",
       "status": "checked-counterpart",
@@ -706,7 +706,7 @@
     },
     {
       "id": "C057",
-      "source_line": 770,
+      "source_line": 780,
       "anchor": "$P_m:E_H\\to E_H$ be the Bernstein",
       "claim": "Actual Bernstein operators of degrees 4^m with Hilbert coefficients",
       "status": "checked-counterpart",
@@ -719,7 +719,7 @@
     },
     {
       "id": "C058",
-      "source_line": 779,
+      "source_line": 789,
       "anchor": "\\label{eq:hilbert-bernstein}",
       "claim": "C1 contraction, continuous-history operator-norm convergence and C1 strong convergence",
       "status": "checked-counterpart",
@@ -732,7 +732,7 @@
     },
     {
       "id": "C059",
-      "source_line": 784,
+      "source_line": 794,
       "anchor": "The grids are nested",
       "claim": "Equality of P_j observations implies equality of every P_i, i<=j",
       "status": "checked-counterpart",
@@ -744,7 +744,7 @@
     },
     {
       "id": "C060",
-      "source_line": 786,
+      "source_line": 796,
       "anchor": "The range $F_m=",
       "claim": "Actual closed ranges continuously linearly equivalent to finite Hilbert products",
       "status": "checked-counterpart",
@@ -760,7 +760,7 @@
     },
     {
       "id": "C061",
-      "source_line": 802,
+      "source_line": 812,
       "anchor": "A Hilbert-space smooth partition of unity",
       "claim": "Infinitely smooth partitions of unity and smooth Urysohn cutoffs in separable Hilbert space",
       "status": "checked-counterpart",
@@ -774,7 +774,7 @@
     },
     {
       "id": "C062",
-      "source_line": 791,
+      "source_line": 801,
       "anchor": "consider the closed subset",
       "claim": "Displayed distance core is closed and lies in the displayed open belt",
       "status": "checked-counterpart",
@@ -788,7 +788,7 @@
     },
     {
       "id": "C063",
-      "source_line": 804,
+      "source_line": 814,
       "anchor": "neighborhood of $K_m$ and has support",
       "claim": "Cutoff near the exact core with support in the exact belt on the actual range",
       "status": "checked-counterpart",
@@ -800,7 +800,7 @@
     },
     {
       "id": "C064",
-      "source_line": 806,
+      "source_line": 816,
       "anchor": "Choose a smooth function $\\beta",
       "claim": "Actual compactly supported infinitely smooth scalar cutoff and bounded smooth saturation",
       "status": "checked-counterpart",
@@ -816,7 +816,7 @@
     },
     {
       "id": "C065",
-      "source_line": 813,
+      "source_line": 823,
       "anchor": "This gives a globally defined bounded",
       "claim": "Actual range-cutoff times saturation extends to bounded global C1 piece",
       "status": "checked-counterpart",
@@ -828,7 +828,7 @@
     },
     {
       "id": "C066",
-      "source_line": 824,
+      "source_line": 834,
       "anchor": "The joint continuity of the extended derivatives",
       "claim": "Jointly continuous linear action implies locally bounded operator norms",
       "status": "checked-counterpart",
@@ -840,7 +840,7 @@
     },
     {
       "id": "C067",
-      "source_line": 832,
+      "source_line": 842,
       "anchor": "The right-hand side tends locally uniformly",
       "claim": "Exact manuscript family has local C1 approximation in operator norm",
       "status": "checked-counterpart",
@@ -851,7 +851,7 @@
     },
     {
       "id": "C068",
-      "source_line": 836,
+      "source_line": 846,
       "anchor": "For every $m$, choose $Q_m$",
       "claim": "Paper Bernstein observations annihilate narrow terminal corrections and separate histories",
       "status": "checked-counterpart",
@@ -932,7 +932,7 @@
     },
     {
       "id": "C074",
-      "source_line": 749,
+      "source_line": 759,
       "anchor": "\\label{thm:hilbert}",
       "claim": "Hilbert-valued theorem on the exact sum-norm history space",
       "status": "checked-counterpart",
@@ -943,7 +943,7 @@
     },
     {
       "id": "C075",
-      "source_line": 779,
+      "source_line": 789,
       "anchor": "\\label{eq:hilbert-bernstein}",
       "claim": "Actual sum-norm Bernstein contraction, strong convergence, continuous-history operator limit and nesting",
       "status": "checked-counterpart",

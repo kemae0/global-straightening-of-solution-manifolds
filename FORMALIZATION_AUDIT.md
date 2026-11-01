@@ -1,10 +1,12 @@
 # Formalization audit — October 31, 2026
 
-The supplied revision is preserved exactly in `manuscript/paper_revised.tex`.
-The target `manuscript/paper_corrected.tex` differs in one phrase qualifying
-the endpoint-reflection comparison. Its example gives an ambient defect
-straightening, but cannot have the full no-atom theorem's spectrum `{1}`.
-`EndpointReflection` proves this obstruction. See
+The latest supplied revision is preserved exactly in
+`manuscript/paper_revised.tex`. The certificate target
+`manuscript/paper_corrected.tex` is byte-identical to that supplied text.
+The author corrected the endpoint-reflection comparison: the example gives
+an ambient defect straightening, without asserting the full no-atom
+theorem's spectrum `{1}`. `EndpointReflection` proves the exact involution,
+defect identity and spectral distinction. See
 [MANUSCRIPT_CORRECTIONS.md](MANUSCRIPT_CORRECTIONS.md).
 
 The older false zero-space spectral assertion is repaired in the revised
@@ -130,7 +132,8 @@ counterparts and proof-route differences.
 
 The earlier unrestricted spectrum and impossibility assertions have
 counterexamples, not proofs. The earlier input and current supplied input
-are preserved. The current reflection comparison is qualified explicitly.
+are preserved. The latest reflection comparison includes the author's
+explicit qualification; there are no agent edits to the current source.
 The displayed degree-4^m Bernstein construction is now checked, including
 continuous linear equivalence of its actual closed ranges with finite Hilbert
 products and nestedness stated directly for P_m. The Hilbert existence proof

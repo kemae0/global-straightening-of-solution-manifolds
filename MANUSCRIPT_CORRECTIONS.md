@@ -5,12 +5,12 @@ Manifolds for State-Dependent Delay Equations*, is preserved byte for byte
 in `manuscript/paper_revised.tex`. Its hash and the current formalization
 target's hash are recorded in `verification/provenance.json`.
 
-## Qualification in the current revision
+## Reflection wording resolved in the latest revision
 
-The sentence before the endpoint-reflection example says the zero-atom
+The sentence before the endpoint-reflection example in the preceding draft said the zero-atom
 condition is not necessary for "the diffeomorphism in Theorem 3.3"
 (the theorem labelled `thm:no-atom`). Read as referring to all that theorem's
-conclusions, this is false. For `f = 2D`, the example `A = I - 2QD` is an
+conclusions, this was false. For `f = 2D`, the example `A = I - 2QD` is an
 ambient continuous linear involution satisfying `D A = -D`, but its
 complexified derivative has `-1` in its spectrum. More generally, every
 C¹ chart with this defect identity on a nonempty open domain has `-1` in
@@ -19,10 +19,11 @@ its derivative spectrum, so it cannot have spectrum `{1}`.
 `EndpointReflection.lean` constructs the exact displayed involution and
 proves `neg_one_mem_complexified_spectrum_of_endpoint_flip` and
 `C1Straightening.twice_endpoint_spectrum_obstruction`. This issue was
-reported to the user. In `paper_corrected.tex`, only the sentence's phrase
-"for the existence of the diffeomorphism in Theorem ..." is replaced by
-"for the existence of an ambient diffeomorphism satisfying the defect identity".
-The supplied revision itself remains unchanged.
+reported to the user. The author then revised the paragraph to distinguish
+the full theorem's conclusions from existence of a C¹ diffeomorphism with
+the defect identity. The latest paragraph matches the checked result.
+Both `paper_revised.tex` and the certificate alias `paper_corrected.tex`
+now preserve that latest supplied text byte for byte, without agent edits.
 
 ## Historical corrections
 
