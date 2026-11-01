@@ -1,8 +1,9 @@
 # Formalization audit — October 31, 2026
 
-The latest supplied revision is preserved exactly in
-`manuscript/paper_revised.tex`. The certificate target
-`manuscript/paper_corrected.tex` is byte-identical to that supplied text.
+The final supplied paper is preserved exactly in
+`manuscript/global_straightening_solution_manifolds.tex`. The certificate
+target `manuscript/paper_corrected.tex` and compatibility copy
+`manuscript/paper_revised.tex` are byte-identical to that supplied file.
 The author corrected the endpoint-reflection comparison: the example gives
 an ambient defect straightening, without asserting the full no-atom
 theorem's spectrum `{1}`. `EndpointReflection` proves the exact involution,

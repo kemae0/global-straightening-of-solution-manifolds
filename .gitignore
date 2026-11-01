@@ -10,6 +10,7 @@ source_v5/
 manuscript/*
 !manuscript/paper_corrected.tex
 !manuscript/paper_revised.tex
+!manuscript/global_straightening_solution_manifolds.tex
 verification/publication-target.json
 verification/publication-report.json
 verification/publish-*.json

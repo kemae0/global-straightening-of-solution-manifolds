@@ -1,6 +1,6 @@
 {
   "target": "manuscript/paper_corrected.tex",
-  "scope": "Mathematical results and construction claims in the latest supplied revision, including the author-corrected reflection paragraph. The checker validates anchors and references; it does not prove exhaustive prose/Lean equivalence.",
+  "scope": "Mathematical results and construction claims in the final paper supplied by the author. The checker validates anchors and references; it does not prove exhaustive prose/Lean equivalence.",
   "excluded_background": [
     "Differentiable semiflow existence and historical discussion of cited articles",
     "The attribution/application to external Theorems 3.4 and 4.2 in Walther2026; their hypotheses/property-(e) inclusion are discussed as external background, not formalized here",
@@ -313,7 +313,7 @@
     },
     {
       "id": "C025",
-      "source_line": 470,
+      "source_line": 471,
       "anchor": "The bounded linear map",
       "claim": "FTC coordinates are a bounded linear equivalence, not an arbitrary product surrogate",
       "status": "checked-counterpart",
@@ -326,7 +326,7 @@
     },
     {
       "id": "C026",
-      "source_line": 464,
+      "source_line": 465,
       "anchor": "\\label{eq:atom-limit}",
       "claim": "Actual one-sided positive-real-width operator limit equals endpoint atom",
       "status": "checked-counterpart",
@@ -338,7 +338,7 @@
     },
     {
       "id": "C027",
-      "source_line": 488,
+      "source_line": 489,
       "anchor": "\\label{lem:adapted}",
       "claim": "Actual uniformly bounded finite-rank adapted operators with strong and adjoint limits",
       "status": "checked-counterpart",
@@ -349,7 +349,7 @@
     },
     {
       "id": "C028",
-      "source_line": 497,
+      "source_line": 498,
       "anchor": "The Banach space $C_n^1$ is separable",
       "claim": "Separable history and derivative image, including empty image",
       "status": "checked-counterpart",
@@ -361,7 +361,7 @@
     },
     {
       "id": "C029",
-      "source_line": 503,
+      "source_line": 504,
       "anchor": "with full support, $\\nu(\\{0\\})=0$",
       "claim": "Common finite full-support atom-free measure dominating all component total variations",
       "status": "checked-counterpart",
@@ -374,7 +374,7 @@
     },
     {
       "id": "C030",
-      "source_line": 512,
+      "source_line": 513,
       "anchor": "in total variation. Absolute continuity",
       "claim": "Signed measure uniqueness, total-variation dual norm and continuous representation",
       "status": "checked-counterpart",
@@ -387,7 +387,7 @@
     },
     {
       "id": "C031",
-      "source_line": 513,
+      "source_line": 514,
       "anchor": "is preserved under total-variation limits",
       "claim": "Absolute continuity closed under total-variation limits",
       "status": "checked-counterpart",
@@ -398,7 +398,7 @@
     },
     {
       "id": "C032",
-      "source_line": 518,
+      "source_line": 519,
       "anchor": "Choose finite nonnegative continuous partitions",
       "claim": "Finite small-support nonnegative partitions; zero-weight averaging convention",
       "status": "checked-counterpart",
@@ -411,7 +411,7 @@
     },
     {
       "id": "C033",
-      "source_line": 519,
+      "source_line": 520,
       "anchor": "\\label{eq:markov}",
       "claim": "Displayed finite Markov averages, positivity and finite rank",
       "status": "checked-counterpart",
@@ -424,7 +424,7 @@
     },
     {
       "id": "C034",
-      "source_line": 523,
+      "source_line": 524,
       "anchor": "strictly positive. These finite-rank positive operators",
       "claim": "Markov contractions and uniform strong convergence",
       "status": "checked-counterpart",
@@ -437,7 +437,7 @@
     },
     {
       "id": "C035",
-      "source_line": 525,
+      "source_line": 526,
       "anchor": "For a scalar measure $\\mu=w\\nu$",
       "claim": "Explicit signed Markov adjoint density for integrable w",
       "status": "checked-counterpart",
@@ -448,7 +448,7 @@
     },
     {
       "id": "C036",
-      "source_line": 531,
+      "source_line": 532,
       "anchor": "\\label{eq:markov-dual}",
       "claim": "Actual total-variation adjoint convergence, using continuous density approximation",
       "status": "checked-counterpart",
@@ -459,7 +459,7 @@
     },
     {
       "id": "C037",
-      "source_line": 537,
+      "source_line": 538,
       "anchor": "(V_mg)(t)",
       "claim": "Actual terminal cutoff by min(t,-sigma), contraction and strong convergence",
       "status": "checked-counterpart",
@@ -473,7 +473,7 @@
     },
     {
       "id": "C038",
-      "source_line": 542,
+      "source_line": 543,
       "anchor": "\\le2|\\mu|",
       "claim": "Two-times-terminal-tail total-variation bound and convergence",
       "status": "checked-counterpart",
@@ -485,7 +485,7 @@
     },
     {
       "id": "C039",
-      "source_line": 545,
+      "source_line": 546,
       "anchor": "\\label{eq:composed-dual}",
       "claim": "Adjoint convergence of the composition",
       "status": "checked-counterpart",
@@ -496,7 +496,7 @@
     },
     {
       "id": "C040",
-      "source_line": 553,
+      "source_line": 554,
       "anchor": "\\label{eq:R}",
       "claim": "FTC-reconstructed finite-rank operators with strong convergence and uniform bound",
       "status": "checked-counterpart",
@@ -510,7 +510,7 @@
     },
     {
       "id": "C041",
-      "source_line": 564,
+      "source_line": 565,
       "anchor": "gives \\eqref{eq:adapted-invisible}",
       "claim": "Annihilation of terminal corrections by the reconstructed operator",
       "status": "checked-counterpart",
@@ -521,7 +521,7 @@
     },
     {
       "id": "C042",
-      "source_line": 567,
+      "source_line": 568,
       "anchor": "\\label{thm:no-atom}",
       "claim": "Full terminal-atom straightening theorem, spectrum and isotopy",
       "status": "checked-counterpart",
@@ -533,7 +533,7 @@
     },
     {
       "id": "C043",
-      "source_line": 583,
+      "source_line": 584,
       "anchor": "Each $K_m$ is compact",
       "claim": "Finite-dimensional range cutoffs and bounded C1 extension by zero",
       "status": "checked-counterpart",
@@ -546,7 +546,7 @@
     },
     {
       "id": "C044",
-      "source_line": 585,
+      "source_line": 586,
       "anchor": "Fix $\\phi_*\\in U$",
       "claim": "Eventually captured common ball, exact local agreement of cutoff approximants",
       "status": "checked-counterpart",
@@ -558,7 +558,7 @@
     },
     {
       "id": "C045",
-      "source_line": 590,
+      "source_line": 591,
       "anchor": "for the derivative use",
       "claim": "Local C1 approximation in operator norm, not merely pointwise derivatives",
       "status": "checked-counterpart",
@@ -570,7 +570,7 @@
     },
     {
       "id": "C046",
-      "source_line": 598,
+      "source_line": 599,
       "anchor": "Take $O_m\\phi=",
       "claim": "Nested finite observations separate histories and annihilate sufficiently narrow corrections",
       "status": "checked-counterpart",
@@ -581,7 +581,7 @@
     },
     {
       "id": "C047",
-      "source_line": 612,
+      "source_line": 613,
       "anchor": "If $f$ has property",
       "claim": "Extended derivative implies vanishing terminal defect",
       "status": "checked-counterpart",
@@ -593,7 +593,7 @@
     },
     {
       "id": "C048",
-      "source_line": 624,
+      "source_line": 625,
       "anchor": "\\label{cor:levels}",
       "claim": "All-level identity, split fiber charts, tangent kernels, continuous complementary n-planes",
       "status": "checked-counterpart",
@@ -610,7 +610,7 @@
     },
     {
       "id": "C049",
-      "source_line": 651,
+      "source_line": 652,
       "anchor": "\\label{cor:coupling}",
       "claim": "Invertible endpoint-derivative coupling and actual ambient chart",
       "status": "checked-counterpart",
@@ -623,7 +623,7 @@
     },
     {
       "id": "C050",
-      "source_line": 684,
+      "source_line": 685,
       "anchor": "In contrast, $f(\\phi)=\\phi",
       "claim": "Corrected nonempty-domain, nontrivial-state impossibility comparison",
       "status": "checked-counterpart",
@@ -634,7 +634,7 @@
     },
     {
       "id": "C051",
-      "source_line": 675,
+      "source_line": 676,
       "anchor": "but is not necessary for the existence",
       "claim": "Endpoint reflection is an involution giving ambient defect straightening; it cannot have spectrum {1}",
       "status": "checked-counterpart",
@@ -649,7 +649,7 @@
     },
     {
       "id": "C052",
-      "source_line": 693,
+      "source_line": 694,
       "anchor": "\\label{thm:remote}",
       "claim": "Remote observations with arbitrary Banach range; full localization, spectrum and isotopy",
       "status": "checked-counterpart",
@@ -660,7 +660,7 @@
     },
     {
       "id": "C053",
-      "source_line": 704,
+      "source_line": 705,
       "anchor": "For sufficiently small $\\delta$, $LQ_\\delta=0$",
       "claim": "Remote chain-rule terminal defect tends to zero",
       "status": "checked-counterpart",
@@ -672,7 +672,7 @@
     },
     {
       "id": "C054",
-      "source_line": 717,
+      "source_line": 718,
       "anchor": "\\label{cor:past}",
       "claim": "Past-derivative feedback admits localized straightening",
       "status": "checked-counterpart",
@@ -683,7 +683,7 @@
     },
     {
       "id": "C055",
-      "source_line": 725,
+      "source_line": 726,
       "anchor": "does not satisfy property",
       "claim": "Actual failure of continuous-history derivative extension at zero",
       "status": "checked-counterpart",
@@ -695,7 +695,7 @@
     },
     {
       "id": "C056",
-      "source_line": 759,
+      "source_line": 760,
       "anchor": "\\label{thm:hilbert}",
       "claim": "Full corrected separable Hilbert theorem with actual complex spectrum and isotopy",
       "status": "checked-counterpart",
@@ -706,7 +706,7 @@
     },
     {
       "id": "C057",
-      "source_line": 780,
+      "source_line": 781,
       "anchor": "$P_m:E_H\\to E_H$ be the Bernstein",
       "claim": "Actual Bernstein operators of degrees 4^m with Hilbert coefficients",
       "status": "checked-counterpart",
@@ -719,7 +719,7 @@
     },
     {
       "id": "C058",
-      "source_line": 789,
+      "source_line": 790,
       "anchor": "\\label{eq:hilbert-bernstein}",
       "claim": "C1 contraction, continuous-history operator-norm convergence and C1 strong convergence",
       "status": "checked-counterpart",
@@ -732,7 +732,7 @@
     },
     {
       "id": "C059",
-      "source_line": 794,
+      "source_line": 795,
       "anchor": "The grids are nested",
       "claim": "Equality of P_j observations implies equality of every P_i, i<=j",
       "status": "checked-counterpart",
@@ -744,7 +744,7 @@
     },
     {
       "id": "C060",
-      "source_line": 796,
+      "source_line": 797,
       "anchor": "The range $F_m=",
       "claim": "Actual closed ranges continuously linearly equivalent to finite Hilbert products",
       "status": "checked-counterpart",
@@ -760,8 +760,8 @@
     },
     {
       "id": "C061",
-      "source_line": 812,
-      "anchor": "A Hilbert-space smooth partition of unity",
+      "source_line": 813,
+      "anchor": "By the existence of smooth partitions of unity",
       "claim": "Infinitely smooth partitions of unity and smooth Urysohn cutoffs in separable Hilbert space",
       "status": "checked-counterpart",
       "proofs": [
@@ -774,7 +774,7 @@
     },
     {
       "id": "C062",
-      "source_line": 801,
+      "source_line": 802,
       "anchor": "consider the closed subset",
       "claim": "Displayed distance core is closed and lies in the displayed open belt",
       "status": "checked-counterpart",
@@ -788,7 +788,7 @@
     },
     {
       "id": "C063",
-      "source_line": 814,
+      "source_line": 817,
       "anchor": "neighborhood of $K_m$ and has support",
       "claim": "Cutoff near the exact core with support in the exact belt on the actual range",
       "status": "checked-counterpart",
@@ -800,7 +800,7 @@
     },
     {
       "id": "C064",
-      "source_line": 816,
+      "source_line": 819,
       "anchor": "Choose a smooth function $\\beta",
       "claim": "Actual compactly supported infinitely smooth scalar cutoff and bounded smooth saturation",
       "status": "checked-counterpart",
@@ -816,7 +816,7 @@
     },
     {
       "id": "C065",
-      "source_line": 823,
+      "source_line": 826,
       "anchor": "This gives a globally defined bounded",
       "claim": "Actual range-cutoff times saturation extends to bounded global C1 piece",
       "status": "checked-counterpart",
@@ -828,7 +828,7 @@
     },
     {
       "id": "C066",
-      "source_line": 834,
+      "source_line": 837,
       "anchor": "The joint continuity of the extended derivatives",
       "claim": "Jointly continuous linear action implies locally bounded operator norms",
       "status": "checked-counterpart",
@@ -840,7 +840,7 @@
     },
     {
       "id": "C067",
-      "source_line": 842,
+      "source_line": 845,
       "anchor": "The right-hand side tends locally uniformly",
       "claim": "Exact manuscript family has local C1 approximation in operator norm",
       "status": "checked-counterpart",
@@ -851,7 +851,7 @@
     },
     {
       "id": "C068",
-      "source_line": 846,
+      "source_line": 849,
       "anchor": "For every $m$, choose $Q_m$",
       "claim": "Paper Bernstein observations annihilate narrow terminal corrections and separate histories",
       "status": "checked-counterpart",
@@ -918,7 +918,7 @@
     },
     {
       "id": "C073",
-      "source_line": 567,
+      "source_line": 568,
       "anchor": "\\label{thm:no-atom}",
       "claim": "Terminal-defect theorem on the exact sum-norm history space",
       "status": "checked-counterpart",
@@ -932,7 +932,7 @@
     },
     {
       "id": "C074",
-      "source_line": 759,
+      "source_line": 760,
       "anchor": "\\label{thm:hilbert}",
       "claim": "Hilbert-valued theorem on the exact sum-norm history space",
       "status": "checked-counterpart",
@@ -943,7 +943,7 @@
     },
     {
       "id": "C075",
-      "source_line": 789,
+      "source_line": 790,
       "anchor": "\\label{eq:hilbert-bernstein}",
       "claim": "Actual sum-norm Bernstein contraction, strong convergence, continuous-history operator limit and nesting",
       "status": "checked-counterpart",
@@ -958,5 +958,5 @@
       ]
     }
   ],
-  "supplied_source": "manuscript/paper_revised.tex"
+  "supplied_source": "manuscript/global_straightening_solution_manifolds.tex"
 }

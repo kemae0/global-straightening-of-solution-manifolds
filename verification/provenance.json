@@ -9,7 +9,7 @@
   "Mathlib": "f897ebcf72cd16f89ab4577d0c826cd14afaafc7",
   "OriginalSourcesImported": false,
   "CorrectedManuscript": "manuscript/paper_corrected.tex",
-  "CorrectedManuscriptSHA256": "4b8ac13ddf35907011f319d19740996bd76bea01099ca2c9b7eef738d759a74e",
+  "CorrectedManuscriptSHA256": "a65ca46e4899e334bb5aa9775e900a1acfdf853c6e53b54a2dc2367316c72d76",
   "PriorCorrectedManuscripts": [
     {
       "title": "On global regularization of solution manifolds",
@@ -18,14 +18,18 @@
     }
   ],
   "RevisedManuscript": "manuscript/paper_revised.tex",
-  "RevisedManuscriptSHA256": "4b8ac13ddf35907011f319d19740996bd76bea01099ca2c9b7eef738d759a74e",
+  "RevisedManuscriptSHA256": "a65ca46e4899e334bb5aa9775e900a1acfdf853c6e53b54a2dc2367316c72d76",
   "CurrentClarification": "The author updated the reflection paragraph to distinguish the full theorem from existence of an ambient diffeomorphism with the defect identity.",
   "CurrentClarificationReportedToUser": true,
   "PriorSuppliedRevisions": [
     "892232dbee5216a7df702a1c9871fd789aa0250caed4653a85db954d4eaea80f",
-    "56320ea5a2a24bf95d547d92889b5ae00385935df9534e2a6ac3fab7fe9b2187"
+    "56320ea5a2a24bf95d547d92889b5ae00385935df9534e2a6ac3fab7fe9b2187",
+    "4b8ac13ddf35907011f319d19740996bd76bea01099ca2c9b7eef738d759a74e"
   ],
   "HistoricalCorrectionsApprovedByUser": true,
   "CurrentClarificationResolvedByUser": true,
-  "CurrentSourceModifiedByAgent": false
+  "CurrentSourceModifiedByAgent": false,
+  "FinalManuscript": "manuscript/global_straightening_solution_manifolds.tex",
+  "FinalManuscriptSHA256": "a65ca46e4899e334bb5aa9775e900a1acfdf853c6e53b54a2dc2367316c72d76",
+  "ManuscriptStatus": "Final paper supplied by the author"
 }

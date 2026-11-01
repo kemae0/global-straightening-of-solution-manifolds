@@ -1,8 +1,8 @@
 # Corrections to the supplied manuscript
 
-The current supplied revision, titled *Global Straightening of Solution
+The final supplied paper, titled *Global Straightening of Solution
 Manifolds for State-Dependent Delay Equations*, is preserved byte for byte
-in `manuscript/paper_revised.tex`. Its hash and the current formalization
+in `manuscript/global_straightening_solution_manifolds.tex`. Its hash and the current formalization
 target's hash are recorded in `verification/provenance.json`.
 
 ## Reflection wording resolved in the latest revision

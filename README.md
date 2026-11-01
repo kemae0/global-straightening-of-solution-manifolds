@@ -1,6 +1,8 @@
 # Global Straightening of Solution Manifolds for State-Dependent Delay Equations
 
-Lean 4 proofs accompanying Lily DiPaulo's research manuscript of October 31, 2026.
+Lean 4 proofs accompanying Lily DiPaulo's final paper of October 31, 2026.
+
+[Read the final paper (LaTeX source)](manuscript/global_straightening_solution_manifolds.tex).
 
 The library constructs an ambient C¹ diffeomorphism on an arbitrary open
 history domain under property (e). In finite dimensions it also proves
@@ -17,12 +19,13 @@ continuous-history norm. The finite-state and nonzero separable Hilbert
 results include derivative spectrum `{1}` and the affine C¹ isotopy
 `A_s = id + s(A - id)`.
 
-## Alignment with the current paper
+## Alignment with the final paper
 
-- [Supplied manuscript](manuscript/paper_revised.tex): the latest attachment,
-  preserved byte for byte, including the expanded introduction and bibliography.
-- [Certificate source](manuscript/paper_corrected.tex): an identical copy of
-  the latest supplied text, retained at this path for the verification scripts.
+- [Final paper](manuscript/global_straightening_solution_manifolds.tex): the
+  author's supplied `.tex` file, preserved byte for byte.
+- [Certificate source](manuscript/paper_corrected.tex): an identical copy
+  retained at this path for the verification scripts. `paper_revised.tex`
+  is also retained as an identical compatibility copy.
 - [Claim map](verification/manuscript-coverage.json): source locations and
   Lean declarations for the results and construction claims under review.
 - [Formalization audit](FORMALIZATION_AUDIT.md) and
@@ -40,9 +43,15 @@ constant below epsilon for every affine slice with parameter in `[0,1]`.
 The local C¹ approximation is in operator norm; the literal strict local
 supremum estimate is proved separately.
 
+The final paper makes the measure-representation lemma's open-domain and
+C¹ hypotheses explicit, adds the Hilbert partition-of-unity reference,
+and states the observation factorization used by the coordinate lemma.
+These statements match the existing Lean results; this update changes
+the manuscript and its reference map without changing the Lean proofs.
+
 ## Reflection example: wording resolved
 
-The latest manuscript distinguishes all conclusions of Theorem 3.3
+The final manuscript distinguishes all conclusions of Theorem 3.3
 (`thm:no-atom`) from existence of a C¹ diffeomorphism satisfying the defect
 identity. This resolves the overbroad wording in the preceding draft and
 matches the Lean reflection result.
