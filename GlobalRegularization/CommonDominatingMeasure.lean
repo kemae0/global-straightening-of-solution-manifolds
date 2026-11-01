@@ -3,7 +3,8 @@ import Mathlib.MeasureTheory.VectorMeasure.Decomposition.Jordan
 
 /-! One finite dominating measure for a countable family, preserving a
 zero endpoint atom and the positivity of a full-support reference measure.
-This does not yet extend domination to the full separable derivative image. -/
+FullImageDomination extends domination to the whole separable derivative
+image using actual signed measures and total-variation continuity. -/
 
 namespace GlobalRegularization
 

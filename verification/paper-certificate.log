@@ -84,6 +84,131 @@ GlobalRegularization.matrixHistoryFunctional_terminal_zero_iff (h : NNReal) (hh 
       (nhds 0) ↔
     ∀ (i j : Fin n),
       (μ i j).real {GlobalRegularization.historyRight h} - (ν i j).real {GlobalRegularization.historyRight h} = 0
+GlobalRegularization.matrixHistoryFunctional_terminal_filter_limit (h : NNReal) (hh : 0 < ↑h) (n : ℕ)
+  (L : GlobalRegularization.C1History h (Fin n → ℝ) →L[ℝ] Fin n → ℝ) (A : (Fin n → ℝ) →L[ℝ] Fin n → ℝ)
+  (μ ν : Fin n → Fin n → MeasureTheory.Measure ↑(GlobalRegularization.HistoryInterval h))
+  [∀ (i j : Fin n), MeasureTheory.IsFiniteMeasure (μ i j)] [∀ (i j : Fin n), MeasureTheory.IsFiniteMeasure (ν i j)]
+  (hrep :
+    ∀ (x : GlobalRegularization.C1History h (Fin n → ℝ)) (i : Fin n),
+      L x i =
+        A (((GlobalRegularization.historyInclusion h (Fin n → ℝ)) x) (GlobalRegularization.historyLeft h)) i +
+          ∑ j,
+            (∫ (t : ↑(GlobalRegularization.HistoryInterval h)),
+                ((GlobalRegularization.historyDerivative h (Fin n → ℝ)) x) t j ∂μ i j -
+              ∫ (t : ↑(GlobalRegularization.HistoryInterval h)),
+                ((GlobalRegularization.historyDerivative h (Fin n → ℝ)) x) t j ∂ν i j)) :
+  Filter.Tendsto (fun δ => L.comp (GlobalRegularization.terminalCorrectionAtWidth h (Fin n → ℝ) δ))
+    (nhdsWithin 0 (Set.Ioi 0)) (nhds (GlobalRegularization.historyAtomOperator h n μ ν))
+GlobalRegularization.matrixHistoryFunctional_terminal_filter_zero_iff (h : NNReal) (hh : 0 < ↑h) (n : ℕ)
+  (L : GlobalRegularization.C1History h (Fin n → ℝ) →L[ℝ] Fin n → ℝ) (A : (Fin n → ℝ) →L[ℝ] Fin n → ℝ)
+  (μ ν : Fin n → Fin n → MeasureTheory.Measure ↑(GlobalRegularization.HistoryInterval h))
+  [∀ (i j : Fin n), MeasureTheory.IsFiniteMeasure (μ i j)] [∀ (i j : Fin n), MeasureTheory.IsFiniteMeasure (ν i j)]
+  (hrep :
+    ∀ (x : GlobalRegularization.C1History h (Fin n → ℝ)) (i : Fin n),
+      L x i =
+        A (((GlobalRegularization.historyInclusion h (Fin n → ℝ)) x) (GlobalRegularization.historyLeft h)) i +
+          ∑ j,
+            (∫ (t : ↑(GlobalRegularization.HistoryInterval h)),
+                ((GlobalRegularization.historyDerivative h (Fin n → ℝ)) x) t j ∂μ i j -
+              ∫ (t : ↑(GlobalRegularization.HistoryInterval h)),
+                ((GlobalRegularization.historyDerivative h (Fin n → ℝ)) x) t j ∂ν i j)) :
+  Filter.Tendsto (fun δ => L.comp (GlobalRegularization.terminalCorrectionAtWidth h (Fin n → ℝ) δ))
+      (nhdsWithin 0 (Set.Ioi 0)) (nhds 0) ↔
+    ∀ (i j : Fin n),
+      (μ i j).real {GlobalRegularization.historyRight h} - (ν i j).real {GlobalRegularization.historyRight h} = 0
+GlobalRegularization.historyFunctional_signed_matrix_representation (h : NNReal) (n : ℕ)
+  (L : GlobalRegularization.C1History h (Fin n → ℝ) →L[ℝ] Fin n → ℝ) (x : GlobalRegularization.C1History h (Fin n → ℝ))
+  (i : Fin n) :
+  L x i =
+    (GlobalRegularization.historyEndpointPart h n L)
+        (((GlobalRegularization.historyInclusion h (Fin n → ℝ)) x) (GlobalRegularization.historyLeft h)) i +
+      ∑ j,
+        (GlobalRegularization.signedIntegralFunctional (GlobalRegularization.historySignedMatrix h n L i j))
+          ((GlobalRegularization.continuousVectorComponent n j)
+            ((GlobalRegularization.historyDerivative h (Fin n → ℝ)) x))
+GlobalRegularization.signedVariationNorm_eq_dual_norm.{u_1} {X : Type u_1} [MetricSpace X] [CompactSpace X]
+  [MeasurableSpace X] [BorelSpace X] [Nonempty X] (s : MeasureTheory.SignedMeasure X) :
+  GlobalRegularization.signedVariationNorm s = ‖GlobalRegularization.signedIntegralFunctional s‖
+GlobalRegularization.signedRieszMeasure_variation_distance.{u_1} {X : Type u_1} [MetricSpace X] [CompactSpace X]
+  [MeasurableSpace X] [BorelSpace X] [Nonempty X] (L M : C(X, ℝ) →L[ℝ] ℝ) :
+  GlobalRegularization.signedVariationNorm
+      (GlobalRegularization.signedRieszMeasure L - GlobalRegularization.signedRieszMeasure M) =
+    ‖L - M‖
+GlobalRegularization.historySignedMatrix_totalVariation_continuous.{u_1} (h : NNReal) (n : ℕ) (i j : Fin n)
+  {ι : Type u_1} {l : Filter ι} (L : ι → GlobalRegularization.C1History h (Fin n → ℝ) →L[ℝ] Fin n → ℝ)
+  (M : GlobalRegularization.C1History h (Fin n → ℝ) →L[ℝ] Fin n → ℝ) (hlim : Filter.Tendsto L l (nhds M)) :
+  Filter.Tendsto
+    (fun k =>
+      GlobalRegularization.signedVariationNorm
+        (GlobalRegularization.historySignedMatrix h n (L k) i j - GlobalRegularization.historySignedMatrix h n M i j))
+    l (nhds 0)
+GlobalRegularization.signed_absoluteContinuity_closed_under_variation_limits.{u_1, u_2} {X : Type u_1} [MetricSpace X]
+  [CompactSpace X] [MeasurableSpace X] [BorelSpace X] {ι : Type u_2} {l : Filter ι} [l.NeBot]
+  (s : ι → MeasureTheory.SignedMeasure X) (t : MeasureTheory.SignedMeasure X) (ν : MeasureTheory.Measure X)
+  (hac : ∀ᶠ (i : ι) in l, (s i).totalVariation.AbsolutelyContinuous ν)
+  (hlim : Filter.Tendsto (fun i => GlobalRegularization.signedVariationNorm (s i - t)) l (nhds 0)) :
+  t.totalVariation.AbsolutelyContinuous ν
+GlobalRegularization.exists_full_image_totalVariation_dominator (h : NNReal) (hh : 0 < ↑h) (n : ℕ)
+  (S : Set (GlobalRegularization.C1History h (Fin n → ℝ) →L[ℝ] Fin n → ℝ)) (hsep : TopologicalSpace.IsSeparable S)
+  (hzero :
+    ∀ L ∈ S,
+      Filter.Tendsto
+        (fun m =>
+          L.comp
+            (GlobalRegularization.terminalCorrection h (Fin n → ℝ) (GlobalRegularization.adaptedTerminalWidth h m) ⋯))
+        Filter.atTop (nhds 0)) :
+  ∃ ν,
+    MeasureTheory.IsFiniteMeasure ν ∧
+      ν {GlobalRegularization.historyRight h} = 0 ∧
+        (∀ (V : Set ↑(GlobalRegularization.HistoryInterval h)), IsOpen V → V.Nonempty → 0 < ν V) ∧
+          ∀ L ∈ S,
+            ∀ (i j : Fin n), (GlobalRegularization.historySignedMatrix h n L i j).totalVariation.AbsolutelyContinuous ν
+GlobalRegularization.finiteMarkov_adjoint_density.{u_1, u_2} {X : Type u_1} [MetricSpace X] [CompactSpace X]
+  [MeasurableSpace X] [BorelSpace X] [Nonempty X] {ι : Type u_2} [Fintype ι] (ν : MeasureTheory.Measure X)
+  [MeasureTheory.IsFiniteMeasure ν] (ψ : ι → C(X, ℝ)) (hψ : ∀ (j : ι) (x : X), 0 ≤ (ψ j) x)
+  (hsum : ∀ (x : X), ∑ j, (ψ j) x = 1) (w : X → ℝ) (hw : MeasureTheory.Integrable w ν) :
+  GlobalRegularization.signedMeasureAdjoint (GlobalRegularization.finiteMarkovOperator ℝ ν ψ hψ hsum)
+      (GlobalRegularization.signedRieszMeasure (GlobalRegularization.integralDensityFunctional ν w hw)) =
+    GlobalRegularization.signedRieszMeasure
+      (GlobalRegularization.integralDensityFunctional ν ⇑(GlobalRegularization.finiteMarkovDensity ν ψ w) ⋯)
+GlobalRegularization.markovApproximation_signed_totalVariation.{u_1} {X : Type u_1} [MetricSpace X] [CompactSpace X]
+  [MeasurableSpace X] [BorelSpace X] [Nonempty X] (ν : MeasureTheory.Measure X) [MeasureTheory.IsFiniteMeasure ν]
+  (hfull : ∀ (U : Set X), IsOpen U → U.Nonempty → 0 < ν U) (s : MeasureTheory.SignedMeasure X)
+  (hac : s.totalVariation.AbsolutelyContinuous ν) :
+  Filter.Tendsto
+    (fun n =>
+      GlobalRegularization.signedVariationNorm
+        (GlobalRegularization.signedMeasureAdjoint (GlobalRegularization.markovApproximation ℝ X ν n) s - s))
+    Filter.atTop (nhds 0)
+GlobalRegularization.terminalHistoryCutoff_signed_variation_bound (h : NNReal)
+  (s : MeasureTheory.SignedMeasure ↑(GlobalRegularization.HistoryInterval h)) (σ : ℝ) (hσh : σ ≤ ↑h) :
+  GlobalRegularization.signedVariationNorm
+      (GlobalRegularization.signedMeasureAdjoint (GlobalRegularization.terminalHistoryCutoff h ℝ σ hσh) s - s) ≤
+    2 * s.totalVariation.real {t | -σ < ↑t}
+GlobalRegularization.terminalHistoryCutoff_signed_totalVariation (h : NNReal)
+  (s : MeasureTheory.SignedMeasure ↑(GlobalRegularization.HistoryInterval h))
+  (hs : ↑s {GlobalRegularization.historyRight h} = 0) (σ : ℕ → ℝ) (hσh : ∀ (n : ℕ), σ n ≤ ↑h)
+  (hlim : Filter.Tendsto σ Filter.atTop (nhds 0)) :
+  Filter.Tendsto
+    (fun n =>
+      GlobalRegularization.signedVariationNorm
+        (GlobalRegularization.signedMeasureAdjoint (GlobalRegularization.terminalHistoryCutoff h ℝ (σ n) ⋯) s - s))
+    Filter.atTop (nhds 0)
+GlobalRegularization.composed_signed_adjoint_totalVariation.{u_1} {X : Type u_1} [MetricSpace X] [CompactSpace X]
+  [MeasurableSpace X] [BorelSpace X] [Nonempty X] (T V : ℕ → C(X, ℝ) →L[ℝ] C(X, ℝ)) (hV : ∀ (n : ℕ), ‖V n‖ ≤ 1)
+  (s : MeasureTheory.SignedMeasure X)
+  (hTlim :
+    Filter.Tendsto
+      (fun n => GlobalRegularization.signedVariationNorm (GlobalRegularization.signedMeasureAdjoint (T n) s - s))
+      Filter.atTop (nhds 0))
+  (hVlim :
+    Filter.Tendsto
+      (fun n => GlobalRegularization.signedVariationNorm (GlobalRegularization.signedMeasureAdjoint (V n) s - s))
+      Filter.atTop (nhds 0)) :
+  Filter.Tendsto
+    (fun n =>
+      GlobalRegularization.signedVariationNorm (GlobalRegularization.signedMeasureAdjoint ((T n).comp (V n)) s - s))
+    Filter.atTop (nhds 0)
 GlobalRegularization.exists_adapted_operators_for_separable_family (h : NNReal) (hh : 0 < ↑h) (n : ℕ)
   (S : Set (GlobalRegularization.C1History h (Fin n → ℝ) →L[ℝ] Fin n → ℝ)) (hsep : TopologicalSpace.IsSeparable S)
   (hzero :
@@ -111,6 +236,10 @@ GlobalRegularization.adaptedTerminalWidth_pos (h : NNReal) (hh : 0 < ↑h) (n : 
 GlobalRegularization.adaptedTerminalWidth_antitone (h : NNReal) : Antitone (GlobalRegularization.adaptedTerminalWidth h)
 GlobalRegularization.adaptedTerminalWidth_tendsto (h : NNReal) :
   Filter.Tendsto (GlobalRegularization.adaptedTerminalWidth h) Filter.atTop (nhds 0)
+GlobalRegularization.one_sided_power_expansion.{u_1} {R : Type u_1} [Semiring R] (a b : R) (hab : a * b = 0) (k : ℕ) :
+  (a + b) ^ k = ∑ j ∈ Finset.range (k + 1), b ^ (k - j) * a ^ j
+GlobalRegularization.nilpotent_remainder_power_expansion.{u_1} {R : Type u_1} [Semiring R] (a b : R) (N k : ℕ)
+  (hab : a * b = 0) (ha : a ^ (N + 2) = 0) : (a + b) ^ k = ∑ j ∈ Finset.range (min k (N + 1) + 1), b ^ (k - j) * a ^ j
 GlobalRegularization.terminal_atom_full_straightening (h : NNReal) (hh : 0 < ↑h) (n : ℕ) [NeZero n]
   (U : Set (GlobalRegularization.C1History h (Fin n → ℝ))) (hU : IsOpen U)
   (f : GlobalRegularization.C1History h (Fin n → ℝ) → Fin n → ℝ) (hf : ContDiffOn ℝ 1 f U)
@@ -225,6 +354,20 @@ GlobalRegularization.scalarPastDerivativeFeedback_no_extended_derivative_at_zero
 GlobalRegularization.exists_hilbert_C1_cutoff.{u_1} {H : Type u_1} [NormedAddCommGroup H] [InnerProductSpace ℝ H]
   [TopologicalSpace.SeparableSpace H] {K U : Set H} (hK : IsClosed K) (hU : IsOpen U) (hKU : K ⊆ U) :
   ∃ χ, ContDiff ℝ 1 χ ∧ tsupport χ ⊆ U ∧ (∀ᶠ (x : H) in nhdsSet K, χ x = 1) ∧ ∀ (x : H), χ x ∈ Set.Icc 0 1
+GlobalRegularization.hilbertBump_all_derivatives_bounded.{u_1} {H : Type u_1} [NormedAddCommGroup H]
+  [InnerProductSpace ℝ H] (c : H) (r : ℝ) (hr : 0 < r) (n : ℕ) :
+  ∃ C, 0 ≤ C ∧ ∀ (x : H), ‖iteratedFDeriv ℝ n (GlobalRegularization.hilbertBump c r) x‖ ≤ C
+GlobalRegularization.exists_hilbert_smooth_positive_support.{u_1} {H : Type u_1} [NormedAddCommGroup H]
+  [InnerProductSpace ℝ H] [TopologicalSpace.SeparableSpace H] {s : Set H} (hs : IsOpen s) :
+  ∃ f, Function.support f = s ∧ ContDiff ℝ (↑⊤) f ∧ ∀ (x : H), f x ∈ Set.Icc 0 1
+GlobalRegularization.exists_hilbert_smooth_cutoff.{u_1} {H : Type u_1} [NormedAddCommGroup H] [InnerProductSpace ℝ H]
+  [TopologicalSpace.SeparableSpace H] {K U : Set H} (hK : IsClosed K) (hU : IsOpen U) (hKU : K ⊆ U) :
+  ∃ χ, ContDiff ℝ (↑⊤) χ ∧ tsupport χ ⊆ U ∧ (∀ᶠ (x : H) in nhdsSet K, χ x = 1) ∧ ∀ (x : H), χ x ∈ Set.Icc 0 1
+GlobalRegularization.exists_hilbert_smooth_partition_of_unity.{u_1, u_2} {H : Type u_1} [NormedAddCommGroup H]
+  [InnerProductSpace ℝ H] [TopologicalSpace.SeparableSpace H] {ι : Type u_2} (U : ι → Set H)
+  (hU : ∀ (i : ι), IsOpen (U i)) (hcover : Set.univ ⊆ ⋃ i, U i) : ∃ p, p.IsSubordinate U
+GlobalRegularization.hilbertSaturation_smooth.{u_1} {H : Type u_1} [NormedAddCommGroup H] [InnerProductSpace ℝ H]
+  (r : ℝ) : ContDiff ℝ (↑⊤) (GlobalRegularization.hilbertSaturation r)
 GlobalRegularization.property_e_Hilbert_bounded_C1_approximants.{u_1} (H : Type u_1) [NormedAddCommGroup H]
   [InnerProductSpace ℝ H] [CompleteSpace H] [TopologicalSpace.SeparableSpace H]
   (U : Set (GlobalRegularization.C1History 1 H)) (hU : IsOpen U) (f : GlobalRegularization.C1History 1 H → H)
@@ -255,3 +398,134 @@ GlobalRegularization.property_e_Hilbert_straightening_spectrum_inclusion.{u_1} (
       ∀ x ∈ U, spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) ⊆ {1}
 'GlobalRegularization.property_e_Hilbert_full_straightening' depends on axioms: [propext, Classical.choice, Quot.sound]
 GlobalRegularization.zero_space_identity_spectrum_ne_one : spectrum ℂ 1 ≠ {1}
+GlobalRegularization.zeroHilbert_feedback_has_property_e :
+  GlobalRegularization.HasExtendedDerivative Set.univ
+    (GlobalRegularization.historyInclusion 1 GlobalRegularization.ZeroHilbertState) fun x => 0
+GlobalRegularization.literal_Hilbert_conclusion_false :
+  ¬∃ chart, ∀ x ∈ Set.univ, spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) = {1}
+GlobalRegularization.full_support_partition_zero_denominator :
+  ∃ ψ,
+    (∀ (j : Bool) (x : ↑(GlobalRegularization.HistoryInterval 1)), 0 ≤ (ψ j) x) ∧
+      (∀ (x : ↑(GlobalRegularization.HistoryInterval 1)), ∑ j, (ψ j) x = 1) ∧
+        (∀ (V : Set ↑(GlobalRegularization.HistoryInterval 1)),
+            IsOpen V → V.Nonempty → 0 < (GlobalRegularization.historyLebesgue 1) V) ∧
+          ¬0 < ∫ (t : ↑(GlobalRegularization.HistoryInterval 1)), (ψ false) t ∂GlobalRegularization.historyLebesgue 1
+'GlobalRegularization.literal_Hilbert_conclusion_false' depends on axioms: [propext, Classical.choice, Quot.sound]
+GlobalRegularization.finite_tensor_coefficients.{u_1, u_2, u_3} {X : Type u_1} {ι : Type u_2} [MetricSpace X]
+  [CompactSpace X] [MeasurableSpace X] [BorelSpace X] [Nonempty X] [Fintype ι] [DecidableEq ι] (v : ι → C(X, ℝ))
+  (hv : LinearIndependent ℝ v) (B : Type u_3) [NormedAddCommGroup B] [NormedSpace ℝ B] [CompleteSpace B] :
+  ∃ q, ∀ (c : ι → B), q (∑ j, v j • ContinuousMap.const X (c j)) = c
+GlobalRegularization.bernstein_real_independent (n : ℕ) : LinearIndependent ℝ fun j => bernstein n ↑j
+GlobalRegularization.unitHistorySamples_surjective.{u_1} (B : Type u_1) [NormedAddCommGroup B] [NormedSpace ℝ B]
+  [CompleteSpace B] (n : ℕ) : Function.Surjective ⇑(GlobalRegularization.unitHistorySamples B n)
+GlobalRegularization.unitHistorySynthesis_range_closed.{u_1} (B : Type u_1) [NormedAddCommGroup B] [NormedSpace ℝ B]
+  [CompleteSpace B] (n : ℕ) : IsClosed (Set.range ⇑(GlobalRegularization.unitHistorySynthesis B n))
+GlobalRegularization.hilbertBernsteinRangeEquiv.{u_2} (H : Type u_2) [NormedAddCommGroup H] [InnerProductSpace ℝ H]
+  [CompleteSpace H] (n : ℕ) :
+  GlobalRegularization.HilbertHistoryObservationSpace H n ≃L[ℝ]
+    ↥(LinearMap.range (GlobalRegularization.unitHistoryBernsteinCLM H n))
+GlobalRegularization.paperBernsteinRangeEquiv.{u_2} (H : Type u_2) [NormedAddCommGroup H] [InnerProductSpace ℝ H]
+  [CompleteSpace H] (m : ℕ) :
+  GlobalRegularization.HilbertHistoryObservationSpace H (GlobalRegularization.paperBernsteinIndex m) ≃L[ℝ]
+    ↥(LinearMap.range (GlobalRegularization.paperBernstein H m))
+GlobalRegularization.paperBernstein_nested.{u_1} (B : Type u_1) [NormedAddCommGroup B] [NormedSpace ℝ B]
+  [CompleteSpace B] (i j : ℕ) (hij : i ≤ j) (x y : GlobalRegularization.C1History 1 B)
+  (hxy : (GlobalRegularization.paperBernstein B j) x = (GlobalRegularization.paperBernstein B j) y) :
+  (GlobalRegularization.paperBernstein B i) x = (GlobalRegularization.paperBernstein B i) y
+GlobalRegularization.paperBernstein_contraction.{u_1} (B : Type u_1) [NormedAddCommGroup B] [NormedSpace ℝ B]
+  [CompleteSpace B] (m : ℕ) : ‖GlobalRegularization.paperBernstein B m‖ ≤ 1
+GlobalRegularization.paperBernstein_strong.{u_1} (B : Type u_1) [NormedAddCommGroup B] [NormedSpace ℝ B]
+  [CompleteSpace B] (x : GlobalRegularization.C1History 1 B) :
+  Filter.Tendsto (fun m => (GlobalRegularization.paperBernstein B m) x) Filter.atTop (nhds x)
+GlobalRegularization.paperBernstein_continuous_operator_limit.{u_1} (B : Type u_1) [NormedAddCommGroup B]
+  [NormedSpace ℝ B] [CompleteSpace B] :
+  Filter.Tendsto
+    (fun m =>
+      (GlobalRegularization.historyInclusion 1 B).comp (GlobalRegularization.paperBernstein B m) -
+        GlobalRegularization.historyInclusion 1 B)
+    Filter.atTop (nhds 0)
+GlobalRegularization.paperBernstein_terminal_invisible.{u_1} (B : Type u_1) [NormedAddCommGroup B] [NormedSpace ℝ B]
+  [CompleteSpace B] (m : ℕ) (δ : ℝ) (hδ : 0 < δ) (hshort : δ / 2 < 1 / 4 ^ m) :
+  (GlobalRegularization.paperBernstein B m).comp (GlobalRegularization.terminalCorrection 1 B δ hδ) = 0
+GlobalRegularization.exists_smooth_cutoff_Bernstein_range.{u_1} (H : Type u_1) [NormedAddCommGroup H]
+  [InnerProductSpace ℝ H] [CompleteSpace H] [TopologicalSpace.SeparableSpace H] (m : ℕ)
+  {K U : Set ↥(LinearMap.range (GlobalRegularization.paperBernstein H m))} (hK : IsClosed K) (hU : IsOpen U)
+  (hKU : K ⊆ U) :
+  ∃ χ,
+    ContDiff ℝ (↑⊤) χ ∧
+      tsupport χ ⊆ U ∧
+        (∀ᶠ (x : ↥(LinearMap.range (GlobalRegularization.paperBernstein H m))) in nhdsSet K, χ x = 1) ∧
+          ∀ (x : ↥(LinearMap.range (GlobalRegularization.paperBernstein H m))), χ x ∈ Set.Icc 0 1
+GlobalRegularization.manuscriptCore_compact.{u_1, u_2} {E : Type u_1} {F : Type u_2} [NormedAddCommGroup E]
+  [NormedSpace ℝ E] [NormedAddCommGroup F] [NormedSpace ℝ F] [FiniteDimensional ℝ F] (U : Set E) (j : F →L[ℝ] E)
+  (hj : ∀ (z : F), ‖j z‖ = ‖z‖) (m : ℝ) : IsCompact (GlobalRegularization.manuscriptCore U j m)
+GlobalRegularization.manuscriptCore_subset_belt.{u_1, u_2} {E : Type u_1} {F : Type u_2} [NormedAddCommGroup E]
+  [NormedSpace ℝ E] [NormedAddCommGroup F] [NormedSpace ℝ F] (U : Set E) (j : F →L[ℝ] E) (m : ℝ) (hm : 0 < m) :
+  GlobalRegularization.manuscriptCore U j m ⊆ GlobalRegularization.manuscriptBelt U j m
+GlobalRegularization.exists_manuscript_core_cutoff.{u_1, u_2, u_3} {E : Type u_1} {F : Type u_2} [NormedAddCommGroup E]
+  [NormedSpace ℝ E] [NormedAddCommGroup F] [NormedSpace ℝ F] {Z : Type u_3} [NormedAddCommGroup Z]
+  [InnerProductSpace ℝ Z] [TopologicalSpace.SeparableSpace Z] (e : Z ≃L[ℝ] F) (U : Set E) (j : F →L[ℝ] E) (m : ℝ)
+  (hm : 0 < m) :
+  ∃ χ,
+    ContDiff ℝ (↑⊤) χ ∧
+      tsupport χ ⊆ GlobalRegularization.manuscriptBelt U j m ∧
+        (∀ᶠ (z : F) in nhdsSet (GlobalRegularization.manuscriptCore U j m), χ z = 1) ∧ ∀ (z : F), χ z ∈ Set.Icc 0 1
+GlobalRegularization.manuscriptBeta_compact : HasCompactSupport GlobalRegularization.manuscriptBeta
+GlobalRegularization.manuscriptHilbertSaturation_smooth.{u_3} {H : Type u_3} [NormedAddCommGroup H]
+  [InnerProductSpace ℝ H] (m : ℝ) : ContDiff ℝ (↑⊤) (GlobalRegularization.manuscriptHilbertSaturation m)
+GlobalRegularization.manuscriptHilbertSaturation_bound.{u_3} {H : Type u_3} [NormedAddCommGroup H]
+  [InnerProductSpace ℝ H] (m : ℝ) (hm : 0 < m) (v : H) : ‖GlobalRegularization.manuscriptHilbertSaturation m v‖ ≤ 2 * m
+GlobalRegularization.manuscriptHilbertSaturation_identity.{u_3} {H : Type u_3} [NormedAddCommGroup H]
+  [InnerProductSpace ℝ H] (m : ℝ) (hm : 0 < m) (v : H) (hv : ‖v‖ ≤ m) :
+  GlobalRegularization.manuscriptHilbertSaturation m v = v
+GlobalRegularization.exists_manuscript_bounded_piece.{u_1, u_2, u_3, u_4} {E : Type u_1} {F : Type u_2} {Z : Type u_3}
+  {H : Type u_4} [NormedAddCommGroup E] [NormedSpace ℝ E] [NormedAddCommGroup F] [NormedSpace ℝ F]
+  [NormedAddCommGroup Z] [InnerProductSpace ℝ Z] [TopologicalSpace.SeparableSpace Z] [NormedAddCommGroup H]
+  [InnerProductSpace ℝ H] (e : Z ≃L[ℝ] F) (U : Set E) (hU : IsOpen U) (j : F →L[ℝ] E) (f : E → H)
+  (hf : ContDiffOn ℝ 1 f U) (m : ℝ) (hm : 0 < m) :
+  ∃ χ,
+    ContDiff ℝ (↑⊤) χ ∧
+      tsupport χ ⊆ GlobalRegularization.manuscriptBelt U j m ∧
+        (∀ᶠ (z : F) in nhdsSet (GlobalRegularization.manuscriptCore U j m), χ z = 1) ∧
+          (∀ (z : F), χ z ∈ Set.Icc 0 1) ∧
+            (ContDiff ℝ 1 fun z => χ z • GlobalRegularization.manuscriptHilbertSaturation m (f (j z))) ∧
+              Bornology.IsBounded
+                  (Set.range fun z => χ z • GlobalRegularization.manuscriptHilbertSaturation m (f (j z))) ∧
+                ∀ z ∈ GlobalRegularization.manuscriptCore U j m,
+                  ‖f (j z)‖ ≤ m → χ z • GlobalRegularization.manuscriptHilbertSaturation m (f (j z)) = f (j z)
+GlobalRegularization.property_e_manuscript_Hilbert_family.{u_1} (H : Type u_1) [NormedAddCommGroup H]
+  [InnerProductSpace ℝ H] [CompleteSpace H] [TopologicalSpace.SeparableSpace H]
+  (U : Set (GlobalRegularization.C1History 1 H)) (hU : IsOpen U) (f : GlobalRegularization.C1History 1 H → H)
+  (he : GlobalRegularization.HasExtendedDerivative U (GlobalRegularization.historyInclusion 1 H) f) :
+  ∃ fm,
+    (∀ (n : ℕ), ContDiff ℝ 1 (fm n)) ∧
+      (∀ (n : ℕ), Bornology.IsBounded (Set.range (fm n))) ∧
+        GlobalRegularization.LocalC1Approximation U f fm ∧
+          ∀ (i : ℕ) (x y : GlobalRegularization.C1History 1 H),
+            (GlobalRegularization.paperBernstein H (i + 1)) x = (GlobalRegularization.paperBernstein H (i + 1)) y →
+              fm i x = fm i y
+'GlobalRegularization.property_e_manuscript_Hilbert_family' depends on axioms: [propext, Classical.choice, Quot.sound]
+GlobalRegularization.HasExtendedDerivative.exists_locally_bounded_extension.{u_1, u_2, u_3} {E : Type u_1}
+  {C : Type u_2} {B : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] [NormedAddCommGroup C] [NormedSpace ℝ C]
+  [NormedAddCommGroup B] [NormedSpace ℝ B] {U : Set E} {f : E → B} {ι : E →L[ℝ] C}
+  (he : GlobalRegularization.HasExtendedDerivative U ι f) (hU : IsOpen U) :
+  ∃ F,
+    (∀ x ∈ U, fderiv ℝ f x = (F x).comp ι) ∧
+      ContinuousOn (fun p => (F p.1) p.2) (U.prod Set.univ) ∧
+        ∀ x ∈ U, ∃ r > 0, ∃ M, 0 ≤ M ∧ ∀ y ∈ Metric.ball x r, ‖F y‖ ≤ M
+GlobalRegularization.LocalizedHistoryStraightening.sup_displacement_lt.{u_1} (h : NNReal) (B : Type u_1)
+  [NormedAddCommGroup B] [NormedSpace ℝ B] [CompleteSpace B] {U : Set (GlobalRegularization.C1History h B)}
+  {f : GlobalRegularization.C1History h B → B} {τ ε : ℝ}
+  (chart : GlobalRegularization.LocalizedHistoryStraightening h B U f τ ε) (hε : 0 < ε) :
+  sSup ((fun x => ‖(GlobalRegularization.historyInclusion h B) (chart.forward x - x)‖) '' U) < ε
+GlobalRegularization.twiceEndpointStraightening (h : NNReal) :
+  GlobalRegularization.C1Straightening Set.univ (GlobalRegularization.endpointDerivative h ℝ) fun x =>
+    2 • (GlobalRegularization.endpointDerivative h ℝ) x
+GlobalRegularization.twiceEndpoint_not_terminal (h : NNReal) (hh : 0 < ↑h) :
+  ¬GlobalRegularization.HasVanishingTerminalDerivative h ℝ Set.univ fun x =>
+      2 • (GlobalRegularization.endpointDerivative h ℝ) x
+GlobalRegularization.finiteMarkovOperator_nonneg.{u_1, u_2} {X : Type u_1} {ι : Type u_2} [TopologicalSpace X]
+  [CompactSpace X] [MeasurableSpace X] [OpensMeasurableSpace X] [Fintype ι] (μ : MeasureTheory.Measure X)
+  [MeasureTheory.IsFiniteMeasure μ] (ψ : ι → C(X, ℝ)) (hψ : ∀ (j : ι) (x : X), 0 ≤ (ψ j) x)
+  (hsum : ∀ (x : X), ∑ j, (ψ j) x = 1) (g : C(X, ℝ)) (hg : ∀ (x : X), 0 ≤ g x) (t : X) :
+  0 ≤ ((GlobalRegularization.finiteMarkovOperator ℝ μ ψ hψ hsum) g) t

@@ -4,10 +4,12 @@ import GlobalRegularization.IntervalReferenceMeasure
 import GlobalRegularization.HistorySeparable
 import GlobalRegularization.CommonDominatingMeasure
 import GlobalRegularization.DenseDualApproximation
+import GlobalRegularization.FullImageDomination
 
 /-! A common adapted approximation for a separable family of history
-functionals. Adjoint convergence extends from a countable dense family
-by uniform operator bounds. Empty families are included. -/
+functionals. The common measure dominates the actual signed matrix measures
+throughout the family, using total-variation continuity. Empty families
+are included. -/
 
 namespace GlobalRegularization
 
@@ -34,33 +36,8 @@ theorem exists_adapted_operators_for_separable_family
         ContinuousLinearMap.id ℝ (C1History h (Fin n → ℝ)))) atTop (𝓝 0)) ∧
       ∀ m δ (hδ : 0 < δ), δ / 2 < adaptedTerminalWidth h m →
         (P m).comp (terminalCorrection h (Fin n → ℝ) δ hδ) = 0 := by
-  obtain ⟨s, hsS, hscount, hsclosure⟩ := hsep.exists_countable_dense_subset
-  letI := hscount.to_subtype
-  have hrep (k : s) := historyFunctional_atomfree_representation h hh n k.val
-    (hzero k.val (hsS k.property))
-  choose A μ ρ hμ hρ hμatom hρatom hrep using hrep
-  letI := hμ
-  letI := hρ
-  let measures : (s × Fin n × Fin n × Bool) → Measure (HistoryInterval h) :=
-    fun k => if k.2.2.2 then μ k.1 k.2.1 k.2.2.1 else ρ k.1 k.2.1 k.2.2.1
-  have hfinite (k : s × Fin n × Fin n × Bool) : IsFiniteMeasure (measures k) := by
-    dsimp only [measures]
-    split <;> infer_instance
-  letI := hfinite
-  have hatom (k : s × Fin n × Fin n × Bool) : measures k {historyRight h} = 0 := by
-    dsimp only [measures]
-    split
-    · exact hμatom _ _ _
-    · exact hρatom _ _ _
-  obtain ⟨ν, hν, hβν, hdom, hνatom, hpos⟩ := exists_common_finite_dominating_measure measures
-    (historyLebesgue h) (historyRight h) hatom (historyLebesgue_singleton h _)
+  obtain ⟨ν, hν, hνatom, hfull, hdom⟩ := exists_full_image_totalVariation_dominator h hh n S hsep hzero
   letI := hν
-  have hfull : ∀ U : Set (HistoryInterval h), IsOpen U → U.Nonempty → 0 < ν U :=
-    fun U hU hne => hpos U (historyLebesgue_full_support h hh U hU hne)
-  have hμac (k : s) (i j : Fin n) : μ k i j ≪ ν := by
-    simpa only [measures, Bool.true_eq_false, if_true] using hdom (k, i, j, true)
-  have hρac (k : s) (i j : Fin n) : ρ k i j ≪ ν := by
-    simpa only [measures, Bool.false_eq_true, if_false] using hdom (k, i, j, false)
   let P := adaptedHistoryOperator h (Fin n → ℝ) ν
   let C := max 1 ‖(historyCoordinates h (Fin n → ℝ)).symm.toContinuousLinearMap‖
   have hC : 0 < C := lt_of_lt_of_le zero_lt_one (le_max_left _ _)
@@ -70,11 +47,23 @@ theorem exists_adapted_operators_for_separable_family
     adaptedHistoryOperator_finite_range h (Fin n → ℝ) ν, ?_,
     adaptedHistoryOperator_annihilates_terminal h (Fin n → ℝ) ν⟩
   intro L hLS
-  apply derivativeApproximation_of_mem_closure P C hC.le hP s _ (hsclosure hLS)
-  intro M hMs
-  let k : s := ⟨M, hMs⟩
-  exact matrixHistoryFunctional_adapted_adjoint h n M (A k) (μ k) (ρ k) (hrep k) ν hfull
-    (hμac k) (hρac k) (hμatom k) (hρatom k)
+  let μ := fun i j => (historySignedMatrix h n L i j).toJordanDecomposition.posPart
+  let ρ := fun i j => (historySignedMatrix h n L i j).toJordanDecomposition.negPart
+  have hac (i j : Fin n) : μ i j ≪ ν ∧ ρ i j ≪ ν :=
+    (SignedMeasure.totalVariation_absolutelyContinuous_iff _ ν).mp (hdom L hLS i j)
+  have hatom (i j : Fin n) : μ i j {historyRight h} = 0 ∧ ρ i j {historyRight h} = 0 := by
+    have hz := (signed_totalVariation_singleton_zero_iff (historySignedMatrix h n L i j) (historyRight h)).mpr
+      (historySignedMatrix_endpoint_zero h hh n L (hzero L hLS) i j)
+    simpa only [SignedMeasure.totalVariation, Measure.add_apply, add_eq_zero] using hz
+  have hrep (x : C1History h (Fin n → ℝ)) (i : Fin n) :
+      L x i = historyEndpointPart h n L (historyInclusion h (Fin n → ℝ) x (historyLeft h)) i +
+        ∑ j : Fin n, ((∫ t, historyDerivative h (Fin n → ℝ) x t j ∂μ i j) -
+          ∫ t, historyDerivative h (Fin n → ℝ) x t j ∂ρ i j) := by
+    simpa only [signedIntegralFunctional_apply, continuousVectorComponent_apply] using
+      historyFunctional_signed_matrix_representation h n L x i
+  exact matrixHistoryFunctional_adapted_adjoint h n L (historyEndpointPart h n L) μ ρ hrep ν hfull
+    (fun i j => (hac i j).1) (fun i j => (hac i j).2)
+    (fun i j => (hatom i j).1) (fun i j => (hatom i j).2)
 
 end
 

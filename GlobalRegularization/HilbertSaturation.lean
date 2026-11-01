@@ -14,8 +14,11 @@ variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℝ H]
 
 def hilbertSaturation (r : ℝ) (v : H) : H := hilbertBump (0 : H) r v • v
 
+theorem hilbertSaturation_smooth (r : ℝ) : ContDiff ℝ ∞ (hilbertSaturation (H := H) r) :=
+  (hilbertBump_contDiff (0 : H) r).smul contDiff_id
+
 theorem hilbertSaturation_contDiff (r : ℝ) : ContDiff ℝ 1 (hilbertSaturation (H := H) r) :=
-  ((hilbertBump_contDiff (0 : H) r).of_le (by simp)).smul contDiff_id
+  (hilbertSaturation_smooth r).of_le (by simp)
 
 theorem hilbertSaturation_norm_le (r : ℝ) (hr : 0 < r) (v : H) :
     ‖hilbertSaturation r v‖ ≤ r := by

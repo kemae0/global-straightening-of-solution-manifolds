@@ -3,7 +3,11 @@
 Kernel-checked counterparts of the supplied manuscript's new existence
 theorems, coordinate construction, and application corollaries, with the
 corrections in [MANUSCRIPT_CORRECTIONS.md](MANUSCRIPT_CORRECTIONS.md).
-The original LaTeX article is not certified verbatim.
+The approved target is [the corrected manuscript](manuscript/paper_corrected.tex).
+The original LaTeX article is not certified verbatim. **A complete proof of
+the manuscript as written is impossible:** `literal_Hilbert_conclusion_false`
+refutes its unrestricted Hilbert-spectrum conclusion on the actual zero
+Hilbert history space, with property (e) verified for the zero feedback.
 
 The main results are proved from their analytic assumptions on genuine
 complete normed C¹ history spaces. They are not axioms, proposition
@@ -30,8 +34,9 @@ Spectrum equality requires positive finite state dimension or a nontrivial
 Hilbert state space. All spatial conclusions and spectrum inclusion hold
 also in the zero space. Empty open domains are included.
 
-The Hilbert proof constructs C¹ cutoffs near arbitrary closed cores and
-bounded C¹ saturation maps. It does not assume compactness of bounded
+The Hilbert proof constructs infinitely smooth cutoffs near arbitrary closed
+cores, smooth partitions of unity, and bounded smooth saturation maps.
+It does not assume compactness of bounded
 Hilbert-valued ranges or of infinite-dimensional balls.
 
 ## Reproduce verification
@@ -45,6 +50,7 @@ lake build
 lake env lean scripts/Audit.lean
 lake env lean scripts/MainCertificate.lean
 lake env lean scripts/PaperCertificate.lean
+lake env lean scripts/ManuscriptCoverage.lean
 ```
 
 On the original Windows workspace, the local-distribution helper is:
@@ -71,14 +77,27 @@ explains scope, representations, and the verification evidence.
 
 The principal finite-state proof has a direct Bernstein route. The stronger
 terminal theorem constructs positive Markov averages, terminal cutoffs and
-finite-rank reconstructed history operators. Adjoint approximation extends
-from a countable dense family directly in operator norm. This replaces the
-manuscript's intermediate argument about continuity of the measure component
-in total variation and domination of every measure in the full derivative
-image; those intermediate measure claims are not separately certified here.
+finite-rank reconstructed history operators. `SignedMeasureDuality` proves
+uniqueness of the actual signed Riesz measure and identifies its Jordan
+total-variation mass with the dual norm. `FullImageDomination` proves
+total-variation continuity and domination throughout the separable derivative
+image. The terminal existence proof now uses that full-image dominator.
+`SignedMeasureAdjoints` checks the displayed averaging density formula,
+adjoint contractions, total-variation limits, and the terminal-tail estimate.
 
-The observation induction does not require nested sampling grids. This
-allows ordinary increasing Bernstein degrees in the Hilbert proof.
+The Hilbert proof now uses the manuscript's degree-4^m Bernstein operators
+as observations. Their nestedness, actual closed ranges, and continuous
+linear equivalence with finite Hilbert products are proved. The displayed
+distance cores, open belts, smooth cutoffs and saturation formula construct
+the bounded approximating family used in the existence theorem. Positive
+indices are encoded by `n + 1`. The common displacement bound also yields
+the literal supremum estimate, including the empty-domain case.
+
+[The claim coverage map](verification/manuscript-coverage.json) records the
+mathematical assertions and proof ingredients, their locations in the corrected
+source, and their Lean declarations. Its checker verifies the source anchors
+and that every proof reference names a theorem. The semantic correspondence
+is a documented mathematical audit; it is not inferred from a successful build.
 
 The manuscript's bibliography, historical claims and cited semiflow theory
 are background, not formalized results of this repository. Signed integrals

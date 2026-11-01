@@ -1,0 +1,878 @@
+{
+  "target": "manuscript/paper_corrected.tex",
+  "scope": "The manuscript's mathematical results and displayed construction claims. Formal counterparts use FTC history coordinates, interval normalization and harmless reindexing. The checker validates references and anchors; semantic correspondence is audited manually.",
+  "excluded_background": [
+    "Differentiable semiflow existence and historical discussion of cited articles",
+    "The attribution/application to external Theorems 3.4 and 4.2 in Walther2026; their hypotheses/property-(e) inclusion are discussed as external background, not formalized here",
+    "Bibliography, author/date, classification and keywords"
+  ],
+  "corrections": "MANUSCRIPT_CORRECTIONS.md",
+  "claims": [
+    {
+      "id": "C001",
+      "source_line": 33,
+      "anchor": "denote the Banach spaces",
+      "claim": "Genuine complete C1 histories, classical correspondence, evaluations and inclusion",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.history_integral_identity",
+        "GlobalRegularization.hasDerivWithinAt_value",
+        "GlobalRegularization.historyInclusion_injective",
+        "GlobalRegularization.historyOfClassical_value"
+      ],
+      "constructions": [
+        "GlobalRegularization.C1History",
+        "GlobalRegularization.historyInclusion",
+        "GlobalRegularization.historyDerivativeAt",
+        "GlobalRegularization.endpointDerivative",
+        "GlobalRegularization.historyCoordinates"
+      ]
+    },
+    {
+      "id": "C002",
+      "source_line": 37,
+      "anchor": "The associated solution manifold",
+      "claim": "Solution and zero-compatibility sets and their image identity",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.property_e_solution_manifold"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C003",
+      "source_line": 47,
+      "anchor": "Each derivative $Df",
+      "claim": "Property (e): actual extension and jointly continuous action",
+      "status": "checked-counterpart",
+      "proofs": [],
+      "constructions": [
+        "GlobalRegularization.HasExtendedDerivative"
+      ]
+    },
+    {
+      "id": "C004",
+      "source_line": 53,
+      "anchor": "Under this hypothesis, $X_f$",
+      "claim": "Split C1 charts and codimension n for nonempty solution fibers",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.terminal_atom_fiber_geometry",
+        "GlobalRegularization.C1Straightening.fiberTangent_range",
+        "GlobalRegularization.C1Straightening.normal_dimension"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C005",
+      "source_line": 56,
+      "anchor": "\\label{thm:main}",
+      "claim": "Principal property-(e) theorem, arbitrary open domain and localized chart",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.mainClaim",
+        "GlobalRegularization.property_e_full_straightening"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C006",
+      "source_line": 64,
+      "anchor": "\\sup_{\\phi\\in U}\\|A\\phi-\\phi\\|_{C_n}",
+      "claim": "Literal strict supremum bound, including empty U",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.LocalizedHistoryStraightening.sup_displacement_lt"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C007",
+      "source_line": 70,
+      "anchor": "\\paragraph{Degenerate cases.}",
+      "claim": "Zero-state spatial conclusions and spectrum inclusion; empty domains allowed",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.terminal_atom_full_straightening_spectrum_inclusion",
+        "GlobalRegularization.property_e_Hilbert_straightening_spectrum_inclusion",
+        "GlobalRegularization.empty_domain_endpoint_identity_straightening"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C008",
+      "source_line": 75,
+      "anchor": "(Q_ma)(t)",
+      "claim": "Smooth terminal corrections with endpoint derivative identity and zero endpoint value",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.terminalProfile_contDiff",
+        "GlobalRegularization.terminalCorrection_endpoint",
+        "GlobalRegularization.terminalCorrection_value_zero"
+      ],
+      "constructions": [
+        "GlobalRegularization.terminalCorrection",
+        "GlobalRegularization.terminalShell"
+      ]
+    },
+    {
+      "id": "C009",
+      "source_line": 79,
+      "anchor": "\\sup_m\\|Q_m\\|",
+      "claim": "Uniform C1 norm bound and continuous-history norm at most width/2",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.exists_terminalCorrection_uniform_bound",
+        "GlobalRegularization.terminalCorrection_small"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C010",
+      "source_line": 83,
+      "anchor": "\\label{eq:overlap}",
+      "claim": "Bounded overlap estimates for vector and operator shell sums",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.norm_terminalShell_sum_le",
+        "GlobalRegularization.norm_terminalShell_operator_sum_le"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C011",
+      "source_line": 91,
+      "anchor": "\\label{lem:triangular}",
+      "claim": "Coordinate lemma from bounded approximants, observations and terminal invisibility",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.localized_straightening_of_bounded_approximants",
+        "GlobalRegularization.shellCoordinate_general_isotopy",
+        "GlobalRegularization.C1Straightening.HasTriangularDerivative.spectrum_eq"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C012",
+      "source_line": 104,
+      "anchor": "\\label{eq:construction}",
+      "claim": "Actual coordinate correction series",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.shellCoordinate_C1"
+      ],
+      "constructions": [
+        "GlobalRegularization.shellCoordinate"
+      ]
+    },
+    {
+      "id": "C013",
+      "source_line": 116,
+      "anchor": "\\label{eq:derivative}",
+      "claim": "Local uniform convergence of function/derivative series and actual Frechet derivative",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.terminalShellError_summable",
+        "GlobalRegularization.terminalShellError_C1",
+        "GlobalRegularization.shellCoordinate_C1"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C014",
+      "source_line": 120,
+      "anchor": "\\label{eq:triangle}",
+      "claim": "Finite observation identity and global injectivity",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.shellCoordinate_general_observation_identity",
+        "GlobalRegularization.shellCoordinate_general_injective"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C015",
+      "source_line": 126,
+      "anchor": "\\label{eq:telK}",
+      "claim": "Telescoping derivative representation and operator-norm convergence",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.shellOperatorPartial_telescoping",
+        "GlobalRegularization.triangularPartial_tendsto_of_shell"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C016",
+      "source_line": 138,
+      "anchor": "K_N^{N+2}=0",
+      "claim": "Finite filtration implies nilpotence",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.triangularPartial_nilpotent"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C017",
+      "source_line": 139,
+      "anchor": "\\label{eq:ann}",
+      "claim": "Finite operator annihilates remainder; remainders tend to zero",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.triangularPartial_annihilates_remainder",
+        "GlobalRegularization.isUnit_one_add_triangular_limit"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C018",
+      "source_line": 144,
+      "anchor": "K^k=\\sum",
+      "claim": "Written noncommutative one-sided finite power formula",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.one_sided_power_expansion",
+        "GlobalRegularization.nilpotent_remainder_power_expansion"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C019",
+      "source_line": 146,
+      "anchor": "The spectral-radius formula",
+      "claim": "Zero spectral radius from nilpotent approximation and one-sided annihilation",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.spectralRadius_eq_zero_of_nilpotent_approximation",
+        "GlobalRegularization.isUnit_one_add_of_nilpotent_approximation"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C020",
+      "source_line": 146,
+      "anchor": "The inverse function theorem",
+      "claim": "Banach inverse theorem yields C1 inverse on an open image",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.isOpen_image_of_invertible_derivative",
+        "GlobalRegularization.contDiffOn_invFunOn_of_injective_derivative"
+      ],
+      "constructions": [
+        "GlobalRegularization.straighteningOfInjectiveDerivative"
+      ]
+    },
+    {
+      "id": "C021",
+      "source_line": 148,
+      "anchor": "The endpoint identity follows",
+      "claim": "Exact endpoint defect, endpoint value and remote history preservation",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.shellCoordinate_endpoint_identity",
+        "GlobalRegularization.shellCoordinate_preserves_endpoint_value",
+        "GlobalRegularization.shellCoordinate_preserves_remote_history"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C022",
+      "source_line": 149,
+      "anchor": "\\label{eq:telA}",
+      "claim": "Alternative telescoping coordinate series and uniform displacement estimate",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.shell_error_partial_telescoping",
+        "GlobalRegularization.shellCoordinate_displacement_bound"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C023",
+      "source_line": 152,
+      "anchor": "replacing each correction by $s$",
+      "claim": "Jointly C1 affine isotopy, inverse slices and common localization/bound",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.shellCoordinate_general_isotopy",
+        "GlobalRegularization.LocalizedHistoryStraightening.localized_isotopy_of_affine"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C024",
+      "source_line": 157,
+      "anchor": "\\label{lem:atom}",
+      "claim": "Endpoint value plus matrix of finite signed measures representation",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.historyFunctional_signed_matrix_representation",
+        "GlobalRegularization.historyFunctional_matrix_representation"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C025",
+      "source_line": 170,
+      "anchor": "bounded linear isomorphism from $C_n^1$",
+      "claim": "FTC coordinates are a bounded linear equivalence, not an arbitrary product surrogate",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.historyReconstruct_coordinates"
+      ],
+      "constructions": [
+        "GlobalRegularization.historyCoordinates"
+      ]
+    },
+    {
+      "id": "C026",
+      "source_line": 165,
+      "anchor": "\\lim_{\\delta\\downarrow0}Df(\\phi)Q_\\delta",
+      "claim": "Actual one-sided positive-real-width operator limit equals endpoint atom",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.matrixHistoryFunctional_terminal_filter_limit",
+        "GlobalRegularization.matrixHistoryFunctional_terminal_filter_zero_iff"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C027",
+      "source_line": 173,
+      "anchor": "\\label{lem:adapted}",
+      "claim": "Actual uniformly bounded finite-rank adapted operators with strong and adjoint limits",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.exists_adapted_operators_for_separable_family"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C028",
+      "source_line": 182,
+      "anchor": "The space $C_n^1$ is separable",
+      "claim": "Separable history and derivative image, including empty image",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.history_derivative_image_separable",
+        "GlobalRegularization.exists_full_image_totalVariation_dominator"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C029",
+      "source_line": 182,
+      "anchor": "There is therefore one finite positive",
+      "claim": "Common finite full-support atom-free measure dominating all component total variations",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.exists_full_image_totalVariation_dominator",
+        "GlobalRegularization.historyLebesgue_full_support",
+        "GlobalRegularization.historyLebesgue_singleton"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C030",
+      "source_line": 182,
+      "anchor": "converge in total variation",
+      "claim": "Signed measure uniqueness, total-variation dual norm and continuous representation",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.signedVariationNorm_eq_dual_norm",
+        "GlobalRegularization.signedRieszMeasure_variation_distance",
+        "GlobalRegularization.historySignedMatrix_totalVariation_continuous"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C031",
+      "source_line": 182,
+      "anchor": "absolute continuity with respect to $\\nu$ is closed",
+      "claim": "Absolute continuity closed under total-variation limits",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.signed_absoluteContinuity_closed_under_variation_limits"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C032",
+      "source_line": 184,
+      "anchor": "Choose nonnegative continuous finite partitions",
+      "claim": "Finite small-support nonnegative partitions; zero-weight averaging convention",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.exists_smallSupportPartition",
+        "GlobalRegularization.finiteMarkovOperator_apply",
+        "GlobalRegularization.norm_weightedAverage_le"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C033",
+      "source_line": 185,
+      "anchor": "\\label{eq:markov}",
+      "claim": "Displayed finite Markov averages, positivity and finite rank",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.finiteMarkovOperator_apply",
+        "GlobalRegularization.finiteMarkovOperator_nonneg",
+        "GlobalRegularization.finiteMarkovOperator_finite_range"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C034",
+      "source_line": 189,
+      "anchor": "The $T_m$ have finite rank",
+      "claim": "Markov contractions and uniform strong convergence",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.norm_markovApproximation_le",
+        "GlobalRegularization.markovApproximation_strong",
+        "GlobalRegularization.markovApproximation_finite_range"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C035",
+      "source_line": 189,
+      "anchor": "then $T_m^*\\mu$ has density",
+      "claim": "Explicit signed Markov adjoint density for integrable w",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.finiteMarkov_adjoint_density"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C036",
+      "source_line": 195,
+      "anchor": "\\label{eq:dualT}",
+      "claim": "Actual total-variation adjoint convergence, using continuous density approximation",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.markovApproximation_signed_totalVariation"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C037",
+      "source_line": 201,
+      "anchor": "(V_mg)(t)",
+      "claim": "Actual terminal cutoff by min(t,-sigma), contraction and strong convergence",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.norm_terminalHistoryCutoff_le",
+        "GlobalRegularization.terminalHistoryCutoff_strong"
+      ],
+      "constructions": [
+        "GlobalRegularization.terminalHistoryCutoff"
+      ]
+    },
+    {
+      "id": "C038",
+      "source_line": 206,
+      "anchor": "\\le2|\\mu|",
+      "claim": "Two-times-terminal-tail total-variation bound and convergence",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.terminalHistoryCutoff_signed_variation_bound",
+        "GlobalRegularization.terminalHistoryCutoff_signed_totalVariation"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C039",
+      "source_line": 208,
+      "anchor": "Put $\\widetilde T_m=T_mV_m$",
+      "claim": "Adjoint convergence of the composition",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.composed_signed_adjoint_totalVariation"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C040",
+      "source_line": 216,
+      "anchor": "\\label{eq:R}",
+      "claim": "FTC-reconstructed finite-rank operators with strong convergence and uniform bound",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.reconstructHistoryOperator_apply",
+        "GlobalRegularization.reconstructHistoryOperator_finite_range",
+        "GlobalRegularization.adaptedHistoryOperator_uniform_bound",
+        "GlobalRegularization.adaptedHistoryOperator_strong"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C041",
+      "source_line": 219,
+      "anchor": "Formula \\eqref{eq:R} proves",
+      "claim": "Annihilation of terminal corrections by the reconstructed operator",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.adaptedHistoryOperator_annihilates_terminal"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C042",
+      "source_line": 222,
+      "anchor": "\\label{thm:terminal}",
+      "claim": "Full terminal-atom straightening theorem, spectrum and isotopy",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.terminal_atom_full_straightening",
+        "GlobalRegularization.LocalizedHistoryStraightening.localized_isotopy_of_affine"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C043",
+      "source_line": 237,
+      "anchor": "The space $F_m$ is finite dimensional",
+      "claim": "Finite-dimensional range cutoffs and bounded C1 extension by zero",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.exists_compact_smooth_cutoff",
+        "GlobalRegularization.exists_bounded_C1_extension_near_compact",
+        "GlobalRegularization.manuscriptCore_compact"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C044",
+      "source_line": 243,
+      "anchor": "Fix $\\phi_*\\in U$",
+      "claim": "Eventually captured common ball, exact local agreement of cutoff approximants",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.approximationCore_eventually_captures_ball_bounded",
+        "GlobalRegularization.exists_bounded_local_C1_cylindrical_family_uniform"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C045",
+      "source_line": 247,
+      "anchor": "For derivatives write",
+      "claim": "Local C1 approximation in operator norm, not merely pointwise derivatives",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.localC1Approximation_of_agreement",
+        "GlobalRegularization.exists_bounded_local_C1_cylindrical_family"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C046",
+      "source_line": 254,
+      "anchor": "Define $O_m\\phi=",
+      "claim": "Nested finite observations separate histories and annihilate sufficiently narrow corrections",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.localized_straightening_of_adapted_operators_with_triangular_derivative"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C047",
+      "source_line": 259,
+      "anchor": "property \\textup{(e)} gives",
+      "claim": "Extended derivative implies vanishing terminal defect",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.property_e_terminal_limit",
+        "GlobalRegularization.property_e_full_straightening"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C048",
+      "source_line": 271,
+      "anchor": "\\label{cor:levels}",
+      "claim": "All-level identity, split fiber charts, tangent kernels, continuous complementary n-planes",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.terminal_atom_all_levels",
+        "GlobalRegularization.terminal_atom_fiber_geometry",
+        "GlobalRegularization.C1Straightening.fiberTangent_range",
+        "GlobalRegularization.C1Straightening.continuous_complement_family",
+        "GlobalRegularization.C1Straightening.normal_dimension"
+      ],
+      "constructions": [
+        "GlobalRegularization.C1Straightening.splitFiberParametrization"
+      ]
+    },
+    {
+      "id": "C049",
+      "source_line": 282,
+      "anchor": "\\label{cor:coupling}",
+      "claim": "Invertible endpoint-derivative coupling and actual ambient chart",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.terminal_atom_endpoint_coupling_of_isUnit"
+      ],
+      "constructions": [
+        "GlobalRegularization.endpointReplacementCLE"
+      ]
+    },
+    {
+      "id": "C050",
+      "source_line": 295,
+      "anchor": "For comparison, if $U",
+      "claim": "Corrected nonempty-domain, nontrivial-state impossibility comparison",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.no_endpoint_identity_straightening"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C051",
+      "source_line": 295,
+      "anchor": "but not a necessary one",
+      "claim": "Atom-free hypothesis not necessary: explicit nonzero-atom straightenable feedback",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.twiceEndpoint_not_terminal"
+      ],
+      "constructions": [
+        "GlobalRegularization.twiceEndpointStraightening"
+      ]
+    },
+    {
+      "id": "C052",
+      "source_line": 297,
+      "anchor": "\\label{thm:remote}",
+      "claim": "Remote observations with arbitrary Banach range; full localization, spectrum and isotopy",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.remote_observation_full_straightening"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C053",
+      "source_line": 305,
+      "anchor": "The chain rule gives",
+      "claim": "Remote chain-rule terminal defect tends to zero",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.remote_observation_annihilates_terminal",
+        "GlobalRegularization.remote_composition_terminal_condition"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C054",
+      "source_line": 314,
+      "anchor": "\\begin{corollary}[A past-derivative example]",
+      "claim": "Past-derivative feedback admits localized straightening",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.pastDerivative_full_straightening"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C055",
+      "source_line": 319,
+      "anchor": "Its derivative generally does not extend",
+      "claim": "Actual failure of continuous-history derivative extension at zero",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.scalarPastDerivativeFeedback_no_extended_derivative_at_zero"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C056",
+      "source_line": 328,
+      "anchor": "\\label{thm:hilbert}",
+      "claim": "Full corrected separable Hilbert theorem with actual complex spectrum and isotopy",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.property_e_Hilbert_full_straightening"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C057",
+      "source_line": 338,
+      "anchor": "Use the Bernstein operators $P_m$",
+      "claim": "Actual Bernstein operators of degrees 4^m with Hilbert coefficients",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.paperBernsteinIndex_add_one"
+      ],
+      "constructions": [
+        "GlobalRegularization.paperBernstein"
+      ]
+    },
+    {
+      "id": "C058",
+      "source_line": 338,
+      "anchor": "Their positivity and difference-quotient formulas",
+      "claim": "C1 contraction, continuous-history operator-norm convergence and C1 strong convergence",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.paperBernstein_contraction",
+        "GlobalRegularization.paperBernstein_continuous_operator_limit",
+        "GlobalRegularization.paperBernstein_strong"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C059",
+      "source_line": 344,
+      "anchor": "They have nested grids",
+      "claim": "Equality of P_j observations implies equality of every P_i, i<=j",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.paperBernstein_samples_nested",
+        "GlobalRegularization.paperBernstein_nested"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C060",
+      "source_line": 344,
+      "anchor": "Their ranges $F_m=",
+      "claim": "Actual closed ranges continuously linearly equivalent to finite Hilbert products",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.finite_tensor_coefficients",
+        "GlobalRegularization.bernstein_real_independent",
+        "GlobalRegularization.unitHistorySynthesis_range_closed",
+        "GlobalRegularization.unitHistoryBernstein_range_eq_synthesis"
+      ],
+      "constructions": [
+        "GlobalRegularization.paperBernsteinRangeEquiv"
+      ]
+    },
+    {
+      "id": "C061",
+      "source_line": 350,
+      "anchor": "Hilbert spaces admit $C^1$ smooth partitions",
+      "claim": "Infinitely smooth partitions of unity and smooth Urysohn cutoffs in separable Hilbert space",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.hilbertBump_all_derivatives_bounded",
+        "GlobalRegularization.exists_hilbert_smooth_positive_support",
+        "GlobalRegularization.exists_hilbert_smooth_cutoff",
+        "GlobalRegularization.exists_hilbert_smooth_partition_of_unity"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C062",
+      "source_line": 350,
+      "anchor": "The set $K_m$ need not be compact",
+      "claim": "Displayed distance core is closed and lies in the displayed open belt",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.manuscriptCore_closed",
+        "GlobalRegularization.manuscriptBelt_open",
+        "GlobalRegularization.manuscriptCore_subset_belt",
+        "GlobalRegularization.manuscriptBelt_subset_domain"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C063",
+      "source_line": 352,
+      "anchor": "Hence there is a smooth cutoff",
+      "claim": "Cutoff near the exact core with support in the exact belt on the actual range",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.exists_manuscript_core_cutoff",
+        "GlobalRegularization.exists_smooth_cutoff_Bernstein_range"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C064",
+      "source_line": 352,
+      "anchor": "Let $\\beta\\in",
+      "claim": "Actual compactly supported infinitely smooth scalar cutoff and bounded smooth saturation",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.manuscriptBeta_smooth",
+        "GlobalRegularization.manuscriptBeta_one",
+        "GlobalRegularization.manuscriptBeta_compact",
+        "GlobalRegularization.manuscriptHilbertSaturation_smooth",
+        "GlobalRegularization.manuscriptHilbertSaturation_bound",
+        "GlobalRegularization.manuscriptHilbertSaturation_identity"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C065",
+      "source_line": 356,
+      "anchor": "extended by zero, is a globally defined bounded",
+      "claim": "Actual range-cutoff times saturation extends to bounded global C1 piece",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.exists_manuscript_bounded_piece",
+        "GlobalRegularization.property_e_manuscript_Hilbert_family"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C066",
+      "source_line": 362,
+      "anchor": "Joint continuity of the extended derivative",
+      "claim": "Jointly continuous linear action implies locally bounded operator norms",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.joint_linear_action_locally_bounded",
+        "GlobalRegularization.HasExtendedDerivative.exists_locally_bounded_extension"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C067",
+      "source_line": 368,
+      "anchor": "the right side is uniformly small",
+      "claim": "Exact manuscript family has local C1 approximation in operator norm",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.property_e_manuscript_Hilbert_family"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C068",
+      "source_line": 370,
+      "anchor": "Finally choose $Q_m$",
+      "claim": "Paper Bernstein observations annihilate narrow terminal corrections and separate histories",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.paperBernstein_terminal_invisible",
+        "GlobalRegularization.paperBernstein_separates",
+        "GlobalRegularization.property_e_Hilbert_normalized_straightening"
+      ],
+      "constructions": []
+    },
+    {
+      "id": "C069",
+      "source_line": 152,
+      "anchor": "quasinilpotent",
+      "claim": "Actual complexification, spectrum calculation and affine scalar perturbations",
+      "status": "checked-counterpart",
+      "proofs": [
+        "GlobalRegularization.RealComplexification.norm_embed",
+        "GlobalRegularization.RealComplexification.decomposition",
+        "GlobalRegularization.RealComplexification.map_unique",
+        "GlobalRegularization.C1Straightening.HasTriangularDerivative.spectrum_eq"
+      ],
+      "constructions": []
+    }
+  ]
+}

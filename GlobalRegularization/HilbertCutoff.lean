@@ -1,25 +1,25 @@
-import GlobalRegularization.HilbertPositiveSupport
+import GlobalRegularization.HilbertSmoothSupport
 import Mathlib.Topology.Separation.Regular
 
-/-! C¹ Urysohn cutoffs near arbitrary closed subsets of separable Hilbert
+/-! Infinitely smooth Urysohn cutoffs near arbitrary closed subsets of separable Hilbert
 spaces. The sets need not be compact or have compact neighborhoods. -/
 
 namespace GlobalRegularization
 
 open Set Filter Function TopologicalSpace
-open scoped Topology
+open scoped Topology ContDiff
 
 noncomputable section
 
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℝ H] [SeparableSpace H]
 
-theorem exists_hilbert_C1_cutoff {K U : Set H} (hK : IsClosed K) (hU : IsOpen U) (hKU : K ⊆ U) :
-    ∃ χ : H → ℝ, ContDiff ℝ 1 χ ∧ tsupport χ ⊆ U ∧
+theorem exists_hilbert_smooth_cutoff {K U : Set H} (hK : IsClosed K) (hU : IsOpen U) (hKU : K ⊆ U) :
+    ∃ χ : H → ℝ, ContDiff ℝ ∞ χ ∧ tsupport χ ⊆ U ∧
       (∀ᶠ x in 𝓝ˢ K, χ x = 1) ∧ ∀ x, χ x ∈ Icc 0 1 := by
   obtain ⟨W, hW, hKW, hWU⟩ := normal_exists_closure_subset hK hU hKU
   obtain ⟨V, hV, hKV, hVW⟩ := normal_exists_closure_subset hK hW hKW
-  obtain ⟨p, hps, hp, hpr⟩ := exists_hilbert_C1_positive_support hW
-  obtain ⟨q, hqs, hq, hqr⟩ := exists_hilbert_C1_positive_support
+  obtain ⟨p, hps, hp, hpr⟩ := exists_hilbert_smooth_positive_support hW
+  obtain ⟨q, hqs, hq, hqr⟩ := exists_hilbert_smooth_positive_support
     (s := (closure V)ᶜ) isClosed_closure.isOpen_compl
   have hp_pos {x : H} (hx : x ∈ W) : 0 < p x := by
     have hne : p x ≠ 0 := by rwa [← hps] at hx
@@ -51,6 +51,12 @@ theorem exists_hilbert_C1_cutoff {K U : Set H} (hK : IsClosed K) (hU : IsOpen U)
   · intro x
     exact ⟨div_nonneg (hpr x).1 (hden x).le,
       (div_le_one (hden x)).mpr (le_add_of_nonneg_right (hqr x).1)⟩
+
+theorem exists_hilbert_C1_cutoff {K U : Set H} (hK : IsClosed K) (hU : IsOpen U) (hKU : K ⊆ U) :
+    ∃ χ : H → ℝ, ContDiff ℝ 1 χ ∧ tsupport χ ⊆ U ∧
+      (∀ᶠ x in 𝓝ˢ K, χ x = 1) ∧ ∀ x, χ x ∈ Icc 0 1 := by
+  obtain ⟨χ, hχ, hs, he, hr⟩ := exists_hilbert_smooth_cutoff hK hU hKU
+  exact ⟨χ, hχ.of_le (by simp), hs, he, hr⟩
 
 end
 

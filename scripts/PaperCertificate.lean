@@ -1,8 +1,10 @@
 import GlobalRegularization
 
-/-! Coverage of the manuscript's mathematical theorem statements.
+/-! Selected certificates for the manuscript's mathematical statements.
 The spectrum equalities use the necessary nontriviality hypotheses.
-Every named result below is a proved theorem or a constructed chart. -/
+Every named result below is a proved theorem or a constructed chart.
+Passing this script does not certify exhaustive literal manuscript coverage;
+the final checks include negations of false literal assertions. -/
 
 -- Theorem 1.1 (principal statement).
 #check GlobalRegularization.mainClaim
@@ -20,12 +22,27 @@ Every named result below is a proved theorem or a constructed chart. -/
 #check GlobalRegularization.historyFunctional_matrix_representation
 #check GlobalRegularization.matrixHistoryFunctional_terminal_operator_limit
 #check GlobalRegularization.matrixHistoryFunctional_terminal_zero_iff
+#check GlobalRegularization.matrixHistoryFunctional_terminal_filter_limit
+#check GlobalRegularization.matrixHistoryFunctional_terminal_filter_zero_iff
+#check GlobalRegularization.historyFunctional_signed_matrix_representation
+#check GlobalRegularization.signedVariationNorm_eq_dual_norm
+#check GlobalRegularization.signedRieszMeasure_variation_distance
+#check GlobalRegularization.historySignedMatrix_totalVariation_continuous
+#check GlobalRegularization.signed_absoluteContinuity_closed_under_variation_limits
+#check GlobalRegularization.exists_full_image_totalVariation_dominator
+#check GlobalRegularization.finiteMarkov_adjoint_density
+#check GlobalRegularization.markovApproximation_signed_totalVariation
+#check GlobalRegularization.terminalHistoryCutoff_signed_variation_bound
+#check GlobalRegularization.terminalHistoryCutoff_signed_totalVariation
+#check GlobalRegularization.composed_signed_adjoint_totalVariation
 
 -- Adapted-approximation lemma, with actual operators and an empty-family case.
 #check GlobalRegularization.exists_adapted_operators_for_separable_family
 #check GlobalRegularization.adaptedTerminalWidth_pos
 #check GlobalRegularization.adaptedTerminalWidth_antitone
 #check GlobalRegularization.adaptedTerminalWidth_tendsto
+#check GlobalRegularization.one_sided_power_expansion
+#check GlobalRegularization.nilpotent_remainder_power_expansion
 
 -- Stronger terminal-atom theorem, including its actual complex spectrum.
 #check GlobalRegularization.terminal_atom_full_straightening
@@ -54,6 +71,11 @@ Every named result below is a proved theorem or a constructed chart. -/
 
 -- Infinite-dimensional separable Hilbert spaces, with genuine cutoffs.
 #check GlobalRegularization.exists_hilbert_C1_cutoff
+#check GlobalRegularization.hilbertBump_all_derivatives_bounded
+#check GlobalRegularization.exists_hilbert_smooth_positive_support
+#check GlobalRegularization.exists_hilbert_smooth_cutoff
+#check GlobalRegularization.exists_hilbert_smooth_partition_of_unity
+#check GlobalRegularization.hilbertSaturation_smooth
 #check GlobalRegularization.property_e_Hilbert_bounded_C1_approximants
 #check GlobalRegularization.property_e_Hilbert_full_straightening
 #check GlobalRegularization.property_e_Hilbert_straightening_spectrum_inclusion
@@ -61,3 +83,36 @@ Every named result below is a proved theorem or a constructed chart. -/
 
 -- A machine-checked counterexample to the uncorrected zero-space equality.
 #check GlobalRegularization.zero_space_identity_spectrum_ne_one
+#check GlobalRegularization.zeroHilbert_feedback_has_property_e
+#check GlobalRegularization.literal_Hilbert_conclusion_false
+#check GlobalRegularization.full_support_partition_zero_denominator
+#print axioms GlobalRegularization.literal_Hilbert_conclusion_false
+
+-- The actual displayed Bernstein ranges, grid nesting and construction.
+#check GlobalRegularization.finite_tensor_coefficients
+#check GlobalRegularization.bernstein_real_independent
+#check GlobalRegularization.unitHistorySamples_surjective
+#check GlobalRegularization.unitHistorySynthesis_range_closed
+#check GlobalRegularization.hilbertBernsteinRangeEquiv
+#check GlobalRegularization.paperBernsteinRangeEquiv
+#check GlobalRegularization.paperBernstein_nested
+#check GlobalRegularization.paperBernstein_contraction
+#check GlobalRegularization.paperBernstein_strong
+#check GlobalRegularization.paperBernstein_continuous_operator_limit
+#check GlobalRegularization.paperBernstein_terminal_invisible
+#check GlobalRegularization.exists_smooth_cutoff_Bernstein_range
+#check GlobalRegularization.manuscriptCore_compact
+#check GlobalRegularization.manuscriptCore_subset_belt
+#check GlobalRegularization.exists_manuscript_core_cutoff
+#check GlobalRegularization.manuscriptBeta_compact
+#check GlobalRegularization.manuscriptHilbertSaturation_smooth
+#check GlobalRegularization.manuscriptHilbertSaturation_bound
+#check GlobalRegularization.manuscriptHilbertSaturation_identity
+#check GlobalRegularization.exists_manuscript_bounded_piece
+#check GlobalRegularization.property_e_manuscript_Hilbert_family
+#print axioms GlobalRegularization.property_e_manuscript_Hilbert_family
+#check GlobalRegularization.HasExtendedDerivative.exists_locally_bounded_extension
+#check GlobalRegularization.LocalizedHistoryStraightening.sup_displacement_lt
+#check GlobalRegularization.twiceEndpointStraightening
+#check GlobalRegularization.twiceEndpoint_not_terminal
+#check GlobalRegularization.finiteMarkovOperator_nonneg
