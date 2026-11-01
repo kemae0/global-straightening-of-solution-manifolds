@@ -6,6 +6,13 @@ listed here is derived from its stated analytic hypotheses.
 | Dependency or manuscript result | Checked modules / theorem |
 | --- | --- |
 | Genuine complete normed C¹ histories and classical correspondence | `HistorySpace` |
+| Revised exact complete sum-norm history space and quantitative norm equivalence | `SumHistoryNorm` |
+| Transport of actual charts, isotopies and spectra under norm changes | `CoordinateTransport`, `TriangularDerivativeConjugate`, `SumHistoryCertificates` |
+| Revised main theorem, spectrum and one positive bound for every isotopy slice | `RevisedMainTheorems` |
+| Arbitrary finite-dimensional real state norms with the full derivative certificate | `FiniteNormCertificate`, `property_e_sum_finite_dimensional` |
+| Bernstein contraction and all displayed limits in the exact sum norm | `SumBernstein` |
+| Strict local supremum bound and failure of property (e) on every domain containing zero | `RevisedAssertions` |
+| Exact endpoint reflection and its obstruction to spectrum `{1}` | `EndpointReflection` |
 | Endpoint and derivative evaluation, continuous inclusion | `HistorySpace`, `ScalarHistoryLift` |
 | Actual terminal corrections, support and small continuous norm | `BoundaryLayer`, `BoundaryScaling` |
 | Scalar and matrix Riesz representation | `PositiveFunctionalDecomposition`, `ScalarRieszRepresentation`, `HistoryFunctionalRepresentation`, `VectorRieszRepresentation` |

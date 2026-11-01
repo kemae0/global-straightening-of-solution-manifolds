@@ -1,0 +1,32 @@
+import GlobalRegularization
+
+/-! Certificates for the supplied revised manuscript. The source coverage
+map is a manual correspondence audit, not a completeness proof. -/
+
+#check GlobalRegularization.SumC1History
+#check GlobalRegularization.sumHistory_norm
+#check GlobalRegularization.sumHistory_norm_comparison
+#check GlobalRegularization.sumHistoryEquiv
+#check GlobalRegularization.C1Straightening.linear_transport
+#check GlobalRegularization.C1Straightening.linear_transport_isotopy
+#check GlobalRegularization.property_e_revised_main
+#check GlobalRegularization.LocalizedHistoryStraightening.positive_uniform_affine_bound
+#check GlobalRegularization.property_e_sum_finite_main
+#check GlobalRegularization.property_e_sum_finite_dimensional
+#check GlobalRegularization.terminal_atom_sum_finite_main
+#check GlobalRegularization.property_e_sum_Hilbert_main
+#print axioms GlobalRegularization.property_e_sum_finite_dimensional
+#print axioms GlobalRegularization.terminal_atom_sum_finite_main
+#print axioms GlobalRegularization.property_e_sum_Hilbert_main
+#check GlobalRegularization.sumPaperBernstein_contraction
+#check GlobalRegularization.sumPaperBernstein_strong
+#check GlobalRegularization.sumPaperBernstein_continuous_operator_limit
+#check GlobalRegularization.sumPaperBernstein_nested
+#check GlobalRegularization.LocalC1Approximation.literal_sup_bound
+#check GlobalRegularization.endpointReflectionEquiv
+#check GlobalRegularization.endpointReflection_endpoint
+#check GlobalRegularization.endpointReflection_involution
+#check GlobalRegularization.neg_one_mem_complexified_spectrum_of_endpoint_flip
+#check GlobalRegularization.C1Straightening.twice_endpoint_spectrum_obstruction
+#print axioms GlobalRegularization.C1Straightening.twice_endpoint_spectrum_obstruction
+#check GlobalRegularization.scalarPastDerivativeFeedback_not_property_e_on_zero_domain

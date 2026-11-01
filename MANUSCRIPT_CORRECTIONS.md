@@ -1,10 +1,34 @@
 # Corrections to the supplied manuscript
 
-These issues were reported during formalization. The original manuscript
-has been preserved; the Lean statements implement the corrections below.
-The user approved these corrections. The amended source is
-`manuscript/paper_corrected.tex`; the original input hash remains recorded
-in `verification/provenance.json`.
+The current supplied revision, titled *Global Straightening of Solution
+Manifolds for State-Dependent Delay Equations*, is preserved byte for byte
+in `manuscript/paper_revised.tex`. Its hash and the current formalization
+target's hash are recorded in `verification/provenance.json`.
+
+## Qualification in the current revision
+
+The sentence before the endpoint-reflection example says the zero-atom
+condition is not necessary for "the diffeomorphism in Theorem 3.3"
+(the theorem labelled `thm:no-atom`). Read as referring to all that theorem's
+conclusions, this is false. For `f = 2D`, the example `A = I - 2QD` is an
+ambient continuous linear involution satisfying `D A = -D`, but its
+complexified derivative has `-1` in its spectrum. More generally, every
+C¹ chart with this defect identity on a nonempty open domain has `-1` in
+its derivative spectrum, so it cannot have spectrum `{1}`.
+
+`EndpointReflection.lean` constructs the exact displayed involution and
+proves `neg_one_mem_complexified_spectrum_of_endpoint_flip` and
+`C1Straightening.twice_endpoint_spectrum_obstruction`. This issue was
+reported to the user. In `paper_corrected.tex`, only the sentence's phrase
+"for the existence of the diffeomorphism in Theorem ..." is replaced by
+"for the existence of an ambient diffeomorphism satisfying the defect identity".
+The supplied revision itself remains unchanged.
+
+## Historical corrections
+
+The user approved the following corrections to the earlier manuscript.
+The revised draft incorporates these repairs. Their Lean counterexamples
+remain in the library as regression certificates.
 
 1. **Spectrum equality in the zero space is false.** The coordinate lemma
    and Hilbert theorem allow a zero state space but assert spectrum `{1}`.

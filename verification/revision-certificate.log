@@ -1,0 +1,131 @@
+GlobalRegularization.SumC1History.{u_1} (h : NNReal) (B : Type u_1) [NormedAddCommGroup B] [NormedSpace ℝ B]
+  [CompleteSpace B] : Type u_1
+GlobalRegularization.sumHistory_norm.{u_1} (h : NNReal) (B : Type u_1) [NormedAddCommGroup B] [NormedSpace ℝ B]
+  [CompleteSpace B] (x : GlobalRegularization.SumC1History h B) :
+  ‖x‖ = ‖(GlobalRegularization.sumHistoryInclusion h B) x‖ + ‖(GlobalRegularization.sumHistoryDerivative h B) x‖
+GlobalRegularization.sumHistory_norm_comparison.{u_1} (h : NNReal) (B : Type u_1) [NormedAddCommGroup B]
+  [NormedSpace ℝ B] [CompleteSpace B] (x : GlobalRegularization.SumC1History h B) :
+  ‖(GlobalRegularization.sumHistoryEquiv h B) x‖ ≤ ‖x‖ ∧ ‖x‖ ≤ 2 * ‖(GlobalRegularization.sumHistoryEquiv h B) x‖
+GlobalRegularization.sumHistoryEquiv.{u_1} (h : NNReal) (B : Type u_1) [NormedAddCommGroup B] [NormedSpace ℝ B]
+  [CompleteSpace B] : GlobalRegularization.SumC1History h B ≃L[ℝ] GlobalRegularization.C1History h B
+GlobalRegularization.C1Straightening.linear_transport.{u_1, u_2, u_3} {E : Type u_1} {F : Type u_2} {B : Type u_3}
+  [NormedAddCommGroup E] [NormedSpace ℝ E] [NormedAddCommGroup F] [NormedSpace ℝ F] [NormedAddCommGroup B]
+  [NormedSpace ℝ B] (T : E ≃L[ℝ] F) (U : Set E) (D : F →L[ℝ] B) (f : E → B)
+  (s : GlobalRegularization.C1Straightening (⇑T.symm ⁻¹' U) D fun y => f (T.symm y)) :
+  GlobalRegularization.C1Straightening U (D.comp ↑T) f
+GlobalRegularization.C1Straightening.linear_transport_isotopy.{u_1, u_2, u_3} {E : Type u_1} {F : Type u_2}
+  {B : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E] [NormedAddCommGroup F] [NormedSpace ℝ F]
+  [CompleteSpace F] [NormedAddCommGroup B] [NormedSpace ℝ B] (T : E ≃L[ℝ] F) (U : Set E) (D : F →L[ℝ] B) (f : E → B)
+  (s : GlobalRegularization.C1Straightening (⇑T.symm ⁻¹' U) D fun y => f (T.symm y)) (hi : s.HasAffineIsotopy) :
+  (GlobalRegularization.C1Straightening.linear_transport T U D f s).HasAffineIsotopy
+GlobalRegularization.property_e_revised_main (h : NNReal) (hh : 0 < ↑h) (n : ℕ) [NeZero n]
+  (U : Set (GlobalRegularization.C1History h (Fin n → ℝ))) (hU : IsOpen U)
+  (f : GlobalRegularization.C1History h (Fin n → ℝ) → Fin n → ℝ)
+  (he : GlobalRegularization.HasExtendedDerivative U (GlobalRegularization.historyInclusion h (Fin n → ℝ)) f) (τ ε : ℝ)
+  (hτ : 0 < τ) (hε : 0 < ε) :
+  ∃ chart,
+    GlobalRegularization.LocalizedHistoryStraightening.HasLocalizedAffineIsotopy h (Fin n → ℝ) chart ∧
+      (∀ x ∈ U, spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) = {1}) ∧
+        (∃ c ∈ Set.Ioo 0 ε,
+            ∀ s ∈ Set.Icc 0 1,
+              ∀ x ∈ U,
+                ‖(GlobalRegularization.historyInclusion h (Fin n → ℝ))
+                      (GlobalRegularization.affineHomotopy chart.forward s x - x)‖ ≤
+                  c) ∧
+          chart.forward ''
+              GlobalRegularization.solutionManifold U (⇑(GlobalRegularization.endpointDerivative h (Fin n → ℝ))) f =
+            chart.target ∩ GlobalRegularization.zeroHyperplane ⇑(GlobalRegularization.endpointDerivative h (Fin n → ℝ))
+GlobalRegularization.LocalizedHistoryStraightening.positive_uniform_affine_bound.{u_1} (h : NNReal) (B : Type u_1)
+  [NormedAddCommGroup B] [NormedSpace ℝ B] [CompleteSpace B] {U : Set (GlobalRegularization.C1History h B)}
+  {f : GlobalRegularization.C1History h B → B} {τ ε : ℝ}
+  (chart : GlobalRegularization.LocalizedHistoryStraightening h B U f τ ε) (hε : 0 < ε) :
+  ∃ c ∈ Set.Ioo 0 ε,
+    ∀ s ∈ Set.Icc 0 1,
+      ∀ x ∈ U,
+        ‖(GlobalRegularization.historyInclusion h B) (GlobalRegularization.affineHomotopy chart.forward s x - x)‖ ≤ c
+GlobalRegularization.property_e_sum_finite_main (h : NNReal) (hh : 0 < ↑h) (n : ℕ) [NeZero n]
+  (U : Set (GlobalRegularization.SumC1History h (Fin n → ℝ))) (hU : IsOpen U)
+  (f : GlobalRegularization.SumC1History h (Fin n → ℝ) → Fin n → ℝ)
+  (he : GlobalRegularization.HasExtendedDerivative U (GlobalRegularization.sumHistoryInclusion h (Fin n → ℝ)) f)
+  (τ ε : ℝ) (hτ : 0 < τ) (hε : 0 < ε) :
+  ∃ chart,
+    chart.HasAffineIsotopy ∧
+      ∀ x ∈ U, spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) = {1}
+GlobalRegularization.property_e_sum_finite_dimensional.{u_1} (h : NNReal) (B : Type u_1) [NormedAddCommGroup B]
+  [NormedSpace ℝ B] [CompleteSpace B] [FiniteDimensional ℝ B] [Nontrivial B] (hh : 0 < ↑h)
+  (U : Set (GlobalRegularization.SumC1History h B)) (hU : IsOpen U) (f : GlobalRegularization.SumC1History h B → B)
+  (he : GlobalRegularization.HasExtendedDerivative U (GlobalRegularization.sumHistoryInclusion h B) f) (τ ε : ℝ)
+  (hτ : 0 < τ) (hε : 0 < ε) :
+  ∃ chart,
+    chart.HasAffineIsotopy ∧
+      ∀ x ∈ U, spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) = {1}
+GlobalRegularization.terminal_atom_sum_finite_main (h : NNReal) (hh : 0 < ↑h) (n : ℕ) [NeZero n]
+  (U : Set (GlobalRegularization.SumC1History h (Fin n → ℝ))) (hU : IsOpen U)
+  (f : GlobalRegularization.SumC1History h (Fin n → ℝ) → Fin n → ℝ) (hf : ContDiffOn ℝ 1 f U)
+  (hzero : GlobalRegularization.SumHasVanishingTerminalDerivative h (Fin n → ℝ) U f) (τ ε : ℝ) (hτ : 0 < τ)
+  (hε : 0 < ε) :
+  ∃ chart,
+    chart.HasAffineIsotopy ∧
+      ∀ x ∈ U, spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) = {1}
+GlobalRegularization.property_e_sum_Hilbert_main.{u_2} (h : NNReal) (H : Type u_2) [NormedAddCommGroup H]
+  [InnerProductSpace ℝ H] [CompleteSpace H] [TopologicalSpace.SeparableSpace H] [Nontrivial H] (hh : 0 < ↑h)
+  (U : Set (GlobalRegularization.SumC1History h H)) (hU : IsOpen U) (f : GlobalRegularization.SumC1History h H → H)
+  (he : GlobalRegularization.HasExtendedDerivative U (GlobalRegularization.sumHistoryInclusion h H) f) (τ ε : ℝ)
+  (hτ : 0 < τ) (hε : 0 < ε) :
+  ∃ chart,
+    chart.HasAffineIsotopy ∧
+      ∀ x ∈ U, spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) = {1}
+'GlobalRegularization.property_e_sum_finite_dimensional' depends on axioms: [propext, Classical.choice, Quot.sound]
+'GlobalRegularization.terminal_atom_sum_finite_main' depends on axioms: [propext, Classical.choice, Quot.sound]
+'GlobalRegularization.property_e_sum_Hilbert_main' depends on axioms: [propext, Classical.choice, Quot.sound]
+GlobalRegularization.sumPaperBernstein_contraction.{u_1} (B : Type u_1) [NormedAddCommGroup B] [NormedSpace ℝ B]
+  [CompleteSpace B] (m : ℕ) : ‖GlobalRegularization.sumPaperBernstein B m‖ ≤ 1
+GlobalRegularization.sumPaperBernstein_strong.{u_1} (B : Type u_1) [NormedAddCommGroup B] [NormedSpace ℝ B]
+  [CompleteSpace B] (x : GlobalRegularization.SumC1History 1 B) :
+  Filter.Tendsto (fun m => (GlobalRegularization.sumPaperBernstein B m) x) Filter.atTop (nhds x)
+GlobalRegularization.sumPaperBernstein_continuous_operator_limit.{u_1} (B : Type u_1) [NormedAddCommGroup B]
+  [NormedSpace ℝ B] [CompleteSpace B] :
+  Filter.Tendsto
+    (fun m =>
+      (GlobalRegularization.sumHistoryInclusion 1 B).comp (GlobalRegularization.sumPaperBernstein B m) -
+        GlobalRegularization.sumHistoryInclusion 1 B)
+    Filter.atTop (nhds 0)
+GlobalRegularization.sumPaperBernstein_nested.{u_1} (B : Type u_1) [NormedAddCommGroup B] [NormedSpace ℝ B]
+  [CompleteSpace B] (i j : ℕ) (hij : i ≤ j) (x y : GlobalRegularization.SumC1History 1 B)
+  (hxy : (GlobalRegularization.sumPaperBernstein B j) x = (GlobalRegularization.sumPaperBernstein B j) y) :
+  (GlobalRegularization.sumPaperBernstein B i) x = (GlobalRegularization.sumPaperBernstein B i) y
+GlobalRegularization.LocalC1Approximation.literal_sup_bound.{u_1, u_2} {E : Type u_1} {B : Type u_2}
+  [NormedAddCommGroup E] [NormedSpace ℝ E] [NormedAddCommGroup B] [NormedSpace ℝ B] {U : Set E} {f : E → B}
+  {fm : ℕ → E → B} (happ : GlobalRegularization.LocalC1Approximation U f fm) {x : E} (hx : x ∈ U) (η : ℝ) (hη : 0 < η) :
+  ∃ r > 0,
+    Metric.ball x r ⊆ U ∧
+      ∃ N,
+        sSup
+            ((fun p => ‖fm p.1 p.2 - f p.2‖ + ‖fderiv ℝ (fm p.1) p.2 - fderiv ℝ f p.2‖) ''
+              {p | N ≤ p.1 ∧ p.2 ∈ Metric.ball x r}) <
+          η
+GlobalRegularization.endpointReflectionEquiv.{u_1, u_2} {E : Type u_1} {B : Type u_2} [NormedAddCommGroup E]
+  [NormedSpace ℝ E] [CompleteSpace E] [NormedAddCommGroup B] [NormedSpace ℝ B] (D : E →L[ℝ] B) (Q : B →L[ℝ] E)
+  (hQ : D.comp Q = ContinuousLinearMap.id ℝ B) : E ≃L[ℝ] E
+GlobalRegularization.endpointReflection_endpoint.{u_1, u_2} {E : Type u_1} {B : Type u_2} [NormedAddCommGroup E]
+  [NormedSpace ℝ E] [CompleteSpace E] [NormedAddCommGroup B] [NormedSpace ℝ B] (D : E →L[ℝ] B) (Q : B →L[ℝ] E)
+  (hQ : D.comp Q = ContinuousLinearMap.id ℝ B) (x : E) : D ((GlobalRegularization.endpointReflection D Q) x) = -D x
+GlobalRegularization.endpointReflection_involution.{u_1, u_2} {E : Type u_1} {B : Type u_2} [NormedAddCommGroup E]
+  [NormedSpace ℝ E] [CompleteSpace E] [NormedAddCommGroup B] [NormedSpace ℝ B] (D : E →L[ℝ] B) (Q : B →L[ℝ] E)
+  (hQ : D.comp Q = ContinuousLinearMap.id ℝ B) : Function.Involutive ⇑(GlobalRegularization.endpointReflection D Q)
+GlobalRegularization.neg_one_mem_complexified_spectrum_of_endpoint_flip.{u_1, u_2} {E : Type u_1} {B : Type u_2}
+  [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E] [NormedAddCommGroup B] [NormedSpace ℝ B] [Nontrivial B]
+  (D : E →L[ℝ] B) (Q : B →L[ℝ] E) (hQ : D.comp Q = ContinuousLinearMap.id ℝ B) (M : E →L[ℝ] E)
+  (hM : ∀ (y : E), D (M y) = -D y) : -1 ∈ spectrum ℂ (GlobalRegularization.RealComplexification.map M)
+GlobalRegularization.C1Straightening.twice_endpoint_spectrum_obstruction.{u_1, u_2} {E : Type u_1} {B : Type u_2}
+  [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E] [NormedAddCommGroup B] [NormedSpace ℝ B] [Nontrivial B]
+  {U : Set E} (hU : IsOpen U) (D : E →L[ℝ] B) (Q : B →L[ℝ] E) (hQ : D.comp Q = ContinuousLinearMap.id ℝ B)
+  (chart : GlobalRegularization.C1Straightening U D fun x => 2 • D x) {x : E} (hx : x ∈ U) :
+  spectrum ℂ (GlobalRegularization.RealComplexification.map (fderiv ℝ chart.forward x)) ≠ {1}
+'GlobalRegularization.C1Straightening.twice_endpoint_spectrum_obstruction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+GlobalRegularization.scalarPastDerivativeFeedback_not_property_e_on_zero_domain (h : NNReal)
+  (t s : ↑(GlobalRegularization.HistoryInterval h)) (U : Set (GlobalRegularization.C1History h ℝ)) (hzero : 0 ∈ U) :
+  ¬GlobalRegularization.HasExtendedDerivative U (GlobalRegularization.historyInclusion h ℝ)
+      (GlobalRegularization.scalarPastDerivativeFeedback h t s)

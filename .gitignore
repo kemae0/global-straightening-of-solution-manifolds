@@ -9,6 +9,7 @@ exports/
 source_v5/
 manuscript/*
 !manuscript/paper_corrected.tex
+!manuscript/paper_revised.tex
 verification/publication-target.json
 verification/publication-report.json
 verification/publish-*.json

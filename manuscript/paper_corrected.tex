@@ -1,383 +1,925 @@
-% Corrected formalization target. The original input is preserved as paper.tex.
 \documentclass[11pt]{article}
-\usepackage[margin=1.18in]{geometry}
+\usepackage[margin=1.14in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage[hidelinks]{hyperref}
+\usepackage[T1]{fontenc}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{remark}[theorem]{Remark}
-\newcommand{\Lop}{\mathcal L}
+\newcommand{\Lc}{L_c}
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\ran}{\operatorname{ran}}
 \newcommand{\supp}{\operatorname{supp}}
 \newcommand{\dist}{\operatorname{dist}}
 \newcommand{\TV}{\mathrm{TV}}
-\title{On global regularization of solution manifolds}
+\title{Global Straightening of Solution Manifolds for State-Dependent Delay Equations}
 \author{Lily DiPaulo}
 \date{October 31, 2026}
 \begin{document}
 \maketitle
+
+
 \begin{abstract}
-For differential equations $x'(t)=f(x_t)$ with state-dependent delay, the solution manifold $X_f\subset C^1([-h,0],\mathbb R^n)$ is in general the natural domain of a differentiable semiflow. We consider regularization of the entire solution manifold when $f$ is continuously differentiable and has property (e), the extended-derivative property used in the differentiable solution-manifold theory. We give a construction of a global ambient $C^1$ coordinate change taking $X_f$ onto an open subset of the closed subspace defined by $\phi'(0)=0$. The construction is formulated for an arbitrary open domain and preserves the history outside an arbitrarily short interval preceding zero. We also consider derivatives represented by measures without an atom at zero, feedback involving observations of past derivatives, and Hilbert-valued histories.
+Let $U$ be an arbitrary open subset of
+$C^1([-h,0],\mathbb R^n)$, and let
+$f:U\to\mathbb R^n$ be continuously differentiable.
+Suppose that each derivative $Df(\phi)$, $\phi\in U$,
+admits a continuous linear extension
+$D_ef(\phi):C([-h,0],\mathbb R^n)\to\mathbb R^n$,
+such that $D_ef(\phi)\chi$ depends jointly continuously
+on $\phi\in U$ and
+$\chi\in C([-h,0],\mathbb R^n)$. We construct a $C^1$ diffeomorphism
+of $U$ onto an open subset of $C^1([-h,0],\mathbb R^n)$
+which maps the solution manifold of $x'(t)=f(x_t)$ onto
+an open subset of the closed subspace defined by
+$\phi'(0)=0$. This resolves an open problem posed by
+Walther concerning regularization of the entire solution
+manifold. The diffeomorphism preserves the value at zero
+and agrees with the original history on $[-h,-\tau]$ for any prescribed
+$\tau\in(0,h)$, and is uniformly arbitrarily close to the
+identity in the supremum norm. It is connected to the identity
+by a jointly $C^1$ family of diffeomorphisms.
+The same conclusions hold under the weaker assumption that
+the finite signed measures representing the derivatives of
+$f$ have no atom at zero. 
+We also establish a corresponding theorem for separable
+real Hilbert-valued histories.
 \end{abstract}
-\noindent\textbf{Key words:} Delay differential equation, state-dependent delay, solution manifold, global regularization.\\
-\noindent\textbf{2020 Mathematics Subject Classification:} 34K43, 34K19, 34K05; 58D25.
+
+\noindent\textbf{Keywords.} State-dependent delay equations, solution manifolds,
+global regularization, functional differential equations.\\
+\noindent\textbf{Mathematics Subject Classification.} 34K43, 34K19, 34K05, 58D25.
+
+
 \section{Introduction}
-Let $h>0$ and $n\ge1$, and let
+
+Let $h>0$ and $n\ge1$. Following the notation of \cite{Walther2026}, we write
 \[
 C_n=C([-h,0],\mathbb R^n),\qquad
-C_n^1=C^1([-h,0],\mathbb R^n)
+C_n^1=C^1([-h,0],\mathbb R^n).
 \]
-denote the Banach spaces of continuous and continuously differentiable maps, respectively. For a function $x$ defined on an interval containing $[t-h,t]$, write $x_t(s)=x(t+s)$, $-h\le s\le0$. Consider the differential equation
+On $\mathbb R^n$ we use a norm $|\cdot|$ satisfying
+\[
+\max_{1\le i\le n}|v_i|\le |v|\le\sum_{i=1}^n|v_i|.
+\]
+For $\chi\in C_n$ we write
+\[
+ |\chi|=\max_{-h\le t\le0}|\chi(t)|,
+\]
+and denote differentiation by $\partial:C_n^1\to C_n$.
+As in \cite{Walther2026}, we equip $C_n^1$ with the Banach norm
+\[
+ |\phi|_1=|\phi|+|\partial\phi|.
+\]
+We write $\Lc(E,F)$ for the space of continuous linear
+maps between normed spaces $E$ and $F$, equipped with
+the operator norm.
+For a function $x$ defined on an interval
+containing $[t-h,t]$, let $x_t\in C_n$ denote its history
+at time $t$, given by $x_t(s)=x(t+s)$ for $-h\le s\le0$.
+We consider the functional differential equation
 \begin{equation}\label{eq:dde}
 x'(t)=f(x_t),
 \end{equation}
-where $U\subset C_n^1$ is open and $f:U\to\mathbb R^n$ is continuously differentiable. The associated solution manifold is
+where $U\subset C_n^1$ is open and
+$f:U\to\mathbb R^n$ is continuously differentiable.
+
+Following \cite{Walther2003,Walther2026}, we consider
+the solution manifold associated with \eqref{eq:dde}, namely
 \[
-X_f=\{\phi\in U:\phi'(0)=f(\phi)\}.
+X=X_f=\{\phi\in U:\phi'(0)=f(\phi)\}.
 \]
-Write also
+We further recall the
+smoothness property used in the theory of solution
+manifolds \cite{Walther2003,Walther2026}:
+
+\medskip
+\noindent
+\textup{(e)} Each derivative
+$Df(\phi):C_n^1\to\mathbb R^n$, $\phi\in U$,
+has a linear extension
+$D_ef(\phi):C_n\to\mathbb R^n$, and the map
+\[
+U\times C_n\ni(\phi,\chi)
+\longmapsto D_ef(\phi)\chi\in\mathbb R^n
+\]
+is continuous.
+\medskip
+
+Under property \textup{(e)}, the solution manifold
+$X_f$, if nonempty, is a $C^1$ submanifold of
+$C_n^1$ of codimension $n$. The solution segments
+define a continuous semiflow on $X_f$ whose solution
+operators are continuously differentiable
+\cite{Walther2003}. For a broader account of the
+theory of state-dependent delay equations, see
+\cite{HartungEtAl2006}. A central question is whether
+there exists a $C^1$ diffeomorphism defined on an
+open neighborhood of $X_f$ in $C_n^1$ which maps
+$X_f$ onto an open subset of the closed linear
+subspace
 \[
 X_0=\{\phi\in C_n^1:\phi'(0)=0\}.
 \]
-In accordance with \cite{Walther2003,Walther2026}, we use the following extended-derivative property:
-\begin{quote}
-\textup{(e)} Each derivative $Df(\phi):C_n^1\to\mathbb R^n$, $\phi\in U$, has a continuous linear extension $D_ef(\phi):C_n\to\mathbb R^n$, and the map
-\[
-U\times C_n\ni(\phi,\chi)\longmapsto D_ef(\phi)\chi\in\mathbb R^n
-\]
-is continuous.
-\end{quote}
-Under this hypothesis, $X_f$, if nonempty, is a continuously differentiable submanifold of codimension $n$. Walther \cite{Walther2026} obtained regularizations for restrictions of solution manifolds of systems with discrete state-dependent delays, and asked whether the entire manifold admits regularization under the smoothness hypotheses of his Theorems 3.4 or 4.2.
+Earlier results on the global structure of solution
+manifolds were obtained in
+\cite{Walther2021,KrisztinWalther2023,Walther2025}.
+More recently
+Walther \cite{Walther2026} established regularization
+for restrictions of $X_f$ to certain open subsets
+of the history domain and posed the question of
+whether the entire solution manifold can be
+regularized under the hypotheses of either Theorem 3.4
+or Theorem 4.2 of that paper.
 
-Our main result concerns a single coordinate change on the full domain $U$. In addition to the usual regularization, we establish an exact identity for the compatibility defect. 
+We resolve this problem by establishing global
+regularization of the entire solution manifold under
+property \textup{(e)}. More precisely, for every
+$\tau\in(0,h)$ and $\epsilon>0$, we construct a
+$C^1$ diffeomorphism
+$A:U\to A(U)\subset C_n^1$ satisfying
+\[
+(A\phi)'(0)=\phi'(0)-f(\phi),
+\qquad \phi\in U.
+\]
+Consequently,
+\[
+A(X_f)=A(U)\cap X_0.
+\]
+The diffeomorphism can be chosen so that
+\[
+A\phi(t)=\phi(t)
+\quad\text{for }t\in[-h,-\tau]\cup\{0\},
+\]
+and, for some constant $c<\epsilon$,
+\[
+|A\phi-\phi|\le c
+\qquad(\phi\in U).
+\]
+Moreover, $A$ is connected to the identity by a
+jointly $C^1$ isotopy through diffeomorphisms
+onto open subsets of $C_n^1$.
+
+
+We further establish global regularization under the
+weaker hypothesis that the finite signed Borel measures
+representing $Df(\phi)$ have no atom at zero.
+This result applies, in particular, to
+functionals depending on derivatives of histories
+at strictly negative times. We also determine the
+spectra of the complexified derivatives of the
+coordinate change and describe the level sets of
+$\phi\mapsto\phi'(0)-f(\phi)$, including their
+tangent spaces and complementary subspaces.
+Finally, we extend the global regularization
+theorem under property \textup{(e)} to histories
+taking values in a separable real Hilbert space.
+
+
+
+
 \begin{theorem}\label{thm:main}
-Suppose $f\in C^1(U,\mathbb R^n)$ has property \textup{(e)} on an arbitrary open set $U\subset C_n^1$. For every $\tau\in(0,h)$ and $\varepsilon>0$ there is a $C^1$ diffeomorphism $A:U\to A(U)\subset C_n^1$ onto an open set such that
+Suppose $U\subset C_n^1$ is open and
+$f\in C^1(U,\mathbb R^n)$ has property \textup{(e)}.
+For every $0<\tau<h$ and $\epsilon>0$, there exist
+an open set $V\subset C_n^1$, a $C^1$ diffeomorphism
+$A:U\to V$, and a constant $c\in(0,\epsilon)$
+such that, for every $\phi\in U$,
+\begin{align}
+(A\phi)'(0)&=\phi'(0)-f(\phi),
+\label{eq:main-defect}\\
+A\phi(s)&=\phi(s)\quad(-h\le s\le-\tau),
+\qquad A\phi(0)=\phi(0),
+\label{eq:main-local}\\
+|A\phi-\phi|&\le c.
+\label{eq:main-small}
+\end{align}
+Moreover, writing $DA(\phi)_{\mathbb C}$ for the
+complexification of the real derivative,
+\begin{equation}\label{eq:main-spectrum}
+\sigma(DA(\phi)_{\mathbb C})=\{1\}.
+\end{equation}
+The maps $A_s=\id+s(A-\id)$, $0\le s\le1$,
+form a jointly $C^1$ isotopy through
+diffeomorphisms onto open subsets of $C_n^1$.
+They satisfy the same localization and uniform
+displacement estimates, together with
 \[
-(A\phi)'(0)=\phi'(0)-f(\phi),\qquad
-A\phi(s)=\phi(s)\quad(-h\le s\le-\tau),
+(A_s\phi)'(0)=\phi'(0)-sf(\phi).
 \]
-\[
-A\phi(0)=\phi(0),\qquad
-\sup_{\phi\in U}\|A\phi-\phi\|_{C_n}<\varepsilon.
-\]
-In particular, $A(X_f)=A(U)\cap X_0$.
+In particular,
+\begin{equation}\label{eq:main-manifold}
+A(X_f)=V\cap X_0.
+\end{equation}
 \end{theorem}
-The proof uses finite-dimensional approximations and corrections supported near the present time. The resulting coordinate change applies also to certain functionals which do not have property \textup{(e)}, as well as to Hilbert-valued histories.
 
-\paragraph{Degenerate cases.} All spatial straightening statements also hold for a zero state space, using the identity map; in that case the complex spectrum is empty. Open history domains may be empty. The nontriviality assumptions in the spectral statements and the nonempty-domain qualification in the impossibility comparison are essential.
 
-\section{Proof of the main theorem}
-Let $B$ be a Banach space and set $E=C^1([-h,0],B)$. Fix a smooth cutoff $\rho$ with $\rho=1$ on $[0,1/4]$ and $\rho=0$ on $[1/2,\infty)$. For rapidly decreasing widths $\delta_m>0$, write
+\section{Construction of the coordinate change}
+
+As in \cite{Walther2026}, we consider maps of the form
+$A=\id-R$. We give sufficient conditions for $A$ to
+be a diffeomorphism on the entire domain. Let $B$
+be a real Banach space, $E=C^1([-h,0],B)$, and
+$C=C([-h,0],B)$, with the norms
+$|\phi|_1=|\phi|+|\partial\phi|$ and $|\cdot|$,
+respectively. Fix $\rho\in C^\infty([0,\infty))$
+satisfying
 \[
-(Q_ma)(t)=t\rho(-t/\delta_m)a,\qquad S_m=Q_{m-1}-Q_m\quad(m\ge1).
+ 0\le\rho\le1,\qquad
+ \rho=1\ \text{on }[0,1/4],
+ \qquad
+ \rho=0\ \text{on }[1/2,\infty).
 \]
-Then $(Q_ma)'(0)=a$, $(S_ma)'(0)=0$, $Q_ma(0)=0$ for $a\in B$, and
-\[
-\sup_m\|Q_m\|_{B\to E}<\infty,\qquad
-\|Q_m\|_{B\to C([-h,0],B)}\le \delta_m/2.
-\]
-Taking $\delta_{m+1}\le\delta_m/4$, the $S_m$ have bounded overlap. Consequently, for $a_m\in B$ or $L_m\in\Lop(E,B)$,
+For $\delta>0$, define the bounded linear map
+\begin{equation}\label{eq:Qdelta}
+ (Q_\delta a)(t)=t\rho(-t/\delta)a,
+ \qquad a\in B,\quad -h\le t\le0.
+\end{equation}
+It satisfies
+\begin{equation}\label{eq:Qproperties}
+ (Q_\delta a)'(0)=a,\qquad Q_\delta a(0)=0,
+ \qquad
+ \supp Q_\delta a\subset[-\delta/2,0],
+ \qquad
+ |Q_\delta|_{\Lc(B,C)}\le\delta/2,
+\end{equation}
+and $|Q_\delta|_{\Lc(B,E)}$ is bounded independently
+of sufficiently small $\delta$.
+
+Choose positive widths $\delta_m\downarrow0$ with
+$\delta_{m+1}\le\delta_m/4$, put
+$Q_m=Q_{\delta_m}$, and set
+$S_m=Q_{m-1}-Q_m$ for $m\ge1$.
+The supports of $S_m$ and their derivatives have
+overlap at most two. Consequently a constant
+$C_\rho$, depending only on $\rho$, satisfies
 \begin{equation}\label{eq:overlap}
-\left\|\sum_{m=M}^N S_ma_m\right\|_E
-\le C\sup_{M\le m\le N}\|a_m\|,
-\qquad
-\left\|\sum_{m=M}^N S_mL_m\right\|_{\Lop(E)}
-\le C\sup_{M\le m\le N}\|L_m\|.
+ \left|\sum_{m=M}^{N}S_m a_m\right|_1
+ \le C_\rho\sup_{M\le m\le N}|a_m|,
+ \qquad
+ \left|\sum_{m=M}^{N}S_m L_m\right|_{\Lc(E,E)}
+ \le C_\rho\sup_{M\le m\le N}|L_m|
 \end{equation}
+for $a_m\in B$ and $L_m\in\Lc(E,B)$.
 
-\begin{lemma}[A coordinate lemma]\label{lem:triangular}
-Assume $B\ne\{0\}$. Let $U\subset E$ be open and $f\in C^1(U,B)$. Suppose that there are bounded $C^1$ maps $f_m:E\to B$ and bounded linear observations $O_m:E\to Z_m$, for Banach spaces $Z_m$, such that:
+\begin{lemma}\label{lem:triangular}
+Let $U\subset E$ be open and $f\in C^1(U,B)$.
+Suppose there are $C^1$ maps $f_m:E\to B$
+with bounded ranges and bounded linear maps
+$O_m:E\to Z_m$, where $Z_m$ are Banach spaces,
+such that
 \begin{enumerate}
-\item $f_m=\widehat f_m\circ O_m$, and $O_jx=O_jy$ implies $O_ix=O_iy$ whenever $i\le j$;
-\item $\bigcap_m\ker O_m=\{0\}$;
-\item $f_m\to f$ locally in the following $C^1$ sense: for every $x\in U$ and $\eta>0$ there are $r>0$ and $M$ such that $B_E(x,r)\subset U$ and
-\[
-\sup_{y\in B_E(x,r)}\sup_{m\ge M}
-\bigl(\|f_m(y)-f(y)\|+\|Df_m(y)-Df(y)\|\bigr)<\eta;
-\]
-\item widths $\delta_m$ can be chosen, arbitrarily small subject to $\delta_{m+1}\le\delta_m/4$, such that $O_jQ_m=0$ for $j\le m+1$.
+\item Each $f_m$ factors through $O_m$;
+\item if $O_mx=O_my$ for every $m$, then $x=y$;
+\item for each $x\in U$ and $\eta>0$, there
+are $r>0$ and $M$ such that
+$B_E(x,r)\subset U$ and
+\begin{equation}\label{eq:localC1}
+ \sup_{y\in B_E(x,r)}\sup_{m\ge M}
+ \bigl(|f_m(y)-f(y)|
+ +|Df_m(y)-Df(y)|\bigr)<\eta;
+\end{equation}
+\item there exist positive numbers $\sigma_m$,
+nonincreasing in $m$, such that
+$O_mQ_\delta=0$ whenever
+$0<\delta/2<\sigma_m$.
 \end{enumerate}
-Then for every $\tau\in(0,h)$ and $\varepsilon>0$ the map
-\begin{equation}\label{eq:construction}
-A(x)=x-Q_0f(x)+\sum_{m=1}^{\infty}S_m(f(x)-f_m(x))
+Then, for every $0<\tau<h$ and $\epsilon>0$,
+suitable widths give a global $C^1$ diffeomorphism
+$A:U\to A(U)$ onto an open subset of $E$, defined by
+\begin{equation}\label{eq:coordinate}
+ R(x)=Q_0f(x)-\sum_{m=1}^{\infty}S_m
+ \bigl(f(x)-f_m(x)\bigr),
+ \qquad A(x)=x-R(x),
 \end{equation}
-is a $C^1$ diffeomorphism $U\to A(U)\subset E$ with
+and satisfying, for some constant $c\in(0,\epsilon)$
+and every $x\in U$,
 \begin{align*}
-(Ax)'(0)&=x'(0)-f(x),\qquad Ax(t)=x(t)\ (t\in[-h,-\tau]\cup\{0\}),\\
-\sup_{x\in U}\|Ax-x\|_{C}&<\varepsilon,\qquad \sigma(DA(x)_{\mathbb C})=\{1\}.
+ (Ax)'(0)&=x'(0)-f(x),\\
+ Ax(t)&=x(t)
+ \qquad(t\in[-h,-\tau]\cup\{0\}),\\
+ |Ax-x|&\le c.
 \end{align*}
-The maps $A_s=\id+s(A-\id)$, $0\le s\le1$, are also $C^1$ diffeomorphisms onto open images and give a jointly $C^1$ isotopy.
+For every $x\in U$,
+\begin{equation}\label{eq:spectral-inclusion}
+ \sigma(DA(x)_{\mathbb C})\subseteq\{1\},
+\end{equation}
+with equality if $B\ne\{0\}$. Finally,
+$A_s=\id-sR$ is jointly $C^1$, and every
+$A_s$ is a $C^1$ diffeomorphism of $U$
+onto an open image, with
+$(A_sx)'(0)=x'(0)-sf(x)$.
 \end{lemma}
-\begin{proof}
-By \eqref{eq:overlap}, the function and derivative series in \eqref{eq:construction} have tails of arbitrarily small norm on sufficiently small neighborhoods of each $x\in U$. The fundamental theorem of calculus applied to finite partial sums gives Fr\'echet differentiability of the limit and continuity of its derivative:
-\begin{equation}\label{eq:derivative}
-DA(x)=I-Q_0Df(x)+\sum_{m\ge1}S_m\bigl(Df(x)-Df_m(x)\bigr).
-\end{equation}
-Applying $O_j$ to \eqref{eq:construction} gives
-\begin{equation}\label{eq:triangle}
-O_jA(x)=O_jx-\sum_{m=1}^{j-1}O_jS_mf_m(x).
-\end{equation}
-The observations are nested. Hence, if $A(x)=A(y)$, induction on $j$ in \eqref{eq:triangle} gives $O_jx=O_jy$ for every $j$, proving $x=y$.
 
-We prove invertibility without a compactness hypothesis. Fix $x$ and put $L_m=Df_m(x)$ and $K=DA(x)-I$. The telescoping identity derived from \eqref{eq:derivative} gives the operator-norm convergent representation
-\begin{equation}\label{eq:telK}
-K=-Q_0L_1+\sum_{m=1}^{\infty}Q_m(L_m-L_{m+1}).
+\begin{proof}
+Choose the widths so that
+$\delta_0/2<\tau$ and
+$\delta_m/2<\sigma_{m+1}$ for every $m$.
+They may be decreased further as needed for
+the displacement estimate below.
+
+By \eqref{eq:overlap} and \eqref{eq:localC1},
+the series in \eqref{eq:coordinate} and the
+corresponding series of derivatives converge
+uniformly on a sufficiently small neighborhood
+of every $x\in U$. The fundamental
+theorem of calculus for finite partial sums
+gives a $C^1$ limit and
+\begin{equation}\label{eq:DA}
+ DA(x)=\id_E-Q_0Df(x)+\sum_{m\ge1}S_m
+ \bigl(Df(x)-Df_m(x)\bigr).
 \end{equation}
-Indeed, the difference between the finite forms is $Q_N(L_{N+1}-Df(x))$, which tends to zero in operator norm.
+The identities $O_jQ_m=0$ give, for $j\ge1$,
+\begin{equation}\label{eq:triangle}
+ O_jA(x)=O_jx-\sum_{m=1}^{j-1}
+ O_jS_m f_m(x).
+\end{equation}
+If $A(x)=A(y)$, induction on $j$, using the
+factorization of $f_m$ through $O_m$, gives
+$O_jx=O_jy$ for every $j$. Condition 2
+then gives $x=y$.
+
+
+To establish invertibility of the derivative,
+fix $x\in U$. Telescoping \eqref{eq:DA}
+gives the operator-norm convergent series
+\begin{equation}\label{eq:telK}
+DA(x)-\id_E
+=-Q_0Df_1(x)
++\sum_{m=1}^{\infty}
+Q_m\bigl(Df_m(x)-Df_{m+1}(x)\bigr).
+\end{equation}
+Indeed, its $N$th partial sum differs from
+the corresponding truncation of \eqref{eq:DA}
+by $Q_N(Df_{N+1}(x)-Df(x))$, which tends to
+zero in operator norm.
+
 Define
 \[
-K_N=-Q_0L_1+\sum_{m=1}^N Q_m(L_m-L_{m+1}),\qquad R_N=K-K_N.
+P_N=-Q_0Df_1(x)
++\sum_{m=1}^{N}
+Q_m\bigl(Df_m(x)-Df_{m+1}(x)\bigr),
+\qquad
+T_N=DA(x)-\id_E-P_N.
 \]
-The factorization through $O_m$ and condition 4 imply $L_iQ_j=0$ whenever $i\le j+1$. Thus $K_NQ_j=0$ for $j\ge N$ and, for $0\le j<N$,
+The factorization of $f_i$ and condition 4
+imply that
 \[
-K_N(\ran Q_j)\subseteq\sum_{i=j+1}^N\ran Q_i.
+Df_i(x)Q_j=0
+\qquad(i\le j+1).
 \]
-It follows that $K_N^{N+2}=0$. Moreover $R_N$ is the norm limit of operators with ranges in the linear span of $\ran Q_j$, $j\ge N+1$, and $K_N$ annihilates this span. Hence
-\begin{equation}\label{eq:ann}
-K_N^{N+2}=0,\qquad K_NR_N=0,\qquad\|R_N\|\to0.
+Consequently,
+\[
+P_N(\operatorname{ran}Q_j)
+\subseteq
+\sum_{i=j+1}^{N}\operatorname{ran}Q_i
+\quad(0\le j<N),
+\qquad
+P_NQ_j=0\quad(j\ge N).
+\]
+The resulting finite filtration gives
+$P_N^{N+2}=0$. Moreover, $T_N$ is the
+operator-norm limit of finite sums with ranges
+contained in the linear span of
+$\operatorname{ran}Q_j$, $j\ge N+1$.
+Since $P_N$ annihilates these ranges,
+$P_NT_N=0$. Finally, norm convergence of
+\eqref{eq:telK} gives $|T_N|\to0$. Hence
+\begin{equation}\label{eq:nilpotent}
+P_N^{N+2}=0,\qquad
+P_NT_N=0,\qquad
+|T_N|\longrightarrow0.
 \end{equation}
-For fixed $N$, multiplication using $K_NR_N=0$ gives
+In particular, for every positive integer $k$,
 \[
-K^k=\sum_{j=0}^{\min\{k,N+1\}}R_N^{k-j}K_N^j.
+(DA(x)-\id_E)^k
+=\sum_{j=0}^{\min\{k,N+1\}}
+T_N^{\,k-j}P_N^j.
 \]
-The spectral-radius formula yields $r(K)\le\|R_N\|$. Letting $N\to\infty$ proves $r(K)=0$. Therefore $I+K$ is invertible for every $x\in U$. The inverse function theorem and injectivity make $A$ a global diffeomorphism onto an open image.
+Complexifying this identity and applying
+the spectral-radius formula gives
+\[
+r\bigl((DA(x)-\id_E)_{\mathbb C}\bigr)
+\le |T_{N,\mathbb C}|.
+\]
+Since $T_N\to0$ in operator norm,
+\[
+r\bigl((DA(x)-\id_E)_{\mathbb C}\bigr)=0.
+\]
+Therefore $DA(x)$ is invertible and
+\eqref{eq:spectral-inclusion} holds.
+The spectrum is nonempty on a nonzero
+complex Banach space, giving equality
+when $B\ne\{0\}$. The inverse function
+theorem, together with injectivity,
+proves that $A$ is a global $C^1$
+diffeomorphism onto its open image.
 
-The endpoint identity follows from the definition of the $Q_m$. The alternative series
+We also have the identity
 \begin{equation}\label{eq:telA}
-A(x)=x-Q_0f_1(x)+\sum_{m\ge1}Q_m(f_m(x)-f_{m+1}(x))
+A(x)=x-Q_0f_1(x)
++\sum_{m\ge1}
+Q_m\bigl(f_m(x)-f_{m+1}(x)\bigr).
 \end{equation}
-converges to the same function. Since every $f_m$ is bounded, the widths can be made sufficiently small so that the $C$-norm of the correction in \eqref{eq:telA} is less than $\varepsilon$ uniformly on $U$. Support and endpoint-value claims are immediate. Finally, replacing each correction by $s$ times itself preserves the triangular identities; the derivative perturbation is $sK$ and remains quasinilpotent. This proves the isotopy assertions.
+Since the $f_m$ have bounded ranges,
+the widths can be chosen so that the
+supremum norm of the correction in this
+expression has a common upper bound
+$c<\epsilon$. Equation
+\eqref{eq:Qproperties} gives the identities
+for the derivative and value at zero,
+as well as agreement with $x$ on
+$[-h,-\tau]$.
+
+For each real $s$, the corresponding identities for $A_s$
+also establish injectivity of $A_s$.
+Since
+\[
+DA_s(x)=\id_E+s(DA(x)-\id_E),
+\]
+the preceding argument applies with
+$P_N$ and $T_N$ replaced by $sP_N$
+and $sT_N$, respectively. Thus every
+$A_s$ is a global $C^1$ diffeomorphism
+onto an open image. Joint $C^1$
+regularity follows directly from
+$A_s(x)=x-sR(x)$.
 \end{proof}
 
-For the remainder of the proof take $B=\mathbb R^n$, $E=C_n^1$, and $C=C_n$.
 
-\begin{lemma}\label{lem:atom}
-For $f\in C^1(U,\mathbb R^n)$ there exist continuous linear representations
-\begin{equation}\label{eq:measure}
-Df(\phi)\eta=B_\phi\eta(-h)
- +\int_{[-h,0]}M_\phi(dt)\,\eta'(t),
+\section{Derivatives represented by measures}
+
+We now specialize to $B=\mathbb R^n$, so that
+$E=C_n^1$ and $C=C_n$. The maps $Q_\delta$
+are as defined in \eqref{eq:Qdelta}.
+
+\begin{lemma}\label{lem:measures}
+For every $\phi\in U$ there are an $n\times n$ matrix $B_\phi$ and an $n\times n$ matrix $M_\phi$ of finite signed Borel measures on $[-h,0]$ such that
+\begin{equation}\label{eq:representation}
+ Df(\phi)\eta=B_\phi\eta(-h)+\int_{[-h,0]}M_\phi(dt)\,\eta'(t).
 \end{equation}
-where $B_\phi$ is an $n\times n$ matrix and $M_\phi$ an $n\times n$ matrix of finite signed Borel measures. For the endpoint-supported function $Q_\delta$,
-\[
-\lim_{\delta\downarrow0}Df(\phi)Q_\delta=M_\phi(\{0\}).
-\]
-In particular, the condition $M_\phi(\{0\})=0$ is equivalent to the limit being zero for every $\phi\in U$.
+Moreover,
+\begin{equation}\label{eq:atom-limit}
+ \lim_{\delta\downarrow0}Df(\phi)Q_\delta=M_\phi(\{0\})
+\end{equation}
+in the operator norm of $\Lc(\mathbb R^n,\mathbb R^n)$. Therefore $M_\phi(\{0\})=0$ if and only if the left-hand side of \eqref{eq:atom-limit} is zero.
 \end{lemma}
 \begin{proof}
-The map $\eta\mapsto(\eta(-h),\eta')$ is a bounded linear isomorphism from $C_n^1$ onto $\mathbb R^n\times C_n$. Apply the Riesz representation theorem to the second coordinate, componentwise. For sufficiently small $\delta$ we have $Q_\delta a(-h)=0$ and $(Q_\delta a)'(t)\to0$ for each $t<0$, while $(Q_\delta a)'(0)=a$. Dominated convergence with respect to the total variations of the measures proves the assertion.
+The bounded linear map
+\[
+ C_n^1\longrightarrow\mathbb R^n\times C_n,\qquad
+ \eta\longmapsto(\eta(-h),\eta')
+\]
+is an isomorphism, with inverse $(a,g)\mapsto\bigl(t\mapsto a+\int_{-h}^tg(s)\,ds\bigr)$. The Riesz representation theorem applied componentwise to the second coordinate gives \eqref{eq:representation}. For sufficiently small $\delta$, $Q_\delta a(-h)=0$, $(Q_\delta a)'(t)\to0$ for each $t<0$, and $(Q_\delta a)'(0)=a$. The derivatives of $Q_\delta$ are uniformly bounded, so dominated convergence against the total variation of each component measure gives \eqref{eq:atom-limit}. Since there are finitely many components, convergence is in matrix operator norm.
 \end{proof}
 
+We use the assumption
+\begin{equation}\label{eq:no-atom}
+ M_\phi(\{0\})=0\qquad(\phi\in U).
+\end{equation}
+So the representing measures have no atom at zero. By
+Lemma~\ref{lem:measures}, this is equivalent to
+$|Df(\phi)Q_\delta|\to0$ for every $\phi\in U$. The following
+approximation result is used in proving the existence of the
+diffeomorphism.
+
 \begin{lemma}\label{lem:adapted}
-Assume that $f\in C^1(U,\mathbb R^n)$ satisfies $M_\phi(\{0\})=0$ for every $\phi\in U$, with $M_\phi$ as in Lemma~\ref{lem:atom}. There exist uniformly bounded finite-rank operators $R_m:C_n^1\to C_n^1$ and decreasing numbers $\sigma_m\downarrow0$ such that
+Suppose $U\subset C_n^1$ is open, $f\in C^1(U,\mathbb R^n)$, and \eqref{eq:no-atom} holds. There exist uniformly bounded finite-rank operators $R_m:C_n^1\to C_n^1$ and numbers $\sigma_m>0$ decreasing to zero such that
 \begin{align}
-R_m\phi&\longrightarrow\phi &&\text{in }C_n^1,\label{eq:strongR}\\
-\|Df(\phi)(R_m-I)\|&\longrightarrow0 &&(\phi\in U),\label{eq:dualR}\\
-R_mQ_\delta&=0 &&\text{if }\delta/2<\sigma_m.\label{eq:invisR}
+ R_m\eta&\longrightarrow\eta &&\text{in }C_n^1\quad(\eta\in C_n^1),\label{eq:adapted-strong}\\
+ |Df(\phi)(R_m-\id_{C_n^1})|&\longrightarrow0 &&(\phi\in U),\label{eq:adapted-dual}\\
+ R_mQ_\delta&=0 &&\text{whenever }\delta/2<\sigma_m.\label{eq:adapted-invisible}
 \end{align}
 \end{lemma}
 \begin{proof}
-The space $C_n^1$ is separable, hence the open subset $U$ is separable. By continuity of $Df$ in the operator norm, the image $Df(U)\subset\Lop(C_n^1,\mathbb R^n)$ is separable. Choose a countable, possibly empty dense subfamily $\{L_k:k\in I\}\subset Df(U)$, and let $M_{k,ij}$ be its component measures in \eqref{eq:measure}. This includes $U=\varnothing$, when the family is empty. By Lemma~\ref{lem:atom}, all of these measures have no atom at $0$. There is therefore one finite positive Borel measure $\nu$, of full support and with $\nu(\{0\})=0$, dominating every $M_{k,ij}$; for instance, add Lebesgue measure to a summable positive combination of their total variations. For an arbitrary $\phi\in U$, approximate $Df(\phi)$ in operator norm by derivatives from the countable family. The isomorphism $J\eta=(\eta(-h),\eta')$ identifies the measure component of the dual continuously (with its total-variation norm). Hence the corresponding component measures converge in total variation, and absolute continuity with respect to $\nu$ is closed under total-variation limits. Hence every component of $M_\phi$ is absolutely continuous with respect to $\nu$.
+The Banach space $C_n^1$ is separable, and continuity of
+$Df:U\to\Lc(C_n^1,\mathbb R^n)$ implies that $Df(U)$ is separable.
+If $U\ne\emptyset$, choose $\phi_k\in U$ so that
+$\{Df(\phi_k)\}_{k\ge1}$ is dense in $Df(U)$.
+Let $M_{k,ij}$ be the component measures in \eqref{eq:representation}.
+They have no atom at zero. A finite positive Borel measure $\nu$
+with full support, $\nu(\{0\})=0$, and $|M_{k,ij}|\ll\nu$
+for all $k,i,j$ is obtained by adding Lebesgue measure to a
+summable positive combination of these total variations.
+The coordinate isomorphism
+$\eta\mapsto(\eta(-h),\partial\eta)$ and the Riesz
+representation theorem identify each component measure continuously
+in the total-variation norm with a component of the functional
+$Df(\phi)$. Consequently, if $Df(\phi_{k_j})\to Df(\phi)$
+in operator norm, then the corresponding component measures converge
+in total variation. Absolute continuity with respect to $\nu$
+is preserved under total-variation limits; hence
+$|M_{\phi,ij}|\ll\nu$ for every $\phi\in U$.
+If $U=\emptyset$, choose $\nu$ to be Lebesgue measure; all
+statements involving derivatives at points of $U$ are then vacuous.
 
-Choose nonnegative continuous finite partitions of unity $\{\psi_{m,j}\}_{j=1}^{N_m}$ on $[-h,0]$, discarding identically zero weights, with the diameters of their supports tending to zero. Put, componentwise,
+Choose finite nonnegative continuous partitions of unity $\{\psi_{m,j}\}_{j=1}^{N_m}$ on $[-h,0]$ such that the diameters of their supports tend to zero. We omit identically zero weights. Full support of $\nu$ then makes all denominators in
 \begin{equation}\label{eq:markov}
-(T_mg)(t)=\sum_{j=1}^{N_m}\psi_{m,j}(t)
-\frac{\int\psi_{m,j}(s)g(s)\,d\nu(s)}{\int\psi_{m,j}(s)\,d\nu(s)}.
+ (T_mg)(t)=\sum_{j=1}^{N_m}\psi_{m,j}(t)
+ \frac{\int\psi_{m,j}(s)g(s)\,d\nu(s)}{\int\psi_{m,j}(s)\,d\nu(s)}
 \end{equation}
-The denominators are positive because $\nu$ has full support. The $T_m$ have finite rank, $\|T_m\|\le1$, and $T_mg\to g$ uniformly for every $g\in C_n$. If $\mu=w\nu$ with $w\in L^1(\nu)$, then $T_m^*\mu$ has density
+strictly positive. These finite-rank positive operators on $C_n$ satisfy $|T_m|\le1$ and $T_mg\to g$ uniformly for every $g\in C_n$.
+
+For a scalar measure $\mu=w\nu$, its adjoint image under $T_m$ has density
 \[
-\sum_j\psi_{m,j}(t)
-\frac{\int\psi_{m,j}(s)w(s)\,d\nu(s)}{\int\psi_{m,j}(s)\,d\nu(s)}.
+ \sum_j\psi_{m,j}(t)
+ \frac{\int\psi_{m,j}(s)w(s)\,d\nu(s)}{\int\psi_{m,j}(s)\,d\nu(s)}.
 \]
-For continuous $w$ this converges uniformly to $w$ by uniform continuity and the shrinking supports. Since continuous functions are dense in $L^1(\nu)$ and the $T_m^*$ are contractions, it follows that
-\begin{equation}\label{eq:dualT}
-\|T_m^*\mu-\mu\|_{\TV}\longrightarrow0\qquad(\mu\ll\nu).
+When $w$ is continuous, these densities converge uniformly to $w$. Density of continuous functions in $L^1(\nu)$, together with $|T_m^*|\le1$, therefore gives
+\begin{equation}\label{eq:markov-dual}
+ |T_m^*\mu-\mu|_{\TV}\longrightarrow0
+ \qquad(\mu\ll\nu).
 \end{equation}
+Choose $\sigma_m\downarrow0$ with $0<\sigma_m<h$, and put
+\[
+ (V_mg)(t)=g(\min\{t,-\sigma_m\}),\qquad \widetilde T_m=T_mV_m.
+\]
+Then $|V_m|\le1$, $V_mg\to g$ uniformly, and, if $\mu(\{0\})=0$,
+\[
+ |V_m^*\mu-\mu|_{\TV}
+ \le2|\mu|((-\sigma_m,0])\longrightarrow0.
+\]
+The identity $\widetilde T_m^*=V_m^*T_m^*$ and \eqref{eq:markov-dual} yield
+\begin{equation}\label{eq:composed-dual}
+ |\widetilde T_m^*\mu-\mu|_{\TV}
+ \le|T_m^*\mu-\mu|_{\TV}+|V_m^*\mu-\mu|_{\TV}
+ \longrightarrow0
+\end{equation}
+for every component measure of every $M_\phi$, $\phi\in U$.
 
-Choose $\sigma_m\in(0,h)$ decreasing to zero, and define $V_m:C_n\to C_n$ by
-\[
-(V_mg)(t)=g(\min\{t,-\sigma_m\}).
-\]
-Then $\|V_m\|\le1$, $V_mg\to g$ uniformly, and for a measure $\mu$ with $\mu(\{0\})=0$,
-\[
-\|V_m^*\mu-\mu\|_{\TV}
-\le2|\mu|(( -\sigma_m,0])\longrightarrow0.
-\]
-Put $\widetilde T_m=T_mV_m$. By \eqref{eq:dualT},
-\[
-\|\widetilde T_m^*\mu-\mu\|_{\TV}
-\le\|T_m^*\mu-\mu\|_{\TV}+\|V_m^*\mu-\mu\|_{\TV}\longrightarrow0
-\]
-for every component of every $M_\phi$.
-
-Finally set
+Define
 \begin{equation}\label{eq:R}
-(R_m\phi)(t)=\phi(-h)+\int_{-h}^t(\widetilde T_m\phi')(s)\,ds.
+ (R_m\eta)(t)=\eta(-h)+\int_{-h}^t(\widetilde T_m\eta')(s)\,ds.
 \end{equation}
-These maps have finite rank and uniformly bounded $C_n^1\to C_n^1$ norms. Their strong convergence follows from $\widetilde T_mg\to g$. Their adjoint approximation \eqref{eq:dualR} follows by applying \eqref{eq:measure} and the total-variation convergence to each component measure. If $\delta/2<\sigma_m$, then $(Q_\delta a)'$ vanishes on $[-h,-\sigma_m]$, so $V_m(Q_\delta a)'=0$ and $Q_\delta a(-h)=0$. Formula \eqref{eq:R} proves \eqref{eq:invisR}.
+The preceding contraction bounds imply $\sup_m|R_m|<\infty$. The operators have finite rank, and $\widetilde T_mg\to g$ gives \eqref{eq:adapted-strong}. Applying the representation \eqref{eq:representation} and the
+adjoint convergence \eqref{eq:composed-dual} componentwise gives
+\[
+ |Df(\phi)(R_m-\id_{C_n^1})|\longrightarrow0
+ \qquad(\phi\in U),
+\]
+which is \eqref{eq:adapted-dual}.
+
+Finally, $Q_\delta a(-h)=0$, and $\delta/2<\sigma_m$ implies $(Q_\delta a)'=0$ on $[-h,-\sigma_m]$. Hence $V_m(Q_\delta a)'=0$ and \eqref{eq:R} gives \eqref{eq:adapted-invisible}. The same construction with Lebesgue measure verifies all the nonvacuous assertions when $U=\emptyset$.
 \end{proof}
 
-\begin{theorem}\label{thm:terminal}
-Let $U\subset C_n^1$ be arbitrary and open, and let $f\in C^1(U,\mathbb R^n)$. Suppose the representing measures of $Df(\phi)$ satisfy $M_\phi(\{0\})=0$ for every $\phi\in U$, or equivalently
-\[
-\lim_{\delta\downarrow0}\|Df(\phi)Q_\delta\|=0\qquad(\phi\in U).
-\]
-Then, for every $\tau\in(0,h)$ and $\varepsilon>0$, there exists a $C^1$ diffeomorphism $A:U\to A(U)\subset C_n^1$ such that
+\begin{theorem}\label{thm:no-atom}
+Let $U\subset C_n^1$ be arbitrary and open, and let $f\in C^1(U,\mathbb R^n)$ satisfy \eqref{eq:no-atom}. For each $0<\tau<h$ and $\epsilon>0$ there exists a global $C^1$ diffeomorphism $A:U\to A(U)$ onto an open set such that
 \begin{align*}
-(A\phi)'(0)&=\phi'(0)-f(\phi),\\
-A\phi(t)&=\phi(t)\quad(t\in[-h,-\tau]\cup\{0\}),\\
-\sup_{\phi\in U}\|A\phi-\phi\|_{C_n}&<\varepsilon,\\
-\sigma(DA(\phi)_{\mathbb C})&=\{1\}.
+ (A\phi)'(0)&=\phi'(0)-f(\phi),\\
+ A\phi(s)&=\phi(s)\quad(-h\le s\le-\tau),\qquad A\phi(0)=\phi(0),\\
+ |A\phi-\phi|&\le c\quad(\phi\in U)\quad\text{for some }c<\epsilon,\\
+ \sigma(DA(\phi)_{\mathbb C})&=\{1\}\quad(\phi\in U).
 \end{align*}
-There is also a jointly $C^1$ isotopy $A_s=\id+s(A-\id)$ through diffeomorphisms onto open images, with $(A_s\phi)'(0)=\phi'(0)-sf(\phi)$.
+The affine family $A_s=\id+s(A-\id)$ is jointly $C^1$, and each $A_s$ is a global $C^1$ diffeomorphism onto an open image satisfying $(A_s\phi)'(0)=\phi'(0)-sf(\phi)$.
 \end{theorem}
 \begin{proof}
-Let $R_m$ be given by Lemma~\ref{lem:adapted}, and put $F_m=\ran R_m$. The space $F_m$ is finite dimensional. In $F_m$ choose a smooth compactly supported cutoff $\chi_m$ that equals one near
+The empty-domain case is immediate. Otherwise let $R_m$ be given by Lemma~\ref{lem:adapted} and put $F_m=\ran R_m$, a finite-dimensional subspace of $C_n^1$. On $F_m$ choose a smooth compactly supported cutoff $\chi_m$ equal to one in a neighborhood of
 \[
-K_m=\{z\in F_m:\|z\|_{C_n^1}\le m,\ \dist(z,C_n^1\setminus U)\ge m^{-1}\}
+ K_m=\left\{z\in F_m:|z|_1\le m,
+   \ \dist(z,C_n^1\setminus U)\ge m^{-1}\right\},
 \]
-and has support in $F_m\cap U$ (omit the distance condition if $U=C_n^1$). The map $\widehat f_m=\chi_m f|_{F_m\cap U}$ extends by zero to a bounded $C^1$ map $F_m\to\mathbb R^n$. Set $f_m=\widehat f_m\circ R_m$.
+with support in $F_m\cap U$; if $U=C_n^1$, omit the distance restriction. Each $K_m$ is compact, so such a cutoff exists. Extending $\chi_m f|_{F_m\cap U}$ by zero gives a bounded globally $C^1$ map $\widehat f_m:F_m\to\mathbb R^n$. Set $f_m=\widehat f_m\circ R_m$.
 
-Fix $\phi_*\in U$. Boundedness and strong convergence of $R_m$ imply that, on a sufficiently small $C_n^1$-ball about $\phi_*$ and for all sufficiently large $m$, the cutoffs are identically one on $R_m$ of that ball. Thus
+Fix $\phi_*\in U$. Strong convergence of $R_m$, uniform boundedness, and openness of $U$ imply that, on a sufficiently small neighborhood of $\phi_*$ and for all sufficiently large $m$, the cutoff is identically one at $R_m\psi$. Thus
 \[
-f_m(\psi)=f(R_m\psi),\qquad Df_m(\psi)=Df(R_m\psi)R_m.
+ f_m(\psi)=f(R_m\psi),\qquad
+ Df_m(\psi)=Df(R_m\psi)R_m.
 \]
-The first terms converge locally in the tolerance-dependent sense of Lemma~\ref{lem:triangular} by continuity of $f$ and boundedness of $R_m$. For derivatives write
-\begin{align*}
-Df(R_m\psi)R_m-Df(\psi)
-&=[Df(R_m\psi)-Df(\psi)]R_m+Df(\psi)(R_m-I).
-\end{align*}
-The first term is locally small by continuity of $Df$, strong convergence at $\phi_*$, and the uniform bounds on $R_m$. In the second term, replace $Df(\psi)$ by $Df(\phi_*)$ at a cost bounded by $(1+\sup_m\|R_m\|)\|Df(\psi)-Df(\phi_*)\|$; the remaining term tends to zero by \eqref{eq:dualR}. This proves the required local $C^1$ approximation.
+Continuity of $f$ and $Df$, together with \eqref{eq:adapted-strong} and \eqref{eq:adapted-dual}, shows the local $C^1$ approximation in \eqref{eq:localC1}; for the derivative use
+\[
+ Df(R_m\psi)R_m-Df(\psi)
+ =[Df(R_m\psi)-Df(\psi)]R_m
+ +Df(\psi)(R_m-\id_{C_n^1})
+\]
+and compare $Df(\psi)$ with $Df(\phi_*)$ in the second term.
 
-Define $O_m\phi=(R_1\phi,\dots,R_m\phi)$. The observations are nested and separate points, by \eqref{eq:strongR}. Each $f_m$ factors through $O_m$. Choose terminal widths with $\delta_m/2<\sigma_{m+1}$, $\delta_{m+1}\le\delta_m/4$, and $\delta_0/2<\tau$. Formula \eqref{eq:invisR} gives $O_jQ_m=0$ for every $j\le m+1$. All hypotheses of Lemma~\ref{lem:triangular} are fulfilled, proving the assertion.
+Take $O_m\phi=(R_1\phi,\ldots,R_m\phi)$.
+By \eqref{eq:adapted-strong}, these maps separate
+points, and $f_m$ factors through $O_m$.
+Choose widths satisfying
+$\delta_{m+1}\le\delta_m/4$,
+$\delta_m/2<\sigma_{m+1}$, and
+$\delta_0/2<\tau$, decreasing them further
+to obtain the required uniform displacement
+estimate. By \eqref{eq:adapted-invisible},
+$O_jQ_m=0$ when $j\le m+1$.
+Lemma~\ref{lem:triangular} gives every assertion.
 \end{proof}
-
 
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
-For $\phi\in U$, property \textup{(e)} gives
+If $f$ has property \textup{(e)}, then, for $\phi\in U$,
 \[
-\|Df(\phi)Q_\delta\|
-\le \|D_ef(\phi)\|_{\mathcal L(C_n,\mathbb R^n)}
-\|Q_\delta\|_{\mathcal L(\mathbb R^n,C_n)}\longrightarrow0.
+ |Df(\phi)Q_\delta|
+ \le|D_ef(\phi)|_{\Lc(C_n,\mathbb R^n)}
+      |Q_\delta|_{\Lc(\mathbb R^n,C_n)}
+ \le\tfrac{\delta}{2}|D_ef(\phi)|\longrightarrow0.
 \]
-Theorem~\ref{thm:terminal} applies. Its conclusion provides one coordinate change on all of $U$, and hence a global regularization of $X_f$ without additional restrictions on the history domain.
+Lemma~\ref{lem:measures} therefore gives \eqref{eq:no-atom}, and Theorem~\ref{thm:no-atom} applies. Its endpoint identity immediately implies \eqref{eq:main-manifold}.
 \end{proof}
 
-\section{Consequences and extensions}
-Theorem~\ref{thm:main} applies, in particular, to the settings of Theorems 3.4 and 4.2 in \cite{Walther2026}, including arbitrary open history domains. We first record two consequences of the coordinate identity.
+\section{Further consequences}
 
 \begin{corollary}\label{cor:levels}
-Under the hypotheses of Theorem~\ref{thm:terminal}, put $F(\phi)=\phi'(0)-f(\phi)$. For every $b\in\mathbb R^n$,
-\[
-A(F^{-1}(b))=A(U)\cap\{\psi\in C_n^1:\psi'(0)=b\}.
-\]
-Each nonempty fiber $F^{-1}(b)$ is a split $C^1$ submanifold of codimension $n$. There is a global $C^0$ family of complementary $n$-planes to its tangent spaces.
+Assume the hypotheses of Theorem~\ref{thm:no-atom}, and write
+$F(\phi)=\phi'(0)-f(\phi)$. A single chart $A$ given by that theorem satisfies, for every $b\in\mathbb R^n$,
+\begin{equation}\label{eq:level}
+ A(F^{-1}(b))=A(U)\cap\{\psi\in C_n^1:\psi'(0)=b\}.
+\end{equation}
+Every nonempty $F^{-1}(b)$ is a split $C^1$ submanifold of codimension $n$, globally $C^1$-parametrized by an open subset of $X_0$. Its tangent space is
+\begin{equation}\label{eq:tangent}
+ T_\phi F^{-1}(b)=\ker DF(\phi)\qquad(\phi\in F^{-1}(b)).
+\end{equation}
+Moreover, there is a continuous family of $n$-dimensional subspaces complementary to these tangent spaces.
 \end{corollary}
 \begin{proof}
-The first assertion follows from $F(\phi)=(A\phi)'(0)$. Since endpoint differentiation is a split surjection, $F$ is a submersion. Let $Q:\mathbb R^n\to C_n^1$ be bounded and linear with $(Qa)'(0)=a$. Then $DA(\phi)^{-1}Q(\mathbb R^n)$ complements $\ker DF(\phi)$ and depends continuously on $\phi$.
+Equation \eqref{eq:level} follows from
+$(A\phi)'(0)=F(\phi)$. The bounded surjection
+$D:C_n^1\to\mathbb R^n$, $D\eta=\eta'(0)$, has a bounded linear right inverse $Q$. Thus
+$C_n^1=X_0\oplus Q(\mathbb R^n)$, and the inverse chart $A^{-1}$ parametrizes each fiber by the open subset
+\[
+ W_b=\{z\in X_0:z+Qb\in A(U)\}.
+\]
+More explicitly, $z\mapsto A^{-1}(z+Qb)$ is a $C^1$ parametrization whose inverse on the fiber is $\phi\mapsto A\phi-Qb$. Differentiating $F=D\circ A$ gives $DF(\phi)=D\circ DA(\phi)$, so \eqref{eq:tangent} follows from the invertibility of $DA(\phi)$. Finally,
+\[
+ R_\phi=DA(\phi)^{-1}Q
+\]
+is continuous in $\phi$ and satisfies $DF(\phi)R_\phi=I_{\mathbb R^n}$. The ranges $R_\phi(\mathbb R^n)$ provide the claimed complementary $n$-planes.
 \end{proof}
 
-\begin{corollary}[Invertible endpoint-derivative coupling]\label{cor:coupling}
-Let $g\in C^1(U,\mathbb R^n)$ satisfy the hypothesis of Theorem~\ref{thm:terminal}, and let $M\in\mathbb R^{n\times n}$ have $I-M$ invertible. Then the compatibility defect for
+\begin{corollary}\label{cor:coupling}
+Let $g\in C^1(U,\mathbb R^n)$ satisfy \eqref{eq:no-atom}, let $M\in\mathbb R^{n\times n}$, and suppose $I-M$ is invertible. Then the functional
 \[
-f(\phi)=M\phi'(0)+g(\phi)
+ f(\phi)=M\phi'(0)+g(\phi)
 \]
-admits a global ambient $C^1$ straightening $A$ with $(A\phi)'(0)=\phi'(0)-f(\phi)$.
+admits a $C^1$ diffeomorphism
+$A:U\to A(U)$, with $A(U)$ open in $C_n^1$,
+such that
+$(A\phi)'(0)=\phi'(0)-f(\phi)$.
 \end{corollary}
 \begin{proof}
-Put $N=I-M$ and $\widetilde g=N^{-1}g$. Let $B$ be the diffeomorphism given by Theorem~\ref{thm:terminal} for $\widetilde g$, so that $(B\phi)'(0)=\phi'(0)-\widetilde g(\phi)$. Choose a bounded linear map $Q:\mathbb R^n\to C_n^1$ with $(Qa)'(0)=a$, and define $T\phi=\phi+Q(N-I)\phi'(0)$. Then $T$ is a linear isomorphism and, with $A=T\circ B$,
+Write $N=I-M$ and $\widetilde g=N^{-1}g$. Theorem~\ref{thm:no-atom} gives a diffeomorphism $B$ such that $(B\phi)'(0)=\phi'(0)-\widetilde g(\phi)$. Choose a bounded linear right inverse $Q$ of endpoint differentiation and define
 \[
-(A\phi)'(0)=N\bigl(\phi'(0)-\widetilde g(\phi)\bigr)=(I-M)\phi'(0)-g(\phi)=\phi'(0)-f(\phi).
+ T\psi=\psi+Q(N-I)\psi'(0).
+\]
+The splitting $C_n^1=X_0\oplus Q(\mathbb R^n)$ shows that $T$ is an isomorphism: it is the identity on $X_0$ and acts by $N$ on $Q(\mathbb R^n)$. With $A=T\circ B$,
+\[
+ (A\phi)'(0)=N\bigl(\phi'(0)-\widetilde g(\phi)\bigr)
+  =(I-M)\phi'(0)-g(\phi)=\phi'(0)-f(\phi).
 \]
 \end{proof}
-For comparison, if $U\ne\varnothing$ and $f(\phi)=\phi'(0)$, the compatibility equation holds throughout $U$, and no ambient diffeomorphism can map all of $U$ into $X_0$. Thus the absence of an atom at zero is a sufficient condition, but not a necessary one.
 
-\begin{theorem}[Remote observations]\label{thm:remote}
-Let $Y$ be any Banach space and $L:C_n^1\to Y$ any bounded linear map satisfying $L\eta=0$ whenever $\eta$ is supported in $[-\sigma,0]$, for some $\sigma>0$. Let $W\subset C_n\times Y$ be open and $G\in C^1(W,\mathbb R^n)$. On
+The condition $M_\phi(\{0\})=0$ is sufficient, but not necessary, for the existence of an ambient diffeomorphism satisfying the defect identity. For example, if $f(\phi)=2\phi'(0)$, then
+$A\phi=\phi-2Q\phi'(0)$, where $Q$ is a bounded linear
+right inverse to endpoint differentiation, is an ambient linear
+isomorphism (in fact, $A^2=\id$) satisfying the required defect
+identity, although the measure representing $Df$ assigns nonzero
+mass to $\{0\}$. In contrast, $f(\phi)=\phi'(0)$ on a nonempty open domain gives a vanishing defect and cannot be straightened by a diffeomorphism onto an open subset of $C_n^1$ with the same identity, since that image would have to lie in $X_0$.
+
+We give an application in which $f$ depends on a bounded linear map
+that vanishes on histories supported sufficiently close to zero.
+
+\begin{theorem}\label{thm:remote}
+Let $Y$ be a Banach space, and let $L:C_n^1\to Y$ be bounded and linear. Suppose there is a $\sigma>0$ such that $L\eta=0$ whenever $\eta$ is supported in $[-\sigma,0]$. Let $W\subset C_n\times Y$ be open and $G\in C^1(W,\mathbb R^n)$. Set
 \[
-U=\{\phi\in C_n^1:(\phi,L\phi)\in W\},\qquad f(\phi)=G(\phi,L\phi),
+ U=\{\phi\in C_n^1:(\phi,L\phi)\in W\},\qquad
+ f(\phi)=G(\phi,L\phi).
 \]
-there exists a global localized ambient $C^1$ straightening with all the conclusions of Theorem~\ref{thm:terminal}. No geometric or smooth-renorming assumption on $Y$ is needed.
+Then there is a $C^1$ diffeomorphism with all the properties stated
+in Theorem~\ref{thm:no-atom}. No assumption on the existence of
+smooth norms or smooth partitions of unity on $Y$ is required.
 \end{theorem}
 \begin{proof}
-For small $\delta$, $LQ_\delta=0$. The chain rule gives
+For sufficiently small $\delta$, $LQ_\delta=0$. By the chain rule,
 \[
-Df(\phi)Q_\delta=D_1G(\phi,L\phi)Q_\delta+D_2G(\phi,L\phi)LQ_\delta
-=D_1G(\phi,L\phi)Q_\delta.
+ Df(\phi)Q_\delta
+ =D_1G(\phi,L\phi)Q_\delta
+   +D_2G(\phi,L\phi)LQ_\delta
+ =D_1G(\phi,L\phi)Q_\delta.
 \]
-Since $D_1G(\phi,L\phi)$ is bounded on $C_n$ and $\|Q_\delta\|_{\mathbb R^n\to C_n}\to0$, Theorem~\ref{thm:terminal} applies.
+Since $D_1G(\phi,L\phi)$ is bounded on $C_n$ and
+$|Q_\delta|_{\Lc(\mathbb R^n,C_n)}\to0$, we have
+$Df(\phi)Q_\delta\to0$ in operator norm. Lemma~\ref{lem:measures}
+gives $M_\phi(\{0\})=0$, so Theorem~\ref{thm:no-atom} applies.
 \end{proof}
 
-
-\begin{corollary}[A past-derivative example]
-For $t_*\in[-h,0)$ and $s_*\in[-h,0]$, the scalar functional
-\[
-f(\phi)=\sin(\phi'(t_*))+\phi(s_*)^3
-\]
-admits a global localized straightening on every open domain where it is defined. Its derivative generally does not extend continuously to $C([-h,0])$.
+\begin{corollary}\label{cor:past}
+Fix $t_*\in[-h,0)$ and $s_*\in[-h,0]$. The scalar functional
+\begin{equation}\label{eq:past}
+ f(\phi)=\sin(\phi'(t_*))+\phi(s_*)^3
+\end{equation}
+admits a $C^1$ diffeomorphism with all the conclusions of
+Theorem~\ref{thm:no-atom} on any open subset of
+$C^1([-h,0],\mathbb R)$. On any such open set containing
+the zero function, however, $f$ does not satisfy property \textup{(e)}.
 \end{corollary}
 \begin{proof}
-Take $Y=\mathbb R$, $L\phi=\phi'(t_*)$, and $G(\chi,z)=\sin z+\chi(s_*)^3$. Theorem~\ref{thm:remote} applies since $t_*<0$.
+Take $Y=\mathbb R$, $L\phi=\phi'(t_*)$, and $G(\chi,z)=\sin z+\chi(s_*)^3$. Since $t_*<0$, $L\eta=0$ for histories supported sufficiently near zero, and Theorem~\ref{thm:remote} applies.
+
+At the zero history,
+\[
+ Df(0)\eta=\eta'(t_*).
+\]
+Derivative evaluation at $t_*$ does not extend to a continuous
+linear functional on $C([-h,0])$. Indeed, for the smooth cutoff
+$\rho$ chosen above, let
+\[
+ \eta_\delta(t)=(t-t_*)\rho(|t-t_*|/\delta).
+\]
+Then $\eta_\delta'(t_*)=1$ and $|\eta_\delta|\le\delta/2$.
+A continuous extension would therefore take the value $1$
+on functions tending to zero in the supremum norm, which is
+impossible.
 \end{proof}
 
-\medskip\noindent The argument also extends to Hilbert-valued histories.
-Let $H$ be a separable real Hilbert space, $E_H=C^1([-h,0],H)$ and $C_H=C([-h,0],H)$. We do not assume that a bounded map $E_H\to H$ is compact.
 
-\begin{theorem}[Global Hilbert-valued straightening]\label{thm:hilbert}
-Assume $H\ne\{0\}$. Suppose that $U\subset E_H$ is open and $f\in C^1(U,H)$, and each $Df(\phi)$ extends to an operator $D_ef(\phi)\in\Lop(C_H,H)$ with jointly continuous action $(\phi,\eta)\mapsto D_ef(\phi)\eta$. Then, for every $\tau\in(0,h)$ and $\varepsilon>0$, there exists a $C^1$ diffeomorphism $A:U\to A(U)\subset E_H$ satisfying
+\section{Hilbert-valued histories}
+
+Let $H$ be a separable real Hilbert space and write
 \[
-(A\phi)'(0)=\phi'(0)-f(\phi),\qquad
-A\phi=\phi\text{ on }[-h,-\tau]\cup\{0\},\qquad
-\sup_{\phi\in U}\|A\phi-\phi\|_{C_H}<\varepsilon,
+ C_H=C([-h,0],H),\qquad E_H=C^1([-h,0],H),
 \]
-and $\sigma(DA(\phi)_{\mathbb C})=\{1\}$. It admits the same $C^1$ isotopy as above.
+with the supremum norm on $C_H$ and the sum norm
+$|\phi|_1=|\phi|+|\partial\phi|$ on $E_H$.
+Let $I_H:E_H\to C_H$ denote the continuous
+linear inclusion.
+
+
+\begin{theorem}\label{thm:hilbert}
+Suppose $H\ne\{0\}$, $U\subset E_H$ is open, and
+$f\in C^1(U,H)$ satisfies property \textup{(e)}, with extensions
+$D_ef(\phi)\in L_c(C_H,H)$ whose evaluations
+$(\phi,\chi)\mapsto D_ef(\phi)\chi$ are jointly continuous.
+For every $0<\tau<h$ and $\epsilon>0$ there exists a $C^1$
+diffeomorphism $A:U\to A(U)$ onto an open subset of $E_H$ such that
+\begin{align*}
+ (A\phi)'(0)&=\phi'(0)-f(\phi),\\
+ A\phi(t)&=\phi(t)\quad(t\in[-h,-\tau]\cup\{0\}),\\
+ |A\phi-\phi|&\le c\quad(\phi\in U)
+   \quad\text{for some }c<\epsilon,\\
+ \sigma(DA(\phi)_{\mathbb C})&=\{1\}\quad(\phi\in U).
+\end{align*}
+The family $A_s=\id+s(A-\id)$, $0\le s\le1$, is jointly
+$C^1$, and each $A_s$ is a $C^1$ diffeomorphism onto an open
+image with $(A_s\phi)'(0)=\phi'(0)-sf(\phi)$.
 \end{theorem}
 \begin{proof}
-Use the Bernstein operators $P_m$ of degrees $4^m$ with $H$-valued coefficients. Their positivity and difference-quotient formulas show
+It suffices first to treat $h=1$; a linear change of time
+transfers the conclusion to every $h>0$. For $m\ge1$, let
+$P_m:E_H\to E_H$ be the Bernstein operator of degree $4^m$,
 \[
-\sup_m\|P_m\|_{E_H\to E_H}\le1,\qquad
-\|P_m-I\|_{E_H\to C_H}\longrightarrow0,\qquad
-P_m\phi\to\phi\quad\text{in }E_H.
+ (P_m\phi)(t)=\sum_{j=0}^{4^m}
+ \binom{4^m}{j}(1+t)^j(-t)^{4^m-j}
+ \phi\!\left(-1+\frac{j}{4^m}\right),
+ \qquad -1\le t\le0.
 \]
-They have nested grids, so equality of $P_j\phi$ and $P_j\psi$ implies equality of $P_i\phi$ and $P_i\psi$ for $i\le j$. Their ranges $F_m=\ran P_m$ are isomorphic to finite Cartesian powers of $H$, hence are Hilbert spaces (although infinite dimensional if $H$ is infinite dimensional). The norms inherited from $E_H$ are equivalent to the Hilbert product norms; thus the same open sets and differentiability classes may be used.
+The positivity of the Bernstein coefficients and the formula
+for their derivatives give
+\begin{equation}\label{eq:hilbert-bernstein}
+ \sup_m|P_m|_{L_c(E_H,E_H)}\le1,\qquad
+ |I_HP_m-I_H|_{\Lc(E_H,C_H)}\longrightarrow0,\qquad
+ P_m\phi\longrightarrow\phi\ \text{in }E_H.
+\end{equation}
+The grids are nested, so equality of $P_j\phi$ and $P_j\psi$
+for $j\ge i$ implies equality of $P_i\phi$ and $P_i\psi$.
+The range $F_m=\operatorname{ran}P_m$ is linearly and
+topologically isomorphic to $H^{4^m+1}$, hence admits a Hilbert
+norm equivalent to that inherited from $E_H$.
 
-We need bounded globally defined $C^1$ approximants. For each $m$, let
+To construct bounded globally defined $C^1$ maps approximating $f$,
+consider the closed subset of $F_m$
 \[
-K_m=\{z\in F_m:\|z\|_{E_H}\le m,\ \dist(z,E_H\setminus U)\ge m^{-1}\}.
+ K_m=\left\{z\in F_m:|z|_1\le m,\quad
+ \dist(z,E_H\setminus U)\ge m^{-1}\right\}
 \]
-Hilbert spaces admit $C^1$ smooth partitions of unity and a smooth Urysohn lemma. The set $K_m$ need not be compact, but it lies in the open set
-$V_m=\{z\in F_m:\|z\|_{E_H}<m+1,\ \dist(z,E_H\setminus U)>1/(2m)\}$.
-Hence there is a smooth cutoff $\chi_m:F_m\to[0,1]$ equal to one on a neighborhood of $K_m$, with support contained in $V_m$. For $U=E_H$, omit distance restrictions. Let $\beta\in C_c^\infty([0,\infty))$ equal one on $[0,1]$ and define the bounded smooth saturation
+and the open subset
 \[
-\Theta_m(v)=\beta(\|v\|_H^2/m^2)v\quad(v\in H).
+ V_m=\left\{z\in F_m:|z|_1<m+1,\quad
+ \dist(z,E_H\setminus U)>(2m)^{-1}\right\}.
 \]
-The map $z\mapsto\chi_m(z)\Theta_m(f(z))$ on $F_m\cap U$, extended by zero, is a globally defined bounded $C^1$ map $\widehat f_m:F_m\to H$. Put $f_m=\widehat f_m\circ P_m$.
+When $U=E_H$, the distance restrictions are omitted.
+A Hilbert-space smooth partition of unity gives a smooth
+function $\chi_m:F_m\to[0,1]$ which equals one on a
+neighborhood of $K_m$ and has support in $V_m$. In particular,
+compactness of $K_m$ is not required.
+Choose a smooth function $\beta:[0,\infty)\to[0,1]$
+with compact support and $\beta=1$ on $[0,1]$, and set
+\[
+ \Theta_m(v)=\beta(|v|_H^2/m^2)v,\qquad v\in H.
+\]
+The map $\Theta_m$ is smooth and bounded. On $F_m\cap U$
+put $\widehat f_m(z)=\chi_m(z)\Theta_m(f(z))$ and extend
+it by zero to $F_m$. This gives a globally defined bounded
+$C^1$ map; set $f_m=\widehat f_m\circ P_m$.
 
-Near each $\phi_*\in U$, for all large $m$ and on a sufficiently small $E_H$-ball, $\chi_m(P_m\phi)=1$ and $\Theta_m(f(P_m\phi))=f(P_m\phi)$. There
+For each $\phi_*\in U$, the convergence in
+\eqref{eq:hilbert-bernstein} and continuity of $f,Df$
+imply that, on a sufficiently small neighborhood of $\phi_*$
+and for all sufficiently large $m$,
 \[
-f_m(\phi)=f(P_m\phi),\qquad Df_m(\phi)=Df(P_m\phi)P_m.
+ f_m(\phi)=f(P_m\phi),\qquad
+ Df_m(\phi)=Df(P_m\phi)P_m.
 \]
-Joint continuity of the extended derivative implies local boundedness of $\|D_ef(\phi)\|_{\Lop(C_H,H)}$. Thus
-\[
-\|Df_m(\phi)-Df(\phi)\|
-\le\|Df(P_m\phi)-Df(\phi)\|\,\|P_m\|
-+\|D_ef(\phi)\|\,\|P_m-I\|_{E_H\to C_H}.
-\]
-As in the original local approximation argument, the right side is uniformly small on a suitably chosen neighborhood of $\phi_*$ for all large $m$; the same holds for the function values.
+The joint continuity of the extended derivatives gives local
+boundedness of their operator norms. Consequently,
+\begin{align*}
+ |Df_m(\phi)-Df(\phi)|
+ &\le |Df(P_m\phi)-Df(\phi)|\,|P_m|\\
+ &\quad+|D_ef(\phi)|\,
+       |I_HP_m-I_H|_{\Lc(E_H,C_H)}.
+\end{align*}
+The right-hand side tends locally uniformly to zero in the
+sense of Lemma~\ref{lem:triangular}; the same is true of
+$|f_m(\phi)-f(\phi)|$.
 
-Finally choose $Q_m$ with widths so small that $P_jQ_m=0$ for $j\le m+1$. The observations $O_m=P_m$ and the approximants $f_m$ satisfy Lemma~\ref{lem:triangular}. In particular the invertibility of $DA$ follows from the nilpotent-tail spectral argument \eqref{eq:ann}, not from compactness of $DA-I$. This proves the theorem.
+For every $m$, choose $Q_m$ supported sufficiently close to
+zero that $P_jQ_m=0$ for $j\le m+1$. The operators $O_m=P_m$
+separate points by strong convergence and satisfy the required
+nesting and factorization properties. Lemma~\ref{lem:triangular}
+therefore gives a global $C^1$ diffeomorphism, the
+endpoint and localization identities, the common displacement
+bound, and the $C^1$ isotopy. Since $H\ne\{0\}$, the spectral
+inclusion in the lemma is an equality. The normalized
+construction transports to $[-h,0]$ by time rescaling.
 \end{proof}
+
+\section*{Acknowledgements}
+
+The author used OpenAI's ChatGPT 6.1 Sol
+to assist with the development and review of
+proofs and the preparation of this manuscript. The accompanying Lean formalization and verification
+scripts are available in the associated
+\href{https://github.com/kemae0/global-straightening-of-solution-manifolds}
+{GitHub repository}.
+The author assumes full responsibility for
+the results and final content.
+
 
 
 \begin{thebibliography}{9}
-\bibitem{Walther2003}
-H.-O. Walther, The solution manifold and $C^1$-smoothness for differential equations with state-dependent delay, \emph{J. Differential Equations} \textbf{195} (2003), 46--65.
-\bibitem{KrisztinWalther2023}
-T. Krisztin and H.-O. Walther, Solution manifolds of differential systems with discrete state-dependent delays are almost graphs, \emph{Discrete Contin. Dyn. Syst.} \textbf{43} (2023), 2973--2984.
+
 \bibitem{Walther2026}
-H.-O. Walther, A direct approach to simplicity of solution manifolds, \emph{arXiv:2601.00642} (2026).
+H.-O. Walther,
+A direct approach to simplicity of solution manifolds,
+\href{https://arxiv.org/abs/2601.00642}
+{arXiv:2601.00642} (2026).
+
+\bibitem{Walther2003}
+H.-O. Walther,
+The solution manifold and $C^1$-smoothness for
+differential equations with state-dependent delay,
+\emph{J. Differential Equations}
+\textbf{195} (2003), 46--65.
+\href{https://doi.org/10.1016/j.jde.2003.07.001}
+{doi:10.1016/j.jde.2003.07.001}.
+
+\bibitem{HartungEtAl2006}
+F. Hartung, T. Krisztin, H.-O. Walther, and J. Wu,
+Functional differential equations with state-dependent
+delays: Theory and applications,
+in \emph{Handbook of Differential Equations:
+Ordinary Differential Equations}, Vol. 3,
+Elsevier, Amsterdam (2006), 435--545.
+\href{https://doi.org/10.1016/S1874-5725(06)80009-X}
+{doi:10.1016/S1874-5725(06)80009-X}.
+
+\bibitem{Walther2021}
+H.-O. Walther,
+Solution manifolds which are almost graphs,
+\emph{J. Differential Equations}
+\textbf{293} (2021), 226--248.
+\href{https://doi.org/10.1016/j.jde.2021.05.024}
+{doi:10.1016/j.jde.2021.05.024}.
+
+\bibitem{KrisztinWalther2023}
+T. Krisztin and H.-O. Walther,
+Solution manifolds of differential systems with
+discrete state-dependent delays are almost graphs,
+\emph{Discrete Contin. Dyn. Syst.}
+\textbf{43} (2023), 2973--2984.
+\href{https://doi.org/10.3934/dcds.2023036}
+{doi:10.3934/dcds.2023036}.
+
+\bibitem{Walther2025}
+H.-O. Walther,
+On solution manifolds of some differential equations
+with more general state-dependent delay,
+in \emph{2023 MATRIX Annals},
+MATRIX Book Series, Vol. 6,
+Springer, Cham (2025), 457--472.
+\href{https://doi.org/10.1007/978-3-031-76738-8_28}
+{doi:10.1007/978-3-031-76738-8_28}.
+
+\bibitem{KrieglMichor1997}
+A. Kriegl and P. W. Michor,
+\emph{The Convenient Setting of Global Analysis},
+Mathematical Surveys and Monographs, Vol. 53,
+American Mathematical Society, Providence (1997).
+\href{https://doi.org/10.1090/surv/053}
+{doi:10.1090/surv/053}.
+
 \end{thebibliography}
+
 
 \end{document}

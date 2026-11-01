@@ -1,48 +1,91 @@
-# Global straightening of solution manifolds — Lean formalization
+# Global Straightening of Solution Manifolds for State-Dependent Delay Equations
 
-Kernel-checked counterparts of the supplied manuscript's new existence
-theorems, coordinate construction, and application corollaries, with the
-corrections in [MANUSCRIPT_CORRECTIONS.md](MANUSCRIPT_CORRECTIONS.md).
-The approved target is [the corrected manuscript](manuscript/paper_corrected.tex).
-The original LaTeX article is not certified verbatim. **A complete proof of
-the manuscript as written is impossible:** `literal_Hilbert_conclusion_false`
-refutes its unrestricted Hilbert-spectrum conclusion on the actual zero
-Hilbert history space, with property (e) verified for the zero feedback.
+Lean 4 proofs accompanying Lily DiPaulo's research manuscript of October 31, 2026.
 
-The main results are proved from their analytic assumptions on genuine
-complete normed C¹ history spaces. They are not axioms, proposition
-aliases supplied as hypotheses, or proofs containing `sorry`.
+The library constructs an ambient C¹ diffeomorphism on an arbitrary open
+history domain under property (e). In finite dimensions it also proves
+existence under the weaker zero-terminal-atom condition. The chart satisfies
 
-## Main certificates
+$$
+(A\phi)'(0)=\phi'(0)-f(\phi),\qquad
+A(X_f)=A(U)\cap X_0.
+$$
 
-All names below are in the `GlobalRegularization` namespace.
+It preserves the value at zero, fixes the history on any prescribed
+`[-h, -τ]`, and has an arbitrarily small common displacement bound in the
+continuous-history norm. The finite-state and nonzero separable Hilbert
+results include derivative spectrum `{1}` and the affine C¹ isotopy
+`A_s = id + s(A - id)`.
 
-| Result | Lean theorem |
+## Alignment with the current paper
+
+- [Supplied manuscript](manuscript/paper_revised.tex): the latest attachment,
+  preserved byte for byte, including the expanded introduction and bibliography.
+- [Qualified manuscript](manuscript/paper_corrected.tex): the same text with
+  the single endpoint-reflection phrase clarified as explained below.
+- [Claim map](verification/manuscript-coverage.json): source locations and
+  Lean declarations for the results and construction claims under review.
+- [Formalization audit](FORMALIZATION_AUDIT.md) and
+  [dependency map](PROOF_OBLIGATIONS.md): precise representations and scope.
+
+The paper's sum norm `‖φ‖₁ = ‖φ‖ + ‖φ′‖` is implemented on
+`SumC1History`, a complete closed graph satisfying the fundamental theorem
+of calculus. `sumHistoryEquiv` gives a continuous linear equivalence with
+the earlier maximum-norm model. The principal sum-norm theorem allows
+arbitrary finite-dimensional real state norms. Bernstein contraction and
+the stated convergence estimates are also proved in the sum norm.
+
+The chart certificates include a strictly positive common displacement
+constant below epsilon for every affine slice with parameter in `[0,1]`.
+The local C¹ approximation is in operator norm; the literal strict local
+supremum estimate is proved separately.
+
+## Qualification needed in the supplied text
+
+The paragraph after the endpoint-coupling corollary says that the zero-atom
+condition is not necessary for "the diffeomorphism in Theorem 3.3"
+(`thm:no-atom`). Its example proves a narrower assertion.
+
+For endpoint differentiation `D` and a bounded right inverse `Q`, the map
+`A = I - 2QD` is an ambient linear involution satisfying `DA = -D`.
+For nonzero `a`, however, `A(Qa) = -Qa`, so its derivative has eigenvalue
+`-1`. It cannot satisfy the theorem's spectrum conclusion `{1}`.
+`EndpointReflection.lean` proves the involution, the defect identity and
+the spectral obstruction. In fact the obstruction applies to every C¹
+chart with the same defect identity on a nonempty open domain.
+
+The qualified manuscript replaces that phrase with
+"an ambient diffeomorphism satisfying the defect identity".
+The example supports this statement. See
+[MANUSCRIPT_CORRECTIONS.md](MANUSCRIPT_CORRECTIONS.md) for this qualification
+and the historical corrections already incorporated into the new draft.
+
+## Main Lean certificates
+
+All names below belong to the `GlobalRegularization` namespace.
+
+| Paper result | Lean certificate |
 | --- | --- |
-| Principal property-(e) theorem, every finite state dimension | `mainClaim` |
-| Stronger terminal-atom theorem, localization, uniform bound, isotopy and complex spectrum | `terminal_atom_full_straightening` |
-| Zero-dimensional version with spectrum inclusion | `terminal_atom_full_straightening_spectrum_inclusion` |
-| Arbitrary separable real Hilbert state space, including the actual complex spectrum | `property_e_Hilbert_full_straightening` |
-| Hilbert version allowing the zero space | `property_e_Hilbert_straightening_spectrum_inclusion` |
-| All-level identities, split fiber charts, continuous complements and codimension | `terminal_atom_fiber_geometry` |
-| Invertible endpoint-derivative coupling | `terminal_atom_endpoint_coupling_of_isUnit` |
-| Arbitrary Banach remote-observation ranges | `remote_observation_full_straightening` |
-| Concrete past-derivative example | `pastDerivative_full_straightening` |
-| Failure of continuous-history derivative extension for that example | `scalarPastDerivativeFeedback_no_extended_derivative_at_zero` |
+| Principal theorem, spectrum, localized isotopy and shared positive bound | `property_e_revised_main` |
+| Principal theorem on the exact sum-norm model, arbitrary finite-dimensional state norm | `property_e_sum_finite_dimensional` |
+| Zero-terminal-atom theorem on the sum-norm model | `terminal_atom_sum_finite_main` |
+| Nonzero separable Hilbert-valued theorem on the sum-norm model | `property_e_sum_Hilbert_main` |
+| Actual signed-measure representation and one-sided terminal-atom limit | `historyFunctional_signed_matrix_representation`, `matrixHistoryFunctional_terminal_filter_limit` |
+| Full-image dominating measure and adapted operators | `exists_full_image_totalVariation_dominator`, `exists_adapted_operators_for_separable_family` |
+| Level sets, global split fiber parametrizations, tangent kernels and complementary planes | `terminal_atom_fiber_geometry`, `C1Straightening.fiberTangent_range` |
+| Invertible endpoint coupling | `terminal_atom_endpoint_coupling_of_isUnit` |
+| Remote observations with arbitrary Banach observation range | `remote_observation_full_straightening` |
+| Past-derivative example and failure of property (e) on domains containing zero | `pastDerivative_full_straightening`, `scalarPastDerivativeFeedback_not_property_e_on_zero_domain` |
 
-Spectrum equality requires positive finite state dimension or a nontrivial
-Hilbert state space. All spatial conclusions and spectrum inclusion hold
-also in the zero space. Empty open domains are included.
+For a zero state space the spatial conclusions remain available, while
+the spectrum is empty; separate theorems use spectrum inclusion. Empty
+open domains are included. Infinite-dimensional Hilbert cutoffs are
+constructed without assuming compactness of bounded balls.
 
-The Hilbert proof constructs infinitely smooth cutoffs near arbitrary closed
-cores, smooth partitions of unity, and bounded smooth saturation maps.
-It does not assume compactness of bounded
-Hilbert-valued ranges or of infinite-dimensional balls.
-
-## Reproduce verification
+## Reproduce the checks
 
 The project pins Lean **4.24.0** and mathlib commit
-`f897ebcf72cd16f89ab4577d0c826cd14afaafc7` (tag `v4.24.0`).
+`f897ebcf72cd16f89ab4577d0c826cd14afaafc7` (`v4.24.0`).
 
 ```text
 lake exe cache get
@@ -51,61 +94,33 @@ lake env lean scripts/Audit.lean
 lake env lean scripts/MainCertificate.lean
 lake env lean scripts/PaperCertificate.lean
 lake env lean scripts/ManuscriptCoverage.lean
+lake env lean scripts/RevisionCertificate.lean
 ```
 
-On the original Windows workspace, the local-distribution helper is:
-
-```powershell
-.\scripts\Lean.ps1 build
-.\scripts\Lean.ps1 env lean scripts/Audit.lean
-.\scripts\Lean.ps1 env lean scripts/PaperCertificate.lean
-```
-
-The helper uses `.toolchain/` when present and otherwise uses the installed
-Lean/Lake. Dependencies and compiler binaries are not part of the source
-publication. GitHub Actions repeats the build and certificate checks.
+On Windows, `scripts/Lean.ps1` runs these commands using a local Lean
+distribution when available. GitHub Actions repeats the build and checks.
+Verification logs, input hashes and the source manifest are in `verification/`.
+Compiler binaries, dependency checkouts and the original unchecked archive
+are excluded from the published sources.
 
 `Audit.lean` traverses the transitive axiom dependencies of every declaration
-in the project namespace. Only `propext`, `Classical.choice`, and `Quot.sound`
-are permitted. It rejects `sorryAx` and additional axioms.
+in the project namespace. It permits only `propext`, `Classical.choice` and
+`Quot.sound`, rejecting `sorryAx` and additional mathematical axioms.
 
-## Proof organization and differences
+## What these checks establish
 
-[PROOF_OBLIGATIONS.md](PROOF_OBLIGATIONS.md) maps the manuscript's dependency
-chain to checked modules. [FORMALIZATION_AUDIT.md](FORMALIZATION_AUDIT.md)
-explains scope, representations, and the verification evidence.
+Lean checks the formal statements and their proofs from their stated
+hypotheses. The coverage checker verifies source anchors and declaration
+references. Matching prose to those declarations remains a manual
+mathematical audit; the checker does not establish that every sentence of
+the manuscript is formalized or that the paper is free of all errors.
 
-The principal finite-state proof has a direct Bernstein route. The stronger
-terminal theorem constructs positive Markov averages, terminal cutoffs and
-finite-rank reconstructed history operators. `SignedMeasureDuality` proves
-uniqueness of the actual signed Riesz measure and identifies its Jordan
-total-variation mass with the dual norm. `FullImageDomination` proves
-total-variation continuity and domination throughout the separable derivative
-image. The terminal existence proof now uses that full-image dominator.
-`SignedMeasureAdjoints` checks the displayed averaging density formula,
-adjoint contractions, total-variation limits, and the terminal-tail estimate.
+Cited semiflow theory, historical and priority claims, and the applicability
+to hypotheses in external papers remain background. The bibliography is
+not a Lean certificate. Split-submanifold conclusions are expressed through
+explicit C¹ kernel charts, tangent maps and continuous complements.
 
-The Hilbert proof now uses the manuscript's degree-4^m Bernstein operators
-as observations. Their nestedness, actual closed ranges, and continuous
-linear equivalence with finite Hilbert products are proved. The displayed
-distance cores, open belts, smooth cutoffs and saturation formula construct
-the bounded approximating family used in the existence theorem. Positive
-indices are encoded by `n + 1`. The common displacement bound also yields
-the literal supremum estimate, including the empty-domain case.
-
-[The claim coverage map](verification/manuscript-coverage.json) records the
-mathematical assertions and proof ingredients, their locations in the corrected
-source, and their Lean declarations. Its checker verifies the source anchors
-and that every proof reference names a theorem. The semantic correspondence
-is a documented mathematical audit; it is not inferred from a successful build.
-
-The manuscript's bibliography, historical claims and cited semiflow theory
-are background, not formalized results of this repository. Signed integrals
-are represented as differences of integrals against finite positive Borel
-measures. Split-submanifold geometry is certified through explicit C¹ kernel
-charts, tangent maps and finite-codimensional complements.
-
-The unmodified input archive is preserved in the original local workspace,
-outside the checked library. Input hashes are recorded in
-`verification/provenance.json`. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
-for the mathlib proof adaptation notice.
+The original input versions remain preserved locally, with their hashes
+and the current source hashes in `verification/provenance.json`.
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the mathlib proof
+adaptation notices and `LICENSE.mathlib` for its license.

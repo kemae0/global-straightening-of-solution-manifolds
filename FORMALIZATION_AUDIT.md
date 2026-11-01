@@ -1,14 +1,15 @@
 # Formalization audit — October 31, 2026
 
-The manuscript's new existence theorems and application corollaries now have
-kernel-checked Lean counterparts, with the explicit corrections listed in
-[MANUSCRIPT_CORRECTIONS.md](MANUSCRIPT_CORRECTIONS.md). The original prose
-article, including its uncorrected degenerate cases, is not certified verbatim.
-The stronger request for a certificate of everything as written cannot be
-met: `literal_Hilbert_conclusion_false` proves
-that the written Hilbert conclusion is false on a genuine history space.
-The user approved the documented corrections. The target is now
-`manuscript/paper_corrected.tex`, whose hash is recorded with the inputs.
+The supplied revision is preserved exactly in `manuscript/paper_revised.tex`.
+The target `manuscript/paper_corrected.tex` differs in one phrase qualifying
+the endpoint-reflection comparison. Its example gives an ambient defect
+straightening, but cannot have the full no-atom theorem's spectrum `{1}`.
+`EndpointReflection` proves this obstruction. See
+[MANUSCRIPT_CORRECTIONS.md](MANUSCRIPT_CORRECTIONS.md).
+
+The older false zero-space spectral assertion is repaired in the revised
+draft; its counterexample remains checked in the library. Both current
+source hashes and the earlier manuscript provenance are recorded.
 
 ## What is proved
 
@@ -47,6 +48,25 @@ parameters in `[0,1]`, `LocalizedIsotopy` also proves preservation of the
 localization and common strict displacement bound.
 
 ## Genuine models and proof dependencies
+
+The revision explicitly chooses the sum history norm. `SumHistoryNorm`
+constructs the genuine closed FTC graph with norm `‖φ‖ + ‖φ′‖`, proves it
+complete, and constructs the continuous linear equivalence with the older
+maximum-norm graph, with constants 1 and 2. `CoordinateTransport` transports
+the chart and its actual affine isotopy. `SumHistoryCertificates` derives
+finite-state, terminal-defect and Hilbert existence theorems on this sum-norm
+space. The finite-dimensional property-(e) theorem allows an arbitrary real
+state norm. `SumBernstein` separately proves the exact contraction constant
+1, strong limit, continuous-history operator-norm limit and nestedness in
+the sum model.
+
+`RevisedMainTheorems` includes the principal theorem's newly stated spectrum,
+solution-set image identity, localized affine isotopy and a single strictly
+positive displacement constant below epsilon for every slice in `[0,1]`.
+`RevisedAssertions` proves the literal strict local supremum estimate and
+failure of property (e) for the past-derivative example on every domain
+containing zero. The general coordinate theorem already permits separating
+observations without a nestedness hypothesis, as in the revised lemma.
 
 Histories are continuous value/derivative pairs constrained by the fundamental
 theorem of calculus. This closed graph is complete, corresponds to classical
@@ -87,7 +107,8 @@ The project pins Lean 4.24.0 and mathlib
 `f897ebcf72cd16f89ab4577d0c826cd14afaafc7`.
 
 Run `lake build`, then `scripts/Audit.lean`, `scripts/MainCertificate.lean`,
-and `scripts/PaperCertificate.lean` through `lake env lean`. The audit covers
+`scripts/PaperCertificate.lean`, `scripts/ManuscriptCoverage.lean`, and
+`scripts/RevisionCertificate.lean` through `lake env lean`. The audit covers
 every declaration in the project namespace, including helper definitions
 and counterexamples, and allows only `propext`, `Classical.choice`, and
 `Quot.sound`. Exact outputs and a source manifest are stored in `verification/`.
@@ -97,7 +118,7 @@ The original tooling limitation has been resolved locally: the official Lean
 The unrelated parent Git repository was not modified. The original ZIP is
 preserved separately and is not imported into the checked library.
 
-`scripts/ManuscriptCoverage.lean` also validates the source-anchored claim map
+`scripts/ManuscriptCoverage.lean` validates the source-anchored claim map
 and checks that each proof reference names a theorem in the built environment.
 This is a correspondence audit, not a proof that prose and Lean are equivalent.
 The theorem-coverage script concerns the supplied manuscript's own new
@@ -107,8 +128,9 @@ counterparts and proof-route differences.
 
 ## Corrected construction coverage
 
-The original unrestricted spectrum and impossibility assertions have
-counterexamples, not proofs. The original input has not been amended.
+The earlier unrestricted spectrum and impossibility assertions have
+counterexamples, not proofs. The earlier input and current supplied input
+are preserved. The current reflection comparison is qualified explicitly.
 The displayed degree-4^m Bernstein construction is now checked, including
 continuous linear equivalence of its actual closed ranges with finite Hilbert
 products and nestedness stated directly for P_m. The Hilbert existence proof

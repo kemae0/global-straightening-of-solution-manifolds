@@ -1,7 +1,7 @@
 {
   "Source": "lean_global_regularization_v5_unchecked.zip",
   "SHA256": "C32A4AE95812EA0AA605D9CD38E128FB6E61F7FAF962C1A9C50A50FA98C68F2C",
-  "ManuscriptTitle": "On global regularization of solution manifolds",
+  "ManuscriptTitle": "Global Straightening of Solution Manifolds for State-Dependent Delay Equations",
   "ManuscriptDate": "2026-10-31",
   "ManuscriptSHA256": "66217CCBE17B88907D6EF03FDAA9FE98C6D5CA76EE09239179704003F96C5298",
   "Lean": "4.24.0",
@@ -9,6 +9,20 @@
   "Mathlib": "f897ebcf72cd16f89ab4577d0c826cd14afaafc7",
   "OriginalSourcesImported": false,
   "CorrectedManuscript": "manuscript/paper_corrected.tex",
-  "CorrectedManuscriptSHA256": "a339ed6106f2f3a2e8e586f02a5dff99f3616cccc9fcc2da3563812c1c3f92a5",
-  "CorrectionsApprovedByUser": true
+  "CorrectedManuscriptSHA256": "e7a513b64ab08ab2e0e0d68f19c4b661c4b8d47767363aaa2b678d442407308b",
+  "PriorCorrectedManuscripts": [
+    {
+      "title": "On global regularization of solution manifolds",
+      "sha256": "a339ed6106f2f3a2e8e586f02a5dff99f3616cccc9fcc2da3563812c1c3f92a5",
+      "commit": "c58a8cd17f88126cd59ea5cdc92a58ef8cfb8069"
+    }
+  ],
+  "RevisedManuscript": "manuscript/paper_revised.tex",
+  "RevisedManuscriptSHA256": "56320ea5a2a24bf95d547d92889b5ae00385935df9534e2a6ac3fab7fe9b2187",
+  "CurrentClarification": "Restrict the endpoint reflection comparison to ambient defect straightening; its spectrum cannot be {1}.",
+  "CurrentClarificationReportedToUser": true,
+  "PriorSuppliedRevisions": [
+    "892232dbee5216a7df702a1c9871fd789aa0250caed4653a85db954d4eaea80f"
+  ],
+  "HistoricalCorrectionsApprovedByUser": true
 }

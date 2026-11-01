@@ -19,3 +19,4 @@ jobs:
       - run: lake env lean scripts/MainCertificate.lean
       - run: lake env lean scripts/PaperCertificate.lean
       - run: lake env lean scripts/ManuscriptCoverage.lean
+      - run: lake env lean scripts/RevisionCertificate.lean
